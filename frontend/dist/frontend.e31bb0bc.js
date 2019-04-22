@@ -9818,7 +9818,7 @@ function buildName(hash, isKeyframes) {
 function buildClass(className, rawCSS) {
   return rawCSS !== '' ? `
   .${buildName(className)} {
-    ${rawCSS.trim()}
+    ${rawCSS.trim().replace('}', '')}
   }` : '';
 }
 
@@ -9883,6 +9883,7 @@ function buildCSS(className, rawCSS) {
   output = buildClass(className, output.trim());
   rawPseudos.forEach(pseudo => output += buildPseudo(className, pseudo));
   rawQueries.forEach(query => output += buildQuery(className, query));
+  console.log(output);
   return output;
 }
 
@@ -9899,6 +9900,7 @@ function buildKeyframes(hash, rawCSS) {
 function renderCSS() {
   let renderedCSS = '';
   Object.keys(docCSS).forEach(classHash => renderedCSS += docCSS[classHash].rendered);
+  console.log(renderedCSS);
   return `${globalCSS}${renderedCSS}`;
 }
 
@@ -14634,6 +14636,12 @@ var global = arguments[3];
 
 })));
 
+},{}],"public/Favicon.svg":[function(require,module,exports) {
+module.exports = "/Favicon.2c2b3d09.svg";
+},{}],"public/lander.png":[function(require,module,exports) {
+module.exports = "/lander.fc0bddd3.png";
+},{}],"public/logo.svg":[function(require,module,exports) {
+module.exports = "/logo.5e5c7163.svg";
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -14651,8 +14659,38 @@ var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject2() {
+function _templateObject5() {
   var data = _taggedTemplateLiteral(["\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n  background-color: #FFFFFF;\n  border: 2px solid #E9E9E9;\n  color: #8A979D;\n  font-size: 12px;\n  font-weight: 400;\n  line-height: 21px;\n  text-align: left;\n  outline: none;\n  min-height: 30px;\n  padding-left: 10px;\n  padding-top: 5px;\n  padding-bottom: 5px;\n\n  &:focus {\n    border: 2px solid #261E1C;\n    color: #261E1C;\n    outline: none;\n  }\n\n  ", "\n  }\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  padding: 0px;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -14664,7 +14702,7 @@ function _templateObject2() {
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  body {\n    padding: 0px;\n    margin: 0px;\n    overflow: hidden;\n    font-family: Monaco, Menlo, Consolas, source-code-pro, monospace;\n  }\n\n  textarea {\n    font-family: Monaco, Menlo, Consolas, source-code-pro, monospace;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  body {\n    padding: 0px;\n    margin: 0px;\n    overflow: hidden;\n    color: ", ";\n    font-size: 16px;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 35px;\n    font-weight: 700;\n    line-height: 42px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 18px;\n    font-weight: 700;\n    line-height: 21.6px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 12px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -14687,6 +14725,12 @@ var _require2 = require('ethjs-extras'),
     call = _require2.call,
     Eth = _require2.Eth,
     onReceipt = _require2.onReceipt;
+
+var favicon = require('./public/Favicon.svg');
+
+var lander = require('./public/lander.png');
+
+var logo = require('./public/logo.svg');
 
 var stripHex = function stripHex(v) {
   return String(v).indexOf('0x') === 0 ? String(v).slice(2) : v;
@@ -14721,10 +14765,20 @@ var post = function post(url, data) {
 
 var lower = function lower(v) {
   return String(v).toLowerCase();
-}; // change global style..
+};
 
+var lightgray = '#E9E9E9';
+var white = '#FFF';
+var darker = '#A6A2A2';
+var darkest = '#261E1C';
+var primary = '#ED7354';
+var whiteish = '#FFFFFE';
+var green = '#6EDB81';
+var bluegray = '#8A979D';
+var grayer = '#95979C';
+var blackish = '#1C1F26'; // change global style..
 
-_hyperappStyledComponents.default.injectGlobal(_templateObject()); // standard route method
+_hyperappStyledComponents.default.injectGlobal(_templateObject(), blackish, blackish, blackish, blackish, blackish, blackish, primary); // standard route method
 
 
 var route = function route(pathname) {
@@ -14777,10 +14831,18 @@ var NotFound = function NotFound() {
 
 var Wrapper = _hyperappStyledComponents.default.div(_templateObject2());
 
+var InputSmall = _hyperappStyledComponents.default.input(_templateObject3(), function (props) {
+  return props.error ? "\n    border: 2px solid #ED7354;\n    color: #ED7354;\n  " : '';
+});
+
+var Button = _hyperappStyledComponents.default.button(_templateObject4());
+
+var Nav = _hyperappStyledComponents.default.div(_templateObject5());
+
 var Main = function Main() {
   return function (state, actions) {
     var v = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : console.log(state);
-    return (0, _hyperapp.h)("div", null, "Hello world!");
+    return (0, _hyperapp.h)(Wrapper, null, "Hello world!", (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)(InputSmall, null));
   };
 }; // routes for app
 
@@ -14795,10 +14857,12 @@ var Routes = function Routes() {
 }; // main app
 
 
-var main = (0, _hyperapp.app)(state, actions, Routes, document.body); // unsubscripe for routing
+var main = (0, _hyperapp.app)(state, actions, Routes, document.body); // load main call
+
+main.load(); // unsubscripe for routing
 
 var unsubscribe = _router.location.subscribe(main.location);
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js","./public/Favicon.svg":"public/Favicon.svg","./public/lander.png":"public/lander.png","./public/logo.svg":"public/logo.svg"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -14825,7 +14889,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32801" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39467" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
