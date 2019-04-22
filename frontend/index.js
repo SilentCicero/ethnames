@@ -81,9 +81,11 @@ styled.injectGlobal`
     letter-spacing: 1.2px;
   }
 
+  body, html {
+    width: 100%;
+  }
+
   body {
-    padding: 0px;
-    margin: 0px;
     overflow: hidden;
     color: ${blackish};
     font-size: 16px;
@@ -185,6 +187,11 @@ const NotFound = () => (
 
 const Wrapper = styled.div`
   padding: 0px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 0px;
+  align-items: center;
+  justify-content: center;
 `;
 
 const InputSmall = styled.input`
@@ -211,23 +218,85 @@ const InputSmall = styled.input`
     border: 2px solid #ED7354;
     color: #ED7354;
   ` : ''}
-  }
 `;
 
 const Button = styled.button`
 `;
 
-const Nav = styled.div`
+const NavButton = styled.a`
+  font-weight: 500;
+  text-decoration: none;
+  color: ${blackish};
+  font-size: 20px;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  border: 2px solid rgba(0,0,0,0);
+  text-align: center;
+
+  ${props => props.highlight ? `
+    border: 2px solid ${primary};
+    color: ${primary};
+    margin-left: 20px;
+  ` : ''}
+
+  &:hover {
+    ${props => props.highlight ? `
+    background: ${primary};
+    color: #FFF;
+    ` : ''}
+  }
 `;
 
+const NavWrapper = styled.div`
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-self: end;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    justify-self: start;
+    align-items: start;
+    align-self: flex-start;
+    margin-top: 20px;
+  }
+`;
+
+const LogoImage = styled.img`
+  width: 200px;
+  max-height: auto;
+  align-self: start;
+  justify-self: start;
+`;
+
+const HeaderWrapper = styled.div`
+  width: 80%;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @media (max-width: 600px) {
+    margin-top: 37px;
+    width: 85%;
+    flex-direction: column;
+    padding: 20px;
+  }
+`;
+
+const Header = props => () => (<HeaderWrapper>
+  <a href="/" style="border: 0px; outline: 0px;"><LogoImage src={logo} /></a>
+
+  <NavWrapper>
+    <NavButton href="/faq">FAQ</NavButton>
+    <NavButton href="https://github.com/silentcicero/ethnames" target="_blank">Github</NavButton>
+    <NavButton href="/names" highlight="1">My Names</NavButton>
+  </NavWrapper>
+</HeaderWrapper>);
+
 const Main = () => (state, actions, v = console.log(state)) => (
-  <Wrapper>
-    Hello world!
-
-    <br /><br />
-
-    <InputSmall />
-  </Wrapper>
+  <Wrapper><Header /></Wrapper>
 );
 
 // routes for app
