@@ -81,10 +81,6 @@ styled.injectGlobal`
     letter-spacing: 1.2px;
   }
 
-  body, html {
-    width: 100%;
-  }
-
   body {
     overflow: hidden;
     color: ${blackish};
@@ -94,21 +90,22 @@ styled.injectGlobal`
 
   h1 {
     color: ${blackish};
-    font-size: 35px;
+    font-size: 50px;
     font-weight: 700;
-    line-height: 42px;
+    line-height: 60px;
+    margin-bottom: 20px;
   }
 
   h2 {
     color: ${blackish};
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 700;
     line-height: 30px;
   }
 
   h2 {
     color: ${blackish};
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 700;
     line-height: 21.6px;
   }
@@ -187,6 +184,7 @@ const NotFound = () => (
 
 const Wrapper = styled.div`
   padding: 0px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-right: 0px;
@@ -255,6 +253,7 @@ const NavWrapper = styled.div`
   justify-self: end;
 
   @media (max-width: 600px) {
+    ${props => props.navOpen ? `display: flex;` : `display: none;`}
     flex-direction: column;
     justify-self: start;
     align-items: start;
@@ -276,27 +275,124 @@ const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   @media (max-width: 600px) {
+    justify-content: none;
     margin-top: 37px;
     width: 85%;
-    flex-direction: column;
     padding: 20px;
   }
 `;
 
-const Header = props => () => (<HeaderWrapper>
+const NavDropWrapper = styled.div`
+  flex: 0;
+  justify-self: flex-end;
+  display: none;
+  flex-direction: column;
+
+  @media (max-width: 600px) {
+    display: flex;
+  }
+`;
+
+const NavDrop = () => (state, actions) => (
+  <NavDropWrapper onclick={e => actions.change({ navOpen: !state.navOpen })}>
+    <div style={`background: ${blackish}; width: 45px; height: 4px; margin-bottom: 7px;`}></div>
+    <div style={`background: ${blackish}; width: 40px; height: 4px; margin-bottom: 7px;`}></div>
+    <div style={`background: ${blackish}; width: 30px; height: 4px;`}></div>
+  </NavDropWrapper>
+);
+
+const Header = props => (state) => (<HeaderWrapper>
   <a href="/" style="border: 0px; outline: 0px;"><LogoImage src={logo} /></a>
 
-  <NavWrapper>
+  <NavDrop />
+
+  <NavWrapper navOpen={state.navOpen}>
     <NavButton href="/faq">FAQ</NavButton>
     <NavButton href="https://github.com/silentcicero/ethnames" target="_blank">Github</NavButton>
     <NavButton href="/names" highlight="1">My Names</NavButton>
   </NavWrapper>
 </HeaderWrapper>);
 
+const BigInput = styled.input`
+  padding: 15px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid ${primary};
+  max-width: 150px;
+  text-align: center;
+  font-size: 23px;
+
+  &:active {
+    color: ${blackish};
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 100%;
+  }
+`;
+
+const CheckAvailability = styled.button`
+  border: 3px solid ${primary};
+  padding: 10px;
+  margin-top: 50px;
+  padding-right: 13px;
+  padding-left: 13px;
+  font-weight: 700;
+  text-align: center;
+  background: #FFF;
+  font-size: 20px;
+  flex-grow: 0;
+  color: ${primary};
+`;
+
+const LanderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 100px;
+  padding: 30px;
+
+  @media (max-width: 1024px) {
+    margin-top: 40px;
+    flex-direction: column;
+  }
+`;
+
+const LanderImage = styled.img`
+  width: auto;
+  max-height: 320px;
+  margin-right: 100px;
+
+  @media (max-width: 1024px) {
+    max-height: 200px;
+    margin-bottom: 30px;
+    margin-right: 0px;
+  }
+`;
+
 const Main = () => (state, actions, v = console.log(state)) => (
-  <Wrapper><Header /></Wrapper>
+  <Wrapper>
+    <Header />
+
+    <LanderWrapper>
+      <LanderImage src={lander} />
+
+      <div style="max-width: 540px; margin-top: 20px; display: flex; flex-direction: column;">
+        <h1>Get a unique eth name for free</h1>
+        <div sytle="display: flex; flex-direction: row; flex-wrap: wrap;">
+          <BigInput type="text" placeholder="Your Name" />
+          <select style="padding: 15px; letter-spacing: 2px; font-size: 23px; border: none; background: none; outline: none;">
+            <option value=".nongiverof.eth">.nongiverof.eth</option>
+            <option value=".giverof.eth">.giverof.eth</option>
+          </select>
+        </div>
+
+        <CheckAvailability>Check Availability</CheckAvailability>
+      </div>
+    </LanderWrapper>
+  </Wrapper>
 );
 
 // routes for app
