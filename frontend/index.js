@@ -11,6 +11,7 @@ import moment from 'moment';
 const favicon = require('./public/Favicon.svg');
 const lander = require('./public/lander.png');
 const logo = require('./public/logo.svg');
+const downArrow = require('./public/downArrow.svg');
 
 const stripHex = v => String(v).indexOf('0x') === 0 ? String(v).slice(2) : v;
 const trimHexPrefix = val => String(val).indexOf('0x') === 0 ? String(val).slice(2) : val;
@@ -108,6 +109,18 @@ styled.injectGlobal`
     font-size: 30px;
     font-weight: 700;
     line-height: 30px;
+  }
+
+  select {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* This is to remove the arrow of select element in IE */
+  select::-ms-expand {	display: none; }
+  select{
+      -webkit-appearance: none;
+      appearance: none;
   }
 
   h2 {
@@ -251,6 +264,11 @@ const NavButton = styled.a`
     color: #FFF;
     ` : ''}
   }
+
+  @media (max-width: 900px) {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
 `;
 
 const NavWrapper = styled.div`
@@ -259,9 +277,10 @@ const NavWrapper = styled.div`
   flex-direction: row;
   justify-self: end;
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     ${props => props.navOpen ? `display: flex;` : `display: none;`}
     flex-direction: column;
+    width: 100%;
     justify-self: start;
     align-items: start;
     align-self: flex-start;
@@ -286,7 +305,7 @@ const HeaderWrapper = styled.div`
   flex-wrap: wrap;
   align-items: center;
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     justify-content: none;
     margin-top: 37px;
     width: 85%;
@@ -300,7 +319,7 @@ const NavDropWrapper = styled.div`
   display: none;
   flex-direction: column;
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     display: flex;
   }
 `;
@@ -325,30 +344,12 @@ const Header = props => (state) => (<HeaderWrapper>
   </NavWrapper>
 </HeaderWrapper>);
 
-const BigInput = styled.input`
-  padding: 15px;
-  border: none;
-  outline: none;
-  border-bottom: 2px solid ${primary};
-  max-width: 150px;
-  text-align: center;
-  font-size: 23px;
-
-  &:active {
-    color: ${blackish};
-  }
-
-  @media (max-width: 1024px) {
-    max-width: 100%;
-  }
-`;
-
 const CheckAvailability = styled.button`
-  border: 3px solid ${primary};
+  border: 2px solid ${primary};
   padding: 10px;
   margin-top: 50px;
-  padding-right: 13px;
-  padding-left: 13px;
+  padding-right: 30px;
+  padding-left: 30px;
   font-weight: 700;
   text-align: center;
   background: #FFF;
@@ -356,6 +357,7 @@ const CheckAvailability = styled.button`
   flex-grow: 0;
   cursor: pointer;
   color: ${primary};
+  outline: 0;
 `;
 
 const LanderWrapper = styled.div`
@@ -363,27 +365,36 @@ const LanderWrapper = styled.div`
   flex-direction: row;
   margin-top: 100px;
   padding: 30px;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
 
   @media (max-width: 1024px) {
     margin-top: 40px;
     flex-direction: column;
+    align-items: start;
+    justify-content: start;
   }
 `;
 
 const LanderImage = styled.img`
+  height: auto;
   width: auto;
-  max-height: 320px;
+  max-width: 560px;
   margin-right: 100px;
+  margin-left: 40px;
+
+  @media (max-width: 1324px) {
+    max-width: 400px;
+    margin-right: 50px;
+  }
 
   @media (max-width: 1024px) {
-    max-height: 300px;
-    margin-top: 10px;
-    margin-bottom: 40px;
-    margin-right: 0px;
+    display: none;
   }
 
   @media (max-width: 600px) {
-    max-height: 200px;
+    max-width: 200px;
     margin-bottom: 30px;
     margin-right: 0px;
   }
@@ -444,6 +455,59 @@ const FooterBody = styled.div`
   }
 `;
 
+const DownArrow = styled.img`
+  margin-right: 20px;
+`;
+
+const BigInput = styled.input`
+  padding: 15px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid ${primary};
+  max-width: 150px;
+  text-align: left;
+  font-size: 23px;
+
+  &::placeholder {
+    text-align: center;
+  }
+
+  &:active {
+    color: ${blackish};
+  }
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+  }
+`;
+
+const SelectWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+
+  & select {
+    padding: 15px;
+    letter-spacing: 2px; font-size: 23px;
+    border: none; background: none; outline: none;
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+  }
+
+  @media (max-width: 600px) {
+    margin-top: 20px;
+
+    & select {
+      font-size: 30px;
+      padding-left: 0px;
+    }
+  }
+`;
+
 const Footer = () => () => (
   <FooterWrapper>
     <FooterBody>© All Rights Reserved, EthNames.io</FooterBody>
@@ -462,20 +526,23 @@ const Main = () => (state, actions, v = console.log(state)) => (
 
     <LanderWrapper>
       <div>
-      <LanderImage src={lander} />
+        <LanderImage src={lander} />
       </div>
 
-      <div style="max-width: 540px; margin-top: 20px; padding-left: 10px; display: flex; flex-direction: column;">
-        <h1>Get a unique eth name for free</h1>
-        <div sytle="display: flex; flex-direction: row; flex-wrap: wrap;">
+      <div style="margin-top: 0px; padding-left: 10px; display: flex; flex-direction: column;">
+        <h1 style="max-width: 500px;">Get a unique eth name for free</h1>
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
           <BigInput type="text" placeholder="Your Name" />
-          <select style="padding: 15px; letter-spacing: 2px; font-size: 23px; border: none; background: none; outline: none;">
-            <option value=".nongiverof.eth">.nongiverof.eth</option>
-            <option value=".giverof.eth">.giverof.eth</option>
-          </select>
+          <SelectWrapper>
+            <select>
+              <option value=".nongiverof.eth">.nongiverof.eth</option>
+              <option value=".giverof.eth">.giverof.eth</option>
+            </select>
+            <DownArrow src={downArrow} />
+          </SelectWrapper>
         </div>
 
-        <CheckAvailability>Check Availability</CheckAvailability>
+        <div><CheckAvailability>Check Availability</CheckAvailability></div>
       </div>
     </LanderWrapper>
 

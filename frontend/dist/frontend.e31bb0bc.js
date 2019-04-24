@@ -14642,6 +14642,8 @@ module.exports = "/Favicon.2c2b3d09.svg";
 module.exports = "/lander.fc0bddd3.png";
 },{}],"public/logo.svg":[function(require,module,exports) {
 module.exports = "/logo.5e5c7163.svg";
+},{}],"public/downArrow.svg":[function(require,module,exports) {
+module.exports = "/downArrow.e6920ca9.svg";
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -14659,8 +14661,28 @@ var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject19() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  width: 50%;\n\n  & select {\n    padding: 15px;\n    letter-spacing: 2px; font-size: 23px;\n    border: none; background: none; outline: none;\n  }\n\n  @media (max-width: 1024px) {\n    margin-top: 20px;\n  }\n\n  @media (max-width: 600px) {\n    margin-top: 20px;\n\n    & select {\n      font-size: 30px;\n      padding-left: 0px;\n    }\n  }\n"]);
+
+  _templateObject19 = function _templateObject19() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject18() {
+  var data = _taggedTemplateLiteral(["\n  padding: 15px;\n  border: none;\n  outline: none;\n  border-bottom: 2px solid ", ";\n  max-width: 150px;\n  text-align: left;\n  font-size: 23px;\n\n  &::placeholder {\n    text-align: center;\n  }\n\n  &:active {\n    color: ", ";\n  }\n\n  @media (max-width: 600px) {\n    max-width: 100%;\n  }\n"]);
+
+  _templateObject18 = function _templateObject18() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 20px;\n    text-align: center;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin-right: 20px;\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -14670,7 +14692,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n  color: ", ";\n  margin-left: 30px;\n  font-weight: 500;\n  text-decoration: none;\n\n  @media (max-width: 600px) {\n    margin-left: 20px;\n    font-size: 20px;\n    margin-bottom: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 20px;\n    text-align: center;\n  }\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -14680,7 +14702,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  display: flex;\n  flex-direction: row;\n\n  @media (max-width: 600px) {\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  color: ", ";\n  margin-left: 30px;\n  font-weight: 500;\n  text-decoration: none;\n\n  @media (max-width: 600px) {\n    margin-left: 20px;\n    font-size: 20px;\n    margin-bottom: 20px;\n  }\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -14690,7 +14712,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  margin-top: 100px;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n\n  @media (max-width: 1024px) {\n    width: 80%;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column-reverse;\n    margin-bottom: 100px;\n    font-size: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  display: flex;\n  flex-direction: row;\n\n  @media (max-width: 600px) {\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -14700,7 +14722,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  width: auto;\n  max-height: 320px;\n  margin-right: 100px;\n\n  @media (max-width: 1024px) {\n    max-height: 300px;\n    margin-top: 10px;\n    margin-bottom: 40px;\n    margin-right: 0px;\n  }\n\n  @media (max-width: 600px) {\n    max-height: 200px;\n    margin-bottom: 30px;\n    margin-right: 0px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  margin-top: 100px;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n\n  @media (max-width: 1024px) {\n    width: 80%;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column-reverse;\n    margin-bottom: 100px;\n    font-size: 20px;\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -14710,7 +14732,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  margin-top: 100px;\n  padding: 30px;\n\n  @media (max-width: 1024px) {\n    margin-top: 40px;\n    flex-direction: column;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  height: auto;\n  width: auto;\n  max-width: 560px;\n  margin-right: 100px;\n  margin-left: 40px;\n\n  @media (max-width: 1324px) {\n    max-width: 400px;\n    margin-right: 50px;\n  }\n\n  @media (max-width: 1024px) {\n    display: none;\n  }\n\n  @media (max-width: 600px) {\n    max-width: 200px;\n    margin-bottom: 30px;\n    margin-right: 0px;\n  }\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -14720,7 +14742,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  border: 3px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 13px;\n  padding-left: 13px;\n  font-weight: 700;\n  text-align: center;\n  background: #FFF;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  margin-top: 100px;\n  padding: 30px;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n\n  @media (max-width: 1024px) {\n    margin-top: 40px;\n    flex-direction: column;\n    align-items: start;\n    justify-content: start;\n  }\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -14730,7 +14752,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n  padding: 15px;\n  border: none;\n  outline: none;\n  border-bottom: 2px solid ", ";\n  max-width: 150px;\n  text-align: center;\n  font-size: 23px;\n\n  &:active {\n    color: ", ";\n  }\n\n  @media (max-width: 1024px) {\n    max-width: 100%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border: 2px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 30px;\n  padding-left: 30px;\n  font-weight: 700;\n  text-align: center;\n  background: #FFF;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n  outline: 0;\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -14740,7 +14762,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n  flex: 0;\n  justify-self: flex-end;\n  display: none;\n  flex-direction: column;\n\n  @media (max-width: 600px) {\n    display: flex;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  flex: 0;\n  justify-self: flex-end;\n  display: none;\n  flex-direction: column;\n\n  @media (max-width: 900px) {\n    display: flex;\n  }\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -14750,7 +14772,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  margin-top: 80px;\n  overflow: hidden;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  align-items: center;\n\n  @media (max-width: 600px) {\n    justify-content: none;\n    margin-top: 37px;\n    width: 85%;\n    padding: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  margin-top: 80px;\n  overflow: hidden;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  align-items: center;\n\n  @media (max-width: 900px) {\n    justify-content: none;\n    margin-top: 37px;\n    width: 85%;\n    padding: 20px;\n  }\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -14770,7 +14792,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  align-self: flex-end;\n  display: flex;\n  flex-direction: row;\n  justify-self: end;\n\n  @media (max-width: 600px) {\n    ", "\n    flex-direction: column;\n    justify-self: start;\n    align-items: start;\n    align-self: flex-start;\n    margin-top: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  align-self: flex-end;\n  display: flex;\n  flex-direction: row;\n  justify-self: end;\n\n  @media (max-width: 900px) {\n    ", "\n    flex-direction: column;\n    width: 100%;\n    justify-self: start;\n    align-items: start;\n    align-self: flex-start;\n    margin-top: 20px;\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -14780,7 +14802,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  font-weight: 500;\n  text-decoration: none;\n  color: ", ";\n  font-size: 20px;\n  padding: 10px;\n  padding-right: 20px;\n  padding-left: 20px;\n  border: 2px solid rgba(0,0,0,0);\n  text-align: center;\n\n  ", "\n\n  &:hover {\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-weight: 500;\n  text-decoration: none;\n  color: ", ";\n  font-size: 20px;\n  padding: 10px;\n  padding-right: 20px;\n  padding-left: 20px;\n  border: 2px solid rgba(0,0,0,0);\n  text-align: center;\n\n  ", "\n\n  &:hover {\n    ", "\n  }\n\n  @media (max-width: 900px) {\n    font-size: 30px;\n    margin-bottom: 30px;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -14822,7 +14844,7 @@ function _templateObject2() {
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  body {\n    overflow: hidden;\n    color: ", ";\n    font-size: 16px;\n    font-family: 'Work Sans', sans-serif;\n    line-height: 1;\n    overflow: hidden;\n  }\n\n  html, body {\n    margin: 0; height: 100%; overflow: hidden;\n    overflow-y: scroll;\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 50px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 20px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 21.6px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 12px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  body {\n    overflow: hidden;\n    color: ", ";\n    font-size: 16px;\n    font-family: 'Work Sans', sans-serif;\n    line-height: 1;\n    overflow: hidden;\n  }\n\n  html, body {\n    margin: 0; height: 100%; overflow: hidden;\n    overflow-y: scroll;\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 50px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 20px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  select {\n    -webkit-appearance: none;\n    appearance: none;\n  }\n\n  /* This is to remove the arrow of select element in IE */\n  select::-ms-expand {\tdisplay: none; }\n  select{\n      -webkit-appearance: none;\n      appearance: none;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 21.6px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 12px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -14851,6 +14873,8 @@ var favicon = require('./public/Favicon.svg');
 var lander = require('./public/lander.png');
 
 var logo = require('./public/logo.svg');
+
+var downArrow = require('./public/downArrow.svg');
 
 var stripHex = function stripHex(v) {
   return String(v).indexOf('0x') === 0 ? String(v).slice(2) : v;
@@ -15012,21 +15036,25 @@ var Header = function Header(props) {
   };
 };
 
-var BigInput = _hyperappStyledComponents.default.input(_templateObject10(), primary, blackish);
+var CheckAvailability = _hyperappStyledComponents.default.button(_templateObject10(), primary, primary);
 
-var CheckAvailability = _hyperappStyledComponents.default.button(_templateObject11(), primary, primary);
+var LanderWrapper = _hyperappStyledComponents.default.div(_templateObject11());
 
-var LanderWrapper = _hyperappStyledComponents.default.div(_templateObject12());
+var LanderImage = _hyperappStyledComponents.default.img(_templateObject12());
 
-var LanderImage = _hyperappStyledComponents.default.img(_templateObject13());
+var FooterWrapper = _hyperappStyledComponents.default.div(_templateObject13(), grayer);
 
-var FooterWrapper = _hyperappStyledComponents.default.div(_templateObject14(), grayer);
+var FooterNav = _hyperappStyledComponents.default.div(_templateObject14());
 
-var FooterNav = _hyperappStyledComponents.default.div(_templateObject15());
+var FooterNavButton = _hyperappStyledComponents.default.a(_templateObject15(), grayer);
 
-var FooterNavButton = _hyperappStyledComponents.default.a(_templateObject16(), grayer);
+var FooterBody = _hyperappStyledComponents.default.div(_templateObject16());
 
-var FooterBody = _hyperappStyledComponents.default.div(_templateObject17());
+var DownArrow = _hyperappStyledComponents.default.img(_templateObject17());
+
+var BigInput = _hyperappStyledComponents.default.input(_templateObject18(), primary, blackish);
+
+var SelectWrapper = _hyperappStyledComponents.default.div(_templateObject19());
 
 var Footer = function Footer() {
   return function () {
@@ -15047,19 +15075,21 @@ var Main = function Main() {
     return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(LanderWrapper, null, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(LanderImage, {
       src: lander
     })), (0, _hyperapp.h)("div", {
-      style: "max-width: 540px; margin-top: 20px; padding-left: 10px; display: flex; flex-direction: column;"
-    }, (0, _hyperapp.h)("h1", null, "Get a unique eth name for free"), (0, _hyperapp.h)("div", {
-      sytle: "display: flex; flex-direction: row; flex-wrap: wrap;"
+      style: "margin-top: 0px; padding-left: 10px; display: flex; flex-direction: column;"
+    }, (0, _hyperapp.h)("h1", {
+      style: "max-width: 500px;"
+    }, "Get a unique eth name for free"), (0, _hyperapp.h)("div", {
+      style: "display: flex; flex-direction: row; flex-wrap: wrap;"
     }, (0, _hyperapp.h)(BigInput, {
       type: "text",
       placeholder: "Your Name"
-    }), (0, _hyperapp.h)("select", {
-      style: "padding: 15px; letter-spacing: 2px; font-size: 23px; border: none; background: none; outline: none;"
-    }, (0, _hyperapp.h)("option", {
+    }), (0, _hyperapp.h)(SelectWrapper, null, (0, _hyperapp.h)("select", null, (0, _hyperapp.h)("option", {
       value: ".nongiverof.eth"
     }, ".nongiverof.eth"), (0, _hyperapp.h)("option", {
       value: ".giverof.eth"
-    }, ".giverof.eth"))), (0, _hyperapp.h)(CheckAvailability, null, "Check Availability"))), (0, _hyperapp.h)(Footer, null));
+    }, ".giverof.eth")), (0, _hyperapp.h)(DownArrow, {
+      src: downArrow
+    }))), (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(CheckAvailability, null, "Check Availability")))), (0, _hyperapp.h)(Footer, null));
   };
 }; // routes for app
 
@@ -15079,7 +15109,7 @@ var main = (0, _hyperapp.app)(state, actions, Routes, document.body); // load ma
 main.load(); // unsubscripe for routing
 
 var unsubscribe = _router.location.subscribe(main.location);
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js","./public/Favicon.svg":"public/Favicon.svg","./public/lander.png":"public/lander.png","./public/logo.svg":"public/logo.svg"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js","./public/Favicon.svg":"public/Favicon.svg","./public/lander.png":"public/lander.png","./public/logo.svg":"public/logo.svg","./public/downArrow.svg":"public/downArrow.svg"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -15106,7 +15136,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43385" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35433" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
