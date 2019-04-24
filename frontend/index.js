@@ -405,7 +405,9 @@ const FooterWrapper = styled.div`
 
   @media (max-width: 600px) {
     width: inherit;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    margin-bottom: 100px;
+    font-size: 20px;
   }
 `;
 
@@ -415,7 +417,9 @@ const FooterNav = styled.div`
   flex-direction: row;
 
   @media (max-width: 600px) {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -427,17 +431,27 @@ const FooterNavButton = styled.a`
 
   @media (max-width: 600px) {
     margin-left: 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+`;
+
+const FooterBody = styled.div`
+  @media (max-width: 600px) {
+    width: 80%;
+    margin-top: 20px;
+    text-align: center;
   }
 `;
 
 const Footer = () => () => (
   <FooterWrapper>
-    <div>© All Rights Reserved, EthNames.io</div>
+    <FooterBody>© All Rights Reserved, EthNames.io</FooterBody>
 
     <FooterNav>
       <FooterNavButton href="faq">FAQ</FooterNavButton>
       <FooterNavButton href="https://github.com/silentcicero/ethnames">Github</FooterNavButton>
-      <FooterNavButton href="/names">MyNames</FooterNavButton>
+      <FooterNavButton href="/names" style="margin-right: 20px;">MyNames</FooterNavButton>
     </FooterNav>
   </FooterWrapper>
 );

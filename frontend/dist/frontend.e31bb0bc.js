@@ -14659,8 +14659,18 @@ var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject17() {
+  var data = _taggedTemplateLiteral(["\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 20px;\n    text-align: center;\n  }\n"]);
+
+  _templateObject17 = function _templateObject17() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n  color: ", ";\n  margin-left: 30px;\n  font-weight: 500;\n  text-decoration: none;\n\n  @media (max-width: 600px) {\n    margin-left: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  color: ", ";\n  margin-left: 30px;\n  font-weight: 500;\n  text-decoration: none;\n\n  @media (max-width: 600px) {\n    margin-left: 20px;\n    font-size: 20px;\n    margin-bottom: 20px;\n  }\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -14670,7 +14680,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  display: flex;\n  flex-direction: row;\n\n  @media (max-width: 600px) {\n    flex-direction: column;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  display: flex;\n  flex-direction: row;\n\n  @media (max-width: 600px) {\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n  }\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -14680,7 +14690,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  margin-top: 100px;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n\n  @media (max-width: 1024px) {\n    width: 80%;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  margin-top: 100px;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n\n  @media (max-width: 1024px) {\n    width: 80%;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column-reverse;\n    margin-bottom: 100px;\n    font-size: 20px;\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -15016,14 +15026,17 @@ var FooterNav = _hyperappStyledComponents.default.div(_templateObject15());
 
 var FooterNavButton = _hyperappStyledComponents.default.a(_templateObject16(), grayer);
 
+var FooterBody = _hyperappStyledComponents.default.div(_templateObject17());
+
 var Footer = function Footer() {
   return function () {
-    return (0, _hyperapp.h)(FooterWrapper, null, (0, _hyperapp.h)("div", null, "\xA9 All Rights Reserved, EthNames.io"), (0, _hyperapp.h)(FooterNav, null, (0, _hyperapp.h)(FooterNavButton, {
+    return (0, _hyperapp.h)(FooterWrapper, null, (0, _hyperapp.h)(FooterBody, null, "\xA9 All Rights Reserved, EthNames.io"), (0, _hyperapp.h)(FooterNav, null, (0, _hyperapp.h)(FooterNavButton, {
       href: "faq"
     }, "FAQ"), (0, _hyperapp.h)(FooterNavButton, {
       href: "https://github.com/silentcicero/ethnames"
     }, "Github"), (0, _hyperapp.h)(FooterNavButton, {
-      href: "/names"
+      href: "/names",
+      style: "margin-right: 20px;"
     }, "MyNames")));
   };
 };
@@ -15093,7 +15106,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38451" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43385" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
