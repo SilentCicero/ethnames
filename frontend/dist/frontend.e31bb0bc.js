@@ -14659,8 +14659,38 @@ var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject16() {
+  var data = _taggedTemplateLiteral(["\n  color: ", ";\n  margin-left: 30px;\n  font-weight: 500;\n  text-decoration: none;\n\n  @media (max-width: 600px) {\n    margin-left: 20px;\n  }\n"]);
+
+  _templateObject16 = function _templateObject16() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject15() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  display: flex;\n  flex-direction: row;\n\n  @media (max-width: 600px) {\n    flex-direction: column;\n  }\n"]);
+
+  _templateObject15 = function _templateObject15() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject14() {
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  margin-top: 100px;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n\n  @media (max-width: 1024px) {\n    width: 80%;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column;\n  }\n"]);
+
+  _templateObject14 = function _templateObject14() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  width: auto;\n  max-height: 320px;\n  margin-right: 100px;\n\n  @media (max-width: 1024px) {\n    max-height: 200px;\n    margin-bottom: 30px;\n    margin-right: 0px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: auto;\n  max-height: 320px;\n  margin-right: 100px;\n\n  @media (max-width: 1024px) {\n    max-height: 300px;\n    margin-top: 10px;\n    margin-bottom: 40px;\n    margin-right: 0px;\n  }\n\n  @media (max-width: 600px) {\n    max-height: 200px;\n    margin-bottom: 30px;\n    margin-right: 0px;\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -14680,7 +14710,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  border: 3px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 13px;\n  padding-left: 13px;\n  font-weight: 700;\n  text-align: center;\n  background: #FFF;\n  font-size: 20px;\n  flex-grow: 0;\n  color: ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  border: 3px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 13px;\n  padding-left: 13px;\n  font-weight: 700;\n  text-align: center;\n  background: #FFF;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -14710,7 +14740,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  margin-top: 80px;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  flex-wrap: wrap;\n\n  @media (max-width: 600px) {\n    justify-content: none;\n    margin-top: 37px;\n    width: 85%;\n    padding: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  margin-top: 80px;\n  overflow: hidden;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  align-items: center;\n\n  @media (max-width: 600px) {\n    justify-content: none;\n    margin-top: 37px;\n    width: 85%;\n    padding: 20px;\n  }\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -14770,7 +14800,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  padding: 0px;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  margin-right: 0px;\n  align-items: center;\n  justify-content: center;\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 0px;\n  margin: 0px;\n  display: flex;\n  flex-direction: column;\n  margin-right: 0px;\n  justify-content: center;\n  align-items: center;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -14782,7 +14812,7 @@ function _templateObject2() {
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  body {\n    overflow: hidden;\n    color: ", ";\n    font-size: 16px;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 50px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 20px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 21.6px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 12px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  body {\n    overflow: hidden;\n    color: ", ";\n    font-size: 16px;\n    font-family: 'Work Sans', sans-serif;\n    line-height: 1;\n    overflow: hidden;\n  }\n\n  html, body {\n    margin: 0; height: 100%; overflow: hidden;\n    overflow-y: scroll;\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 50px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 20px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 21.6px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 12px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -14955,7 +14985,7 @@ var Header = function Header(props) {
   return function (state) {
     return (0, _hyperapp.h)(HeaderWrapper, null, (0, _hyperapp.h)("a", {
       href: "/",
-      style: "border: 0px; outline: 0px;"
+      style: "border: 0px; outline: 0px; margin-top: 8px;"
     }, (0, _hyperapp.h)(LogoImage, {
       src: logo
     })), (0, _hyperapp.h)(NavDrop, null), (0, _hyperapp.h)(NavWrapper, {
@@ -14980,13 +15010,31 @@ var LanderWrapper = _hyperappStyledComponents.default.div(_templateObject12());
 
 var LanderImage = _hyperappStyledComponents.default.img(_templateObject13());
 
+var FooterWrapper = _hyperappStyledComponents.default.div(_templateObject14(), grayer);
+
+var FooterNav = _hyperappStyledComponents.default.div(_templateObject15());
+
+var FooterNavButton = _hyperappStyledComponents.default.a(_templateObject16(), grayer);
+
+var Footer = function Footer() {
+  return function () {
+    return (0, _hyperapp.h)(FooterWrapper, null, (0, _hyperapp.h)("div", null, "\xA9 All Rights Reserved, EthNames.io"), (0, _hyperapp.h)(FooterNav, null, (0, _hyperapp.h)(FooterNavButton, {
+      href: "faq"
+    }, "FAQ"), (0, _hyperapp.h)(FooterNavButton, {
+      href: "https://github.com/silentcicero/ethnames"
+    }, "Github"), (0, _hyperapp.h)(FooterNavButton, {
+      href: "/names"
+    }, "MyNames")));
+  };
+};
+
 var Main = function Main() {
   return function (state, actions) {
     var v = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : console.log(state);
-    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(LanderWrapper, null, (0, _hyperapp.h)(LanderImage, {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(LanderWrapper, null, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(LanderImage, {
       src: lander
-    }), (0, _hyperapp.h)("div", {
-      style: "max-width: 540px; margin-top: 20px; display: flex; flex-direction: column;"
+    })), (0, _hyperapp.h)("div", {
+      style: "max-width: 540px; margin-top: 20px; padding-left: 10px; display: flex; flex-direction: column;"
     }, (0, _hyperapp.h)("h1", null, "Get a unique eth name for free"), (0, _hyperapp.h)("div", {
       sytle: "display: flex; flex-direction: row; flex-wrap: wrap;"
     }, (0, _hyperapp.h)(BigInput, {
@@ -14998,7 +15046,7 @@ var Main = function Main() {
       value: ".nongiverof.eth"
     }, ".nongiverof.eth"), (0, _hyperapp.h)("option", {
       value: ".giverof.eth"
-    }, ".giverof.eth"))), (0, _hyperapp.h)(CheckAvailability, null, "Check Availability"))));
+    }, ".giverof.eth"))), (0, _hyperapp.h)(CheckAvailability, null, "Check Availability"))), (0, _hyperapp.h)(Footer, null));
   };
 }; // routes for app
 
@@ -15045,7 +15093,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42995" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38451" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

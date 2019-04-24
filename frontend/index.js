@@ -86,6 +86,13 @@ styled.injectGlobal`
     color: ${blackish};
     font-size: 16px;
     font-family: 'Work Sans', sans-serif;
+    line-height: 1;
+    overflow: hidden;
+  }
+
+  html, body {
+    margin: 0; height: 100%; overflow: hidden;
+    overflow-y: scroll;
   }
 
   h1 {
@@ -184,12 +191,12 @@ const NotFound = () => (
 
 const Wrapper = styled.div`
   padding: 0px;
-  width: 100%;
+  margin: 0px;
   display: flex;
   flex-direction: column;
   margin-right: 0px;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 `;
 
 const InputSmall = styled.input`
@@ -272,10 +279,12 @@ const LogoImage = styled.img`
 const HeaderWrapper = styled.div`
   width: 80%;
   margin-top: 80px;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: center;
 
   @media (max-width: 600px) {
     justify-content: none;
@@ -305,7 +314,7 @@ const NavDrop = () => (state, actions) => (
 );
 
 const Header = props => (state) => (<HeaderWrapper>
-  <a href="/" style="border: 0px; outline: 0px;"><LogoImage src={logo} /></a>
+  <a href="/" style="border: 0px; outline: 0px; margin-top: 8px;"><LogoImage src={logo} /></a>
 
   <NavDrop />
 
@@ -345,6 +354,7 @@ const CheckAvailability = styled.button`
   background: #FFF;
   font-size: 20px;
   flex-grow: 0;
+  cursor: pointer;
   color: ${primary};
 `;
 
@@ -366,20 +376,82 @@ const LanderImage = styled.img`
   margin-right: 100px;
 
   @media (max-width: 1024px) {
+    max-height: 300px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    margin-right: 0px;
+  }
+
+  @media (max-width: 600px) {
     max-height: 200px;
     margin-bottom: 30px;
     margin-right: 0px;
   }
 `;
 
+const FooterWrapper = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 100px;
+  font-weight: 500;
+  color: ${grayer};
+  justify-content: space-between;
+
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
+
+  @media (max-width: 600px) {
+    width: inherit;
+    flex-direction: column;
+  }
+`;
+
+const FooterNav = styled.div`
+  display: flex;
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`;
+
+const FooterNavButton = styled.a`
+  color: ${grayer};
+  margin-left: 30px;
+  font-weight: 500;
+  text-decoration: none;
+
+  @media (max-width: 600px) {
+    margin-left: 20px;
+  }
+`;
+
+const Footer = () => () => (
+  <FooterWrapper>
+    <div>© All Rights Reserved, EthNames.io</div>
+
+    <FooterNav>
+      <FooterNavButton href="faq">FAQ</FooterNavButton>
+      <FooterNavButton href="https://github.com/silentcicero/ethnames">Github</FooterNavButton>
+      <FooterNavButton href="/names">MyNames</FooterNavButton>
+    </FooterNav>
+  </FooterWrapper>
+);
+
 const Main = () => (state, actions, v = console.log(state)) => (
   <Wrapper>
     <Header />
 
     <LanderWrapper>
+      <div>
       <LanderImage src={lander} />
+      </div>
 
-      <div style="max-width: 540px; margin-top: 20px; display: flex; flex-direction: column;">
+      <div style="max-width: 540px; margin-top: 20px; padding-left: 10px; display: flex; flex-direction: column;">
         <h1>Get a unique eth name for free</h1>
         <div sytle="display: flex; flex-direction: row; flex-wrap: wrap;">
           <BigInput type="text" placeholder="Your Name" />
@@ -392,6 +464,8 @@ const Main = () => (state, actions, v = console.log(state)) => (
         <CheckAvailability>Check Availability</CheckAvailability>
       </div>
     </LanderWrapper>
+
+    <Footer />
   </Wrapper>
 );
 
