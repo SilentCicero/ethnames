@@ -3,10 +3,13 @@ import { h, app } from "hyperapp";
 import { Link, Route, location, Switch } from "@hyperapp/router";
 import axios from 'axios';
 const ethers = require('ethers');
-const { utils, Wallet } = require('ethers');
+const { utils, Wallet, providers } = require('ethers');
 const { sendTransaction, balanceOf, call, Eth, onReceipt } = require('ethjs-extras');
 import styled from 'hyperapp-styled-components';
 import moment from 'moment';
+
+// setup infura provider mainnet
+const provider = new providers.InfuraProvider("homestead", "942ac122c104479cab942a562071d460");
 
 const favicon = require('./public/Favicon.svg');
 const lander = require('./public/lander.png');
@@ -93,7 +96,11 @@ styled.injectGlobal`
 
   html, body {
     margin: 0; height: 100%; overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
+  }
+
+  html {
+    overflow-y: hidden;
   }
 
   h1 {
@@ -121,6 +128,33 @@ styled.injectGlobal`
   select{
       -webkit-appearance: none;
       appearance: none;
+      outline: 0;
+      border: 0;
+  }
+
+  select:-moz-focusring {
+    color:transparent;
+    text-shadow:0 0 0 #000; /* your normal text color here */
+  }
+  select:-moz-focusring * {
+    color:#000; /* your normal text color here */
+    text-shadow:none;
+  }
+
+  button::-moz-focus-inner {
+    border: 0;
+  }
+
+  option::-moz-focus-inner {
+    border: 0;
+  }
+
+  @-moz-document url-prefix() {
+    select {
+      -moz-appearance: none;
+      text-indent: 0.01px;
+      text-overflow: "";
+    }
   }
 
   h2 {
@@ -188,12 +222,6 @@ const actions = {
   change: obj => obj,
 };
 
-// provider
-let provider = window.ethereum || (window.web3 || {}).currentProvider;
-
-// provider..
-const eth = Eth({ provider });
-
 // Not found page
 const NotFound = () => (
   <div style={{ padding: '20%', 'padding-top': '100px' }}>
@@ -259,6 +287,7 @@ const NavButton = styled.a`
   ` : ''}
 
   &:hover {
+    text-decoration: underline;
     ${props => props.highlight ? `
     background: ${primary};
     color: #FFF;
@@ -358,6 +387,16 @@ const CheckAvailability = styled.button`
   cursor: pointer;
   color: ${primary};
   outline: 0;
+
+  ${props => props.available ? `
+    border-color: ${green};
+    color: ${green};
+  ` : ``}
+
+  ${props => props.notAvailable ? `
+    border-color: yellow;
+    color: yellow;
+  ` : ``}
 `;
 
 const LanderWrapper = styled.div`
@@ -440,6 +479,10 @@ const FooterNavButton = styled.a`
   font-weight: 500;
   text-decoration: none;
 
+  &:hover {
+    text-decoration: underline;
+  }
+
   @media (max-width: 600px) {
     margin-left: 20px;
     font-size: 20px;
@@ -455,10 +498,6 @@ const FooterBody = styled.div`
   }
 `;
 
-const DownArrow = styled.img`
-  margin-right: 20px;
-`;
-
 const BigInput = styled.input`
   padding: 15px;
   border: none;
@@ -467,6 +506,8 @@ const BigInput = styled.input`
   max-width: 150px;
   text-align: left;
   font-size: 23px;
+  line-height: 23px;
+  flex: 1;
 
   &::placeholder {
     text-align: center;
@@ -478,7 +519,17 @@ const BigInput = styled.input`
 
   @media (max-width: 600px) {
     max-width: 100%;
+
+    &::placeholder {
+      text-align: left;
+    }
   }
+`;
+
+const DownArrow = styled.img`
+  margin-right: 20px;
+  z-index: 10000;
+  background: #FFF;
 `;
 
 const SelectWrapper = styled.div`
@@ -486,9 +537,11 @@ const SelectWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
+  flex: 1;
+  border-right: #FFF solid 20px;
 
   & select {
+    z-index: 9000;
     padding: 15px;
     letter-spacing: 2px; font-size: 23px;
     border: none; background: none; outline: none;
@@ -513,8 +566,8 @@ const Footer = () => () => (
     <FooterBody>© All Rights Reserved, EthNames.io</FooterBody>
 
     <FooterNav>
-      <FooterNavButton href="faq">FAQ</FooterNavButton>
-      <FooterNavButton href="https://github.com/silentcicero/ethnames">Github</FooterNavButton>
+      <FooterNavButton href="/terms">Terms</FooterNavButton>
+      <FooterNavButton href="/terms">Privacy</FooterNavButton>
       <FooterNavButton href="/names" style="margin-right: 20px;">MyNames</FooterNavButton>
     </FooterNav>
   </FooterWrapper>
@@ -530,9 +583,24 @@ const Main = () => (state, actions, v = console.log(state)) => (
       </div>
 
       <div style="margin-top: 0px; padding-left: 10px; display: flex; flex-direction: column;">
-        <h1 style="max-width: 500px;">Get a unique eth name for free</h1>
+        <h1 style="max-width: 500px;">Get a unique ens name for free</h1>
         <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
-          <BigInput type="text" placeholder="Your Name" />
+          <BigInput type="text" placeholder="Your Name" oninput={async e => {
+            try {
+              if (e.target.value.length > 0) {
+                // resolve ens name
+                const address = await provider.resolveName(`${e.target.value}.nongiverof.eth`);
+
+                if (address === null) {
+                  actions.change({ checked: true, available: true, notAvailable: false });
+                } else {
+                  actions.change({ checked: true, available: false, notAvailable: true });
+                }
+              }
+            } catch (error) {
+              console.log(error);
+            }
+          }} />
           <SelectWrapper>
             <select>
               <option value=".nongiverof.eth">.nongiverof.eth</option>
@@ -542,7 +610,11 @@ const Main = () => (state, actions, v = console.log(state)) => (
           </SelectWrapper>
         </div>
 
-        <div><CheckAvailability>Check Availability</CheckAvailability></div>
+        <div><CheckAvailability
+          available={state.checked && state.available}
+          notAvailable={state.checked && state.notAvailable}>{
+          state.checked ? (state.available ? "It's Available!" : "Not Available :(") : 'Check Availability'
+        }</CheckAvailability></div>
       </div>
     </LanderWrapper>
 
