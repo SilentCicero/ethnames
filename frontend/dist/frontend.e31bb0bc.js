@@ -14642,6 +14642,8 @@ module.exports = "/lander.fc0bddd3.png";
 module.exports = "/logo.5e5c7163.svg";
 },{}],"public/downArrow.svg":[function(require,module,exports) {
 module.exports = "/downArrow.e6920ca9.svg";
+},{}],"public/done.svg":[function(require,module,exports) {
+module.exports = "/done.861796dd.svg";
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -14764,7 +14766,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n  border: 2px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 30px;\n  padding-left: 30px;\n  font-weight: 700;\n  text-align: center;\n  background: #FFF;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n  outline: 0;\n\n  ", "\n\n  ", "\n\n  @media (max-width: 600px) {\n    width: 100%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border: 2px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 30px;\n  padding-left: 30px;\n  font-weight: bold;\n  text-align: center;\n  background: #FFF;\n  letter-spacing: .8px;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n  outline: 0;\n\n  ", "\n\n  ", "\n\n  @media (max-width: 600px) {\n    width: 100%;\n  }\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -15119,31 +15121,47 @@ actions.checkAvailable = function (obj) {
               case 7:
                 address = _context.sent;
 
-                if (address === null) {
-                  actions.change({
-                    checked: true,
-                    available: true
-                  });
-                } else {
-                  actions.change({
-                    checked: true,
-                    available: false
-                  });
+                if (!(address === null)) {
+                  _context.next = 14;
+                  break;
                 }
 
-                _context.next = 13;
+                actions.change({
+                  checked: true,
+                  available: true
+                }); // goto next step
+
+                if (!obj.go) {
+                  _context.next = 12;
+                  break;
+                }
+
+                return _context.abrupt("return", route('/verify'));
+
+              case 12:
+                _context.next = 15;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 14:
+                actions.change({
+                  checked: true,
+                  available: false
+                });
+
+              case 15:
+                _context.next = 19;
+                break;
+
+              case 17:
+                _context.prev = 17;
                 _context.t0 = _context["catch"](4);
 
-              case 13:
+              case 19:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[4, 11]]);
+        }, _callee, this, [[4, 17]]);
       }));
 
       return function (_x, _x2) {
@@ -15153,7 +15171,9 @@ actions.checkAvailable = function (obj) {
   );
 };
 
-var Main = function Main() {
+var checkmark = require('./public/done.svg');
+
+var Lander = function Lander() {
   return function (state, actions) {
     var v = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : console.log(state);
     return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(LanderWrapper, null, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(LanderImage, {
@@ -15163,6 +15183,9 @@ var Main = function Main() {
     }, (0, _hyperapp.h)("h1", {
       style: "max-width: 500px;"
     }, "Get a unique ens name for free"), (0, _hyperapp.h)("div", {
+      oncreate: function oncreate(e) {
+        return document.getElementById('ethName').focus();
+      },
       style: "display: flex; flex-direction: row; flex-wrap: wrap;"
     }, (0, _hyperapp.h)(BigInput, {
       type: "text",
@@ -15199,9 +15222,25 @@ var Main = function Main() {
     }, ".giverof.eth")), (0, _hyperapp.h)(DownArrow, {
       src: downArrow
     }))), (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(CheckAvailability, {
+      onclick: function onclick(e) {
+        return actions.checkAvailable({
+          go: true
+        });
+      },
       checked: state.checked && state.name.length,
       available: state.available
-    }, state.checked && state.name.length ? state.available ? "It's Available!" : "Not Available :(" : 'Check Availability')))), (0, _hyperapp.h)(Footer, null));
+    }, state.checked && state.name.length ? state.available ? (0, _hyperapp.h)("div", {
+      style: "display: flex; align-items: center;"
+    }, "It's Available! ", (0, _hyperapp.h)("img", {
+      src: checkmark,
+      style: "width: 20px; height: 20px; margin-left: 12px;"
+    })) : "Not Available :(" : 'Check Availability')))), (0, _hyperapp.h)(Footer, null));
+  };
+};
+
+var Verify = function Verify() {
+  return function (state, actions) {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(Footer, null));
   };
 }; // routes for app
 
@@ -15209,7 +15248,10 @@ var Main = function Main() {
 var Routes = function Routes() {
   return (0, _hyperapp.h)(_router.Switch, null, (0, _hyperapp.h)(_router.Route, {
     path: "/",
-    render: Main
+    render: Lander
+  }), (0, _hyperapp.h)(_router.Route, {
+    path: "/verify",
+    render: Verify
   }), (0, _hyperapp.h)(_router.Route, {
     render: NotFound
   }));
@@ -15221,7 +15263,7 @@ var main = (0, _hyperapp.app)(state, actions, Routes, document.body); // load ma
 main.load(); // unsubscripe for routing
 
 var unsubscribe = _router.location.subscribe(main.location);
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js","./public/Favicon.svg":"public/Favicon.svg","./public/lander.png":"public/lander.png","./public/logo.svg":"public/logo.svg","./public/downArrow.svg":"public/downArrow.svg"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js","./public/Favicon.svg":"public/Favicon.svg","./public/lander.png":"public/lander.png","./public/logo.svg":"public/logo.svg","./public/downArrow.svg":"public/downArrow.svg","./public/done.svg":"public/done.svg"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -15248,7 +15290,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38273" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40371" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

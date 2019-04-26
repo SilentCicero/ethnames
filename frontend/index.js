@@ -377,9 +377,10 @@ const CheckAvailability = styled.button`
   margin-top: 50px;
   padding-right: 30px;
   padding-left: 30px;
-  font-weight: 700;
+  font-weight: bold;
   text-align: center;
   background: #FFF;
+  letter-spacing: .8px;
   font-size: 20px;
   flex-grow: 0;
   cursor: pointer;
@@ -601,13 +602,18 @@ actions.checkAvailable = obj => async (state, actions) => {
 
     if (address === null) {
       actions.change({ checked: true, available: true });
+
+      // goto next step
+      if (obj.go) return route('/verify');
     } else {
       actions.change({ checked: true, available: false });
     }
   } catch (error) {}
 };
 
-const Main = () => (state, actions, v = console.log(state)) => (
+const checkmark = require('./public/done.svg');
+
+const Lander = () => (state, actions, v = console.log(state)) => (
   <Wrapper>
     <Header />
 
@@ -618,7 +624,7 @@ const Main = () => (state, actions, v = console.log(state)) => (
 
       <div style="">
         <h1 style="max-width: 500px;">Get a unique ens name for free</h1>
-        <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+        <div oncreate={e => document.getElementById('ethName').focus()} style="display: flex; flex-direction: row; flex-wrap: wrap;">
           <BigInput type="text"
             id="ethName"
             placeholder="Your Name"
@@ -638,9 +644,10 @@ const Main = () => (state, actions, v = console.log(state)) => (
         </div>
 
         <div><CheckAvailability
+          onclick={e => actions.checkAvailable({ go: true })}
           checked={state.checked && state.name.length}
           available={state.available}>{
-          state.checked && state.name.length ? (state.available ? "It's Available!" : "Not Available :(") : 'Check Availability'
+          state.checked && state.name.length ? (state.available ? (<div style="display: flex; align-items: center;">It's Available! <img src={checkmark} style="width: 20px; height: 20px; margin-left: 12px;" /></div>) : "Not Available :(") : 'Check Availability'
         }</CheckAvailability></div>
       </div>
     </LanderWrapper>
@@ -649,10 +656,19 @@ const Main = () => (state, actions, v = console.log(state)) => (
   </Wrapper>
 );
 
+const Verify = () => (state, actions) => (
+  <Wrapper>
+    <Header />
+
+    <Footer />
+  </Wrapper>
+);
+
 // routes for app
 const Routes = () => (
   <Switch>
-    <Route path="/" render={Main} />
+    <Route path="/" render={Lander} />
+    <Route path="/verify" render={Verify} />
     <Route render={NotFound} />
   </Switch>
 );
