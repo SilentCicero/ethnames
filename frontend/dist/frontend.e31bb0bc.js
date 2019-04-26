@@ -14661,6 +14661,16 @@ var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject21() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n\n  @media (max-width: 600px) {\n    flex-wrap: wrap;\n  }\n"]);
+
+  _templateObject21 = function _templateObject21() {
+    return data;
+  };
+
+  return data;
+}
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -14676,7 +14686,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  flex: 1;\n  border-right: #FFF solid 20px;\n\n  & select {\n    z-index: 9000;\n    padding: 15px;\n    letter-spacing: 2px; font-size: 23px;\n    border: none; background: none; outline: none;\n  }\n\n  @media (max-width: 1024px) {\n    margin-top: 20px;\n  }\n\n  @media (max-width: 600px) {\n    margin-top: 20px;\n\n    & select {\n      font-size: 30px;\n      padding-left: 0px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  flex: 1;\n  border-right: #FFF solid 20px;\n\n  & select {\n    flex: 1;\n    z-index: 9000;\n    padding: 15px;\n    letter-spacing: 2px; font-size: 23px;\n    border: none; background: none; outline: none;\n  }\n\n  @media (max-width: 1024px) {\n    margin-top: 20px;\n  }\n\n  @media (max-width: 600px) {\n    margin-top: 20px;\n\n    & select {\n      font-size: 30px;\n      padding-left: 0px;\n    }\n  }\n"]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -14736,7 +14746,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  margin-top: 100px;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n\n  @media (max-width: 1024px) {\n    width: 80%;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column-reverse;\n    margin-bottom: 100px;\n    font-size: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n  margin-top: 60px;\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column-reverse;\n    margin-bottom: 100px;\n    font-size: 20px;\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -14756,7 +14766,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  margin-top: 100px;\n  padding: 30px;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n\n  @media (max-width: 1024px) {\n    margin-top: 40px;\n    flex-direction: column;\n    align-items: start;\n    justify-content: start;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  margin-top: 60px;\n  padding: 30px;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n\n  @media (max-width: 1024px) {\n    margin-top: 40px;\n    flex-direction: column;\n    align-items: start;\n    justify-content: start;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n  }\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -14858,7 +14868,7 @@ function _templateObject2() {
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  body {\n    overflow: hidden;\n    color: ", ";\n    font-size: 16px;\n    font-family: 'Work Sans', sans-serif;\n    line-height: 1;\n    overflow: hidden;\n  }\n\n  html, body {\n    margin: 0; height: 100%; overflow: hidden;\n    overflow-y: auto;\n  }\n\n  html {\n    overflow-y: hidden;\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 50px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 20px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  select {\n    -webkit-appearance: none;\n    appearance: none;\n  }\n\n  /* This is to remove the arrow of select element in IE */\n  select::-ms-expand {\tdisplay: none; }\n  select{\n      -webkit-appearance: none;\n      appearance: none;\n      outline: 0;\n      border: 0;\n  }\n\n  select:-moz-focusring {\n    color:transparent;\n    text-shadow:0 0 0 #000; /* your normal text color here */\n  }\n  select:-moz-focusring * {\n    color:#000; /* your normal text color here */\n    text-shadow:none;\n  }\n\n  button::-moz-focus-inner {\n    border: 0;\n  }\n\n  option::-moz-focus-inner {\n    border: 0;\n  }\n\n  @-moz-document url-prefix() {\n    select {\n      -moz-appearance: none;\n      text-indent: 0.01px;\n      text-overflow: \"\";\n    }\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 21.6px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 12px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  body {\n    overflow: hidden;\n    color: ", ";\n    font-size: 16px;\n    font-family: 'Work Sans', sans-serif;\n    line-height: 1;\n    overflow: hidden;\n  }\n\n  html, body {\n    margin: 0; height: 100%; overflow: hidden;\n    overflow-y: auto;\n  }\n\n  iframe {\n    opacity: 0;\n  }\n\n  html {\n    overflow-y: hidden;\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 50px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 20px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  select {\n    -webkit-appearance: none;\n    appearance: none;\n  }\n\n  /* This is to remove the arrow of select element in IE */\n  select::-ms-expand {\tdisplay: none; }\n  select{\n      -webkit-appearance: none;\n      appearance: none;\n      outline: 0;\n      border: 0;\n  }\n\n  select:-moz-focusring {\n    color:transparent;\n    text-shadow:0 0 0 #000; /* your normal text color here */\n  }\n  select:-moz-focusring * {\n    color:#000; /* your normal text color here */\n    text-shadow:none;\n  }\n\n  button::-moz-focus-inner {\n    border: 0;\n  }\n\n  option::-moz-focus-inner {\n    border: 0;\n  }\n\n  @-moz-document url-prefix() {\n    select {\n      -moz-appearance: none;\n      text-indent: 0.01px;\n      text-overflow: \"\";\n    }\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 21.6px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 12px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -14971,7 +14981,19 @@ var local = window.localStorage || {
 var actions = {
   location: _router.location.actions,
   load: function load() {
-    return function (state, actions) {};
+    return function (state, actions) {
+      console.log(document.querySelector('.grecaptcha-logo'));
+      setTimeout(function (e) {
+        document.querySelector('.grecaptcha-logo').style.opacity = '0';
+      }, 300);
+      grecaptcha.ready(function () {
+        grecaptcha.execute('6LcRdKAUAAAAANRnGKb6IU-Kq8d4FdojGbA7uV45', {
+          action: 'homepage'
+        }).then(function (token) {
+          console.log(token);
+        });
+      });
+    };
   },
   change: function change(obj) {
     return obj;
@@ -15173,6 +15195,8 @@ actions.checkAvailable = function (obj) {
 
 var checkmark = require('./public/done.svg');
 
+var InputWrapper = _hyperappStyledComponents.default.div(_templateObject21());
+
 var Lander = function Lander() {
   return function (state, actions) {
     var v = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : console.log(state);
@@ -15182,11 +15206,11 @@ var Lander = function Lander() {
       style: ""
     }, (0, _hyperapp.h)("h1", {
       style: "max-width: 500px;"
-    }, "Get a unique ens name for free"), (0, _hyperapp.h)("div", {
+    }, "Get a unique ens name for free"), (0, _hyperapp.h)(InputWrapper, {
       oncreate: function oncreate(e) {
         return document.getElementById('ethName').focus();
       },
-      style: "display: flex; flex-direction: row; flex-wrap: wrap;"
+      style: ""
     }, (0, _hyperapp.h)(BigInput, {
       type: "text",
       id: "ethName",
@@ -15290,7 +15314,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40371" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35201" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

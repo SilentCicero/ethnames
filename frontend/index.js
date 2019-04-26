@@ -99,6 +99,10 @@ styled.injectGlobal`
     overflow-y: auto;
   }
 
+  iframe {
+    opacity: 0;
+  }
+
   html {
     overflow-y: hidden;
   }
@@ -220,7 +224,17 @@ const local = window.localStorage || {
 // define initial actions
 const actions = {
   location: location.actions,
-  load: () => (state, actions) => {},
+  load: () => (state, actions) => {
+    console.log(document.querySelector('.grecaptcha-logo'));
+
+    setTimeout(e => { document.querySelector('.grecaptcha-logo').style.opacity = '0'; }, 300);
+
+		grecaptcha.ready(function() {
+			grecaptcha.execute('6LcRdKAUAAAAANRnGKb6IU-Kq8d4FdojGbA7uV45', {action: 'homepage'}).then(function(token) {
+        console.log(token);
+			});
+		});
+  },
   change: obj => obj,
 };
 
@@ -405,7 +419,7 @@ const CheckAvailability = styled.button`
 const LanderWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 100px;
+  margin-top: 60px;
   padding: 30px;
   justify-content: center;
   align-items: center;
@@ -416,6 +430,10 @@ const LanderWrapper = styled.div`
     flex-direction: column;
     align-items: start;
     justify-content: start;
+  }
+
+  @media (max-width: 600px) {
+    width: inherit;
   }
 `;
 
@@ -448,14 +466,10 @@ const FooterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 100px;
   font-weight: 500;
   color: ${grayer};
   justify-content: space-between;
-
-  @media (max-width: 1024px) {
-    width: 80%;
-  }
+  margin-top: 60px;
 
   @media (max-width: 600px) {
     width: inherit;
@@ -547,6 +561,7 @@ const SelectWrapper = styled.div`
   border-right: #FFF solid 20px;
 
   & select {
+    flex: 1;
     z-index: 9000;
     padding: 15px;
     letter-spacing: 2px; font-size: 23px;
@@ -613,6 +628,15 @@ actions.checkAvailable = obj => async (state, actions) => {
 
 const checkmark = require('./public/done.svg');
 
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+  }
+`;
+
 const Lander = () => (state, actions, v = console.log(state)) => (
   <Wrapper>
     <Header />
@@ -624,7 +648,7 @@ const Lander = () => (state, actions, v = console.log(state)) => (
 
       <div style="">
         <h1 style="max-width: 500px;">Get a unique ens name for free</h1>
-        <div oncreate={e => document.getElementById('ethName').focus()} style="display: flex; flex-direction: row; flex-wrap: wrap;">
+        <InputWrapper oncreate={e => document.getElementById('ethName').focus()} style="">
           <BigInput type="text"
             id="ethName"
             placeholder="Your Name"
@@ -641,7 +665,7 @@ const Lander = () => (state, actions, v = console.log(state)) => (
             </select>
             <DownArrow src={downArrow} />
           </SelectWrapper>
-        </div>
+        </InputWrapper>
 
         <div><CheckAvailability
           onclick={e => actions.checkAvailable({ go: true })}

@@ -25,5 +25,8 @@
     "moment": "^2.24.0",
     "regenerator-runtime": "^0.13.2",
     "solc": "^0.5.7"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10"
   }
 }
