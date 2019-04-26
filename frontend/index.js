@@ -201,6 +201,8 @@ const route = pathname => {
 // define initial app state
 const state = {
   location: location.state,
+  name: '',
+  domain: '.nongiverof.eth',
   errors: [],
 };
 
@@ -288,10 +290,6 @@ const NavButton = styled.a`
 
   &:hover {
     text-decoration: underline;
-    ${props => props.highlight ? `
-    background: ${primary};
-    color: #FFF;
-    ` : ''}
   }
 
   @media (max-width: 900px) {
@@ -388,15 +386,19 @@ const CheckAvailability = styled.button`
   color: ${primary};
   outline: 0;
 
-  ${props => props.available ? `
+  ${props => props.checked && props.available ? `
     border-color: ${green};
     color: ${green};
   ` : ``}
 
-  ${props => props.notAvailable ? `
+  ${props => props.checked && !props.available ? `
     border-color: yellow;
     color: yellow;
   ` : ``}
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const LanderWrapper = styled.div`
@@ -433,9 +435,10 @@ const LanderImage = styled.img`
   }
 
   @media (max-width: 600px) {
-    max-width: 200px;
-    margin-bottom: 30px;
-    margin-right: 0px;
+    display: block;
+    max-width: 300px;
+    margin: 0px;
+    margin-bottom: 60px;
   }
 `;
 
@@ -509,6 +512,8 @@ const BigInput = styled.input`
   line-height: 23px;
   flex: 1;
 
+  ${props => props.checked && props.available ? `border-color: ${green}` : ''}
+
   &::placeholder {
     text-align: center;
   }
@@ -573,6 +578,35 @@ const Footer = () => () => (
   </FooterWrapper>
 );
 
+const InnerLanderWrapper = styled.div`
+  margin-top: 0px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 1024px) {
+    padding-left: 0px;
+  }
+`;
+
+actions.checkAvailable = obj => async (state, actions) => {
+  actions.change(obj);
+  const ovState = Object.assign(state, obj);
+
+  if (ovState.name.length == 0) return actions.change({ checked: false });
+
+  try {
+    // resolve ens name
+    const address = await provider.resolveName(`${ovState.name}${ovState.domain}`);
+
+    if (address === null) {
+      actions.change({ checked: true, available: true });
+    } else {
+      actions.change({ checked: true, available: false });
+    }
+  } catch (error) {}
+};
+
 const Main = () => (state, actions, v = console.log(state)) => (
   <Wrapper>
     <Header />
@@ -582,27 +616,20 @@ const Main = () => (state, actions, v = console.log(state)) => (
         <LanderImage src={lander} />
       </div>
 
-      <div style="margin-top: 0px; padding-left: 10px; display: flex; flex-direction: column;">
+      <div style="">
         <h1 style="max-width: 500px;">Get a unique ens name for free</h1>
         <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
-          <BigInput type="text" placeholder="Your Name" oninput={async e => {
-            try {
-              if (e.target.value.length > 0) {
-                // resolve ens name
-                const address = await provider.resolveName(`${e.target.value}.nongiverof.eth`);
-
-                if (address === null) {
-                  actions.change({ checked: true, available: true, notAvailable: false });
-                } else {
-                  actions.change({ checked: true, available: false, notAvailable: true });
-                }
-              }
-            } catch (error) {
-              console.log(error);
-            }
-          }} />
+          <BigInput type="text"
+            id="ethName"
+            placeholder="Your Name"
+            checked={state.checked && state.name.length}
+            available={state.available}
+            onblur={e => actions.checkAvailable({ name: e.target.value })}
+            onkeyup={e => actions.checkAvailable({ name: e.target.value })} />
           <SelectWrapper>
-            <select>
+            <select id="domain"
+              onblur={e => actions.checkAvailable({ domain: e.target.value })}
+              oninput={e => actions.checkAvailable({ domain: e.target.value })}>
               <option value=".nongiverof.eth">.nongiverof.eth</option>
               <option value=".giverof.eth">.giverof.eth</option>
             </select>
@@ -611,9 +638,9 @@ const Main = () => (state, actions, v = console.log(state)) => (
         </div>
 
         <div><CheckAvailability
-          available={state.checked && state.available}
-          notAvailable={state.checked && state.notAvailable}>{
-          state.checked ? (state.available ? "It's Available!" : "Not Available :(") : 'Check Availability'
+          checked={state.checked && state.name.length}
+          available={state.available}>{
+          state.checked && state.name.length ? (state.available ? "It's Available!" : "Not Available :(") : 'Check Availability'
         }</CheckAvailability></div>
       </div>
     </LanderWrapper>

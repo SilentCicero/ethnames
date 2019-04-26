@@ -14663,6 +14663,16 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _templateObject20() {
+  var data = _taggedTemplateLiteral(["\n  margin-top: 0px;\n  padding-left: 10px;\n  display: flex;\n  flex-direction: column;\n\n  @media (max-width: 1024px) {\n    padding-left: 0px;\n  }\n"]);
+
+  _templateObject20 = function _templateObject20() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject19() {
   var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  flex: 1;\n  border-right: #FFF solid 20px;\n\n  & select {\n    z-index: 9000;\n    padding: 15px;\n    letter-spacing: 2px; font-size: 23px;\n    border: none; background: none; outline: none;\n  }\n\n  @media (max-width: 1024px) {\n    margin-top: 20px;\n  }\n\n  @media (max-width: 600px) {\n    margin-top: 20px;\n\n    & select {\n      font-size: 30px;\n      padding-left: 0px;\n    }\n  }\n"]);
 
@@ -14684,7 +14694,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  padding: 15px;\n  border: none;\n  outline: none;\n  border-bottom: 2px solid ", ";\n  max-width: 150px;\n  text-align: left;\n  font-size: 23px;\n  line-height: 23px;\n  flex: 1;\n\n  &::placeholder {\n    text-align: center;\n  }\n\n  &:active {\n    color: ", ";\n  }\n\n  @media (max-width: 600px) {\n    max-width: 100%;\n\n    &::placeholder {\n      text-align: left;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 15px;\n  border: none;\n  outline: none;\n  border-bottom: 2px solid ", ";\n  max-width: 150px;\n  text-align: left;\n  font-size: 23px;\n  line-height: 23px;\n  flex: 1;\n\n  ", "\n\n  &::placeholder {\n    text-align: center;\n  }\n\n  &:active {\n    color: ", ";\n  }\n\n  @media (max-width: 600px) {\n    max-width: 100%;\n\n    &::placeholder {\n      text-align: left;\n    }\n  }\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -14734,7 +14744,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  height: auto;\n  width: auto;\n  max-width: 560px;\n  margin-right: 100px;\n  margin-left: 40px;\n\n  @media (max-width: 1324px) {\n    max-width: 400px;\n    margin-right: 50px;\n  }\n\n  @media (max-width: 1024px) {\n    display: none;\n  }\n\n  @media (max-width: 600px) {\n    max-width: 200px;\n    margin-bottom: 30px;\n    margin-right: 0px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  height: auto;\n  width: auto;\n  max-width: 560px;\n  margin-right: 100px;\n  margin-left: 40px;\n\n  @media (max-width: 1324px) {\n    max-width: 400px;\n    margin-right: 50px;\n  }\n\n  @media (max-width: 1024px) {\n    display: none;\n  }\n\n  @media (max-width: 600px) {\n    display: block;\n    max-width: 300px;\n    margin: 0px;\n    margin-bottom: 60px;\n  }\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -14754,7 +14764,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n  border: 2px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 30px;\n  padding-left: 30px;\n  font-weight: 700;\n  text-align: center;\n  background: #FFF;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n  outline: 0;\n\n  ", "\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  border: 2px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 30px;\n  padding-left: 30px;\n  font-weight: 700;\n  text-align: center;\n  background: #FFF;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n  outline: 0;\n\n  ", "\n\n  ", "\n\n  @media (max-width: 600px) {\n    width: 100%;\n  }\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -14804,7 +14814,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  font-weight: 500;\n  text-decoration: none;\n  color: ", ";\n  font-size: 20px;\n  padding: 10px;\n  padding-right: 20px;\n  padding-left: 20px;\n  border: 2px solid rgba(0,0,0,0);\n  text-align: center;\n\n  ", "\n\n  &:hover {\n    text-decoration: underline;\n    ", "\n  }\n\n  @media (max-width: 900px) {\n    font-size: 30px;\n    margin-bottom: 30px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-weight: 500;\n  text-decoration: none;\n  color: ", ";\n  font-size: 20px;\n  padding: 10px;\n  padding-right: 20px;\n  padding-left: 20px;\n  border: 2px solid rgba(0,0,0,0);\n  text-align: center;\n\n  ", "\n\n  &:hover {\n    text-decoration: underline;\n  }\n\n  @media (max-width: 900px) {\n    font-size: 30px;\n    margin-bottom: 30px;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -14939,6 +14949,8 @@ var route = function route(pathname) {
 
 var state = {
   location: _router.location.state,
+  name: '',
+  domain: '.nongiverof.eth',
   errors: []
 };
 var editor; // localmemory storage
@@ -14983,8 +14995,6 @@ var Button = _hyperappStyledComponents.default.button(_templateObject4());
 
 var NavButton = _hyperappStyledComponents.default.a(_templateObject5(), blackish, function (props) {
   return props.highlight ? "\n    border: 2px solid ".concat(primary, ";\n    color: ").concat(primary, ";\n    margin-left: 20px;\n  ") : '';
-}, function (props) {
-  return props.highlight ? "\n    background: ".concat(primary, ";\n    color: #FFF;\n    ") : '';
 });
 
 var NavWrapper = _hyperappStyledComponents.default.div(_templateObject6(), function (props) {
@@ -15037,9 +15047,9 @@ var Header = function Header(props) {
 };
 
 var CheckAvailability = _hyperappStyledComponents.default.button(_templateObject10(), primary, primary, function (props) {
-  return props.available ? "\n    border-color: ".concat(green, ";\n    color: ").concat(green, ";\n  ") : "";
+  return props.checked && props.available ? "\n    border-color: ".concat(green, ";\n    color: ").concat(green, ";\n  ") : "";
 }, function (props) {
-  return props.notAvailable ? "\n    border-color: yellow;\n    color: yellow;\n  " : "";
+  return props.checked && !props.available ? "\n    border-color: yellow;\n    color: yellow;\n  " : "";
 });
 
 var LanderWrapper = _hyperappStyledComponents.default.div(_templateObject11());
@@ -15054,7 +15064,9 @@ var FooterNavButton = _hyperappStyledComponents.default.a(_templateObject15(), g
 
 var FooterBody = _hyperappStyledComponents.default.div(_templateObject16());
 
-var BigInput = _hyperappStyledComponents.default.input(_templateObject17(), primary, blackish);
+var BigInput = _hyperappStyledComponents.default.input(_templateObject17(), primary, function (props) {
+  return props.checked && props.available ? "border-color: ".concat(green) : '';
+}, blackish);
 
 var DownArrow = _hyperappStyledComponents.default.img(_templateObject18());
 
@@ -15073,89 +15085,123 @@ var Footer = function Footer() {
   };
 };
 
+var InnerLanderWrapper = _hyperappStyledComponents.default.div(_templateObject20());
+
+actions.checkAvailable = function (obj) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      _regeneratorRuntime.default.mark(function _callee(state, actions) {
+        var ovState, address;
+        return _regeneratorRuntime.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                actions.change(obj);
+                ovState = Object.assign(state, obj);
+
+                if (!(ovState.name.length == 0)) {
+                  _context.next = 4;
+                  break;
+                }
+
+                return _context.abrupt("return", actions.change({
+                  checked: false
+                }));
+
+              case 4:
+                _context.prev = 4;
+                _context.next = 7;
+                return provider.resolveName("".concat(ovState.name).concat(ovState.domain));
+
+              case 7:
+                address = _context.sent;
+
+                if (address === null) {
+                  actions.change({
+                    checked: true,
+                    available: true
+                  });
+                } else {
+                  actions.change({
+                    checked: true,
+                    available: false
+                  });
+                }
+
+                _context.next = 13;
+                break;
+
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](4);
+
+              case 13:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[4, 11]]);
+      }));
+
+      return function (_x, _x2) {
+        return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+
 var Main = function Main() {
   return function (state, actions) {
     var v = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : console.log(state);
     return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(LanderWrapper, null, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(LanderImage, {
       src: lander
     })), (0, _hyperapp.h)("div", {
-      style: "margin-top: 0px; padding-left: 10px; display: flex; flex-direction: column;"
+      style: ""
     }, (0, _hyperapp.h)("h1", {
       style: "max-width: 500px;"
     }, "Get a unique ens name for free"), (0, _hyperapp.h)("div", {
       style: "display: flex; flex-direction: row; flex-wrap: wrap;"
     }, (0, _hyperapp.h)(BigInput, {
       type: "text",
+      id: "ethName",
       placeholder: "Your Name",
-      oninput:
-      /*#__PURE__*/
-      function () {
-        var _ref = _asyncToGenerator(
-        /*#__PURE__*/
-        _regeneratorRuntime.default.mark(function _callee(e) {
-          var address;
-          return _regeneratorRuntime.default.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.prev = 0;
-
-                  if (!(e.target.value.length > 0)) {
-                    _context.next = 6;
-                    break;
-                  }
-
-                  _context.next = 4;
-                  return provider.resolveName("".concat(e.target.value, ".nongiverof.eth"));
-
-                case 4:
-                  address = _context.sent;
-
-                  if (address === null) {
-                    actions.change({
-                      checked: true,
-                      available: true,
-                      notAvailable: false
-                    });
-                  } else {
-                    actions.change({
-                      checked: true,
-                      available: false,
-                      notAvailable: true
-                    });
-                  }
-
-                case 6:
-                  _context.next = 11;
-                  break;
-
-                case 8:
-                  _context.prev = 8;
-                  _context.t0 = _context["catch"](0);
-                  console.log(_context.t0);
-
-                case 11:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee, this, [[0, 8]]);
-        }));
-
-        return function (_x) {
-          return _ref.apply(this, arguments);
-        };
-      }()
-    }), (0, _hyperapp.h)(SelectWrapper, null, (0, _hyperapp.h)("select", null, (0, _hyperapp.h)("option", {
+      checked: state.checked && state.name.length,
+      available: state.available,
+      onblur: function onblur(e) {
+        return actions.checkAvailable({
+          name: e.target.value
+        });
+      },
+      onkeyup: function onkeyup(e) {
+        return actions.checkAvailable({
+          name: e.target.value
+        });
+      }
+    }), (0, _hyperapp.h)(SelectWrapper, null, (0, _hyperapp.h)("select", {
+      id: "domain",
+      onblur: function onblur(e) {
+        return actions.checkAvailable({
+          domain: e.target.value
+        });
+      },
+      oninput: function oninput(e) {
+        return actions.checkAvailable({
+          domain: e.target.value
+        });
+      }
+    }, (0, _hyperapp.h)("option", {
       value: ".nongiverof.eth"
     }, ".nongiverof.eth"), (0, _hyperapp.h)("option", {
       value: ".giverof.eth"
     }, ".giverof.eth")), (0, _hyperapp.h)(DownArrow, {
       src: downArrow
     }))), (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(CheckAvailability, {
-      available: state.checked && state.available,
-      notAvailable: state.checked && state.notAvailable
-    }, state.checked ? state.available ? "It's Available!" : "Not Available :(" : 'Check Availability')))), (0, _hyperapp.h)(Footer, null));
+      checked: state.checked && state.name.length,
+      available: state.available
+    }, state.checked && state.name.length ? state.available ? "It's Available!" : "Not Available :(" : 'Check Availability')))), (0, _hyperapp.h)(Footer, null));
   };
 }; // routes for app
 
@@ -15202,7 +15248,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42223" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38273" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
