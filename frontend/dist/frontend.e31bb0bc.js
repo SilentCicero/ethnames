@@ -14661,6 +14661,16 @@ var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject22() {
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n"]);
+
+  _templateObject22 = function _templateObject22() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject21() {
   var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n\n  @media (max-width: 600px) {\n    flex-wrap: wrap;\n  }\n"]);
 
@@ -14746,7 +14756,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n  margin-top: 60px;\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column-reverse;\n    margin-bottom: 100px;\n    font-size: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n  margin-top: 110px;\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    margin-top: 50px;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (max-device-height: 900px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n    margin-top: 100px;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (min-device-height: 901px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n    margin-top: 200px;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 768px)\n    and (max-device-width: 1024px) {\n    margin-top: 150px;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column-reverse;\n    margin-top: 40px;\n    margin-bottom: 100px;\n    font-size: 20px;\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -14776,7 +14786,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n  border: 2px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 30px;\n  padding-left: 30px;\n  font-weight: bold;\n  text-align: center;\n  background: #FFF;\n  letter-spacing: .8px;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n  outline: 0;\n\n  ", "\n\n  ", "\n\n  @media (max-width: 600px) {\n    width: 100%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border: 2px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 30px;\n  padding-left: 30px;\n  font-weight: bold;\n  text-align: center;\n  background: #FFF;\n  letter-spacing: .8px;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n  outline: 0;\n  display: flex;\n  align-items: center;\n\n  ", "\n\n  ", "\n\n  @media (max-width: 600px) {\n    width: 100%;\n  }\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -15123,67 +15133,74 @@ actions.checkAvailable = function (obj) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                actions.change(obj);
-                ovState = Object.assign(state, obj);
-
-                if (!(ovState.name.length == 0)) {
-                  _context.next = 4;
-                  break;
-                }
-
-                return _context.abrupt("return", actions.change({
-                  checked: false
-                }));
-
-              case 4:
-                _context.prev = 4;
-                _context.next = 7;
-                return provider.resolveName("".concat(ovState.name).concat(ovState.domain));
-
-              case 7:
-                address = _context.sent;
-
-                if (!(address === null)) {
-                  _context.next = 14;
-                  break;
-                }
-
-                actions.change({
-                  checked: true,
-                  available: true
+                if (obj.name && obj.name !== state.name || obj.domain && obj.domain !== state.domain) actions.change({
+                  loadingName: true,
+                  checked: false,
+                  available: false,
+                  address: 1
                 }); // goto next step
 
-                if (!obj.go) {
-                  _context.next = 12;
+                if (!(!state.address && obj.go)) {
+                  _context.next = 3;
                   break;
                 }
 
                 return _context.abrupt("return", route('/verify'));
 
-              case 12:
-                _context.next = 15;
-                break;
+              case 3:
+                actions.change(obj);
+                ovState = Object.assign(state, obj);
 
-              case 14:
+                if (!(ovState.name.length == 0)) {
+                  _context.next = 7;
+                  break;
+                }
+
+                return _context.abrupt("return", actions.change({
+                  checked: false,
+                  loadingName: false
+                }));
+
+              case 7:
+                _context.prev = 7;
+                _context.next = 10;
+                return provider.resolveName("".concat(ovState.name).concat(ovState.domain));
+
+              case 10:
+                address = _context.sent;
                 actions.change({
-                  checked: true,
-                  available: false
+                  loadingName: false
                 });
 
-              case 15:
-                _context.next = 19;
+                if (address === null) {
+                  actions.change({
+                    checked: true,
+                    available: true,
+                    loadingName: false,
+                    address: address
+                  });
+                } else {
+                  actions.change({
+                    checked: true,
+                    available: false,
+                    loadingName: false,
+                    address: address
+                  });
+                }
+
+                _context.next = 17;
                 break;
 
-              case 17:
-                _context.prev = 17;
-                _context.t0 = _context["catch"](4);
+              case 15:
+                _context.prev = 15;
+                _context.t0 = _context["catch"](7);
 
-              case 19:
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[4, 17]]);
+        }, _callee, this, [[7, 15]]);
       }));
 
       return function (_x, _x2) {
@@ -15258,13 +15275,46 @@ var Lander = function Lander() {
     }, "It's Available! ", (0, _hyperapp.h)("img", {
       src: checkmark,
       style: "width: 20px; height: 20px; margin-left: 12px;"
-    })) : "Not Available :(" : 'Check Availability')))), (0, _hyperapp.h)(Footer, null));
+    })) : "Not Available :(" : 'Check Availability', state.loadingName && !state.available ? (0, _hyperapp.h)("svg", {
+      style: "margin-left: 12px;",
+      width: "20px",
+      height: "20px",
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 100 100",
+      preserveAspectRatio: "xMidYMid",
+      class: "lds-rolling"
+    }, (0, _hyperapp.h)("circle", {
+      cx: "50",
+      cy: "50",
+      fill: "none",
+      "ng-attr-stroke": primary,
+      "ng-attr-stroke-width": "27",
+      "ng-attr-r": "10",
+      stroke: primary,
+      "stroke-width": "13",
+      r: "35",
+      "stroke-dasharray": "164.93361431346415 56.97787143782138",
+      transform: "rotate(44.8398 50 50)"
+    }, (0, _hyperapp.h)("animateTransform", {
+      attributeName: "transform",
+      type: "rotate",
+      calcMode: "linear",
+      values: "0 50 50;360 50 50",
+      keyTimes: "0;1",
+      dur: "0.8s",
+      begin: "0s",
+      repeatCount: "indefinite"
+    }))) : '')))), (0, _hyperapp.h)(Footer, null));
   };
 };
 
+var VerifyWrapper = _hyperappStyledComponents.default.div(_templateObject22());
+
 var Verify = function Verify() {
   return function (state, actions) {
-    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(Footer, null));
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(VerifyWrapper, null, (0, _hyperapp.h)("div", {
+      style: ""
+    })), (0, _hyperapp.h)(Footer, null));
   };
 }; // routes for app
 
@@ -15314,7 +15364,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35201" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39101" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

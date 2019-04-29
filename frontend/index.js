@@ -400,6 +400,8 @@ const CheckAvailability = styled.button`
   cursor: pointer;
   color: ${primary};
   outline: 0;
+  display: flex;
+  align-items: center;
 
   ${props => props.checked && props.available ? `
     border-color: ${green};
@@ -469,11 +471,47 @@ const FooterWrapper = styled.div`
   font-weight: 500;
   color: ${grayer};
   justify-content: space-between;
-  margin-top: 60px;
+  margin-top: 110px;
+
+  /* ----------- Non-Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1200px)
+    and (max-device-width: 1440px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+    margin-top: 50px;
+  }
+
+  /* ----------- Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1200px)
+    and (max-device-width: 1440px)
+    and (max-device-height: 900px)
+    and (-webkit-min-device-pixel-ratio: 2)
+    and (min-resolution: 192dpi) {
+    margin-top: 100px;
+  }
+
+  /* ----------- Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1200px)
+    and (max-device-width: 1440px)
+    and (min-device-height: 901px)
+    and (-webkit-min-device-pixel-ratio: 2)
+    and (min-resolution: 192dpi) {
+    margin-top: 200px;
+  }
+
+  /* ----------- Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 768px)
+    and (max-device-width: 1024px) {
+    margin-top: 150px;
+  }
 
   @media (max-width: 600px) {
     width: inherit;
     flex-direction: column-reverse;
+    margin-top: 40px;
     margin-bottom: 100px;
     font-size: 20px;
   }
@@ -606,22 +644,27 @@ const InnerLanderWrapper = styled.div`
 `;
 
 actions.checkAvailable = obj => async (state, actions) => {
+  if ((obj.name && (obj.name !== state.name)) || (obj.domain && (obj.domain !== state.domain)))
+    actions.change({ loadingName: true, checked: false, available: false, address: 1 });
+
+  // goto next step
+  if (!state.address && obj.go) return route('/verify');
+
   actions.change(obj);
+
   const ovState = Object.assign(state, obj);
 
-  if (ovState.name.length == 0) return actions.change({ checked: false });
+  if (ovState.name.length == 0) return actions.change({ checked: false, loadingName: false });
 
   try {
     // resolve ens name
     const address = await provider.resolveName(`${ovState.name}${ovState.domain}`);
+    actions.change({ loadingName: false });
 
     if (address === null) {
-      actions.change({ checked: true, available: true });
-
-      // goto next step
-      if (obj.go) return route('/verify');
+      actions.change({ checked: true, available: true, loadingName: false, address });
     } else {
-      actions.change({ checked: true, available: false });
+      actions.change({ checked: true, available: false, loadingName: false, address });
     }
   } catch (error) {}
 };
@@ -672,7 +715,15 @@ const Lander = () => (state, actions, v = console.log(state)) => (
           checked={state.checked && state.name.length}
           available={state.available}>{
           state.checked && state.name.length ? (state.available ? (<div style="display: flex; align-items: center;">It's Available! <img src={checkmark} style="width: 20px; height: 20px; margin-left: 12px;" /></div>) : "Not Available :(") : 'Check Availability'
-        }</CheckAvailability></div>
+        }
+
+        {state.loadingName && !state.available ? (<svg style="margin-left: 12px;" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-rolling">
+          <circle cx="50" cy="50" fill="none" ng-attr-stroke={primary} ng-attr-stroke-width="27" ng-attr-r="10" stroke={primary} stroke-width="13" r="35" stroke-dasharray="164.93361431346415 56.97787143782138" transform="rotate(44.8398 50 50)">
+            <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="0.8s" begin="0s" repeatCount="indefinite"></animateTransform>
+          </circle>
+        </svg>) : ''}
+
+        </CheckAvailability></div>
       </div>
     </LanderWrapper>
 
@@ -680,9 +731,22 @@ const Lander = () => (state, actions, v = console.log(state)) => (
   </Wrapper>
 );
 
+const VerifyWrapper = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+`;
+
 const Verify = () => (state, actions) => (
   <Wrapper>
     <Header />
+
+    <VerifyWrapper>
+
+      <div style="">
+      </div>
+
+    </VerifyWrapper>
 
     <Footer />
   </Wrapper>
