@@ -14661,8 +14661,18 @@ var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject30() {
+  var data = _taggedTemplateLiteral(["\n  height: 30px;\n  font-weight: 500;\n  border: 3px solid ", ";\n  outline: none;\n  font-size: 18px;\n  padding: 13px;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"]);
+
+  _templateObject30 = function _templateObject30() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject29() {
-  var data = _taggedTemplateLiteral(["\n  border: 3px solid ", ";\n  color: ", ";\n  font-size: 18px;\n  cursor: pointer;\n  background: #FFF;\n  padding-top: 15px;\n  padding-right: 27px;\n  padding-left: 27px;\n  padding-bottom: 15px;\n  font-weight: 500;\n  max-width: 130px;\n  outline: none;\n\n  &:hover {\n    outline: none;\n    text-decoration: underline;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-size: 18px;\n  cursor: pointer;\n  background: #FFF;\n  padding-top: 15px;\n  padding-right: 27px;\n  padding-left: 27px;\n  padding-bottom: 15px;\n  font-weight: 700;\n  max-width: 250px;\n  outline: none;\n\n  &:hover {\n    ", "\n  }\n\n  ", "\n"]);
 
   _templateObject29 = function _templateObject29() {
     return data;
@@ -14692,7 +14702,7 @@ function _templateObject27() {
 }
 
 function _templateObject26() {
-  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  margin-bottom: 75px;\n  flex-direction: column;\n  margin-top: 115px;\n\n  @media (max-width: 600px) {\n    width: 85%;\n    margin-bottom: 50px;\n    margin-top: 50px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  margin-bottom: 75px;\n  flex-direction: column;\n  margin-top: 115px;\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    width: 70%;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (max-device-height: 900px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (min-device-height: 901px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n  }\n\n  @media (max-width: 600px) {\n    width: 85%;\n    margin-bottom: 50px;\n    margin-top: 50px;\n  }\n"]);
 
   _templateObject26 = function _templateObject26() {
     return data;
@@ -14846,7 +14856,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n  height: 30px;\n  width: 30px;\n  border-radius: 50%;\n  border: 3px solid ", ";\n  font-size: 18px;\n  font-weight: bold;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin-right: 15px;\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  height: 30px;\n  width: 30px;\n  border-radius: 50%;\n  border: 3px solid ", ";\n  font-size: 18px;\n  font-weight: bold;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin-right: 15px;\n\n  ", "\n\n  @media (max-width: 600px) {\n    ", "\n  }\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -15063,17 +15073,21 @@ var actions = {
   location: _router.location.actions,
   load: function load() {
     return function (state, actions) {
-      console.log(document.querySelector('.grecaptcha-logo'));
-      setTimeout(function (e) {
-        document.querySelector('.grecaptcha-logo').style.opacity = '0';
-      }, 300);
-      grecaptcha.ready(function () {
-        grecaptcha.execute('6LcRdKAUAAAAANRnGKb6IU-Kq8d4FdojGbA7uV45', {
-          action: 'homepage'
-        }).then(function (token) {
-          console.log(token);
+      try {
+        setTimeout(function (e) {
+          document.querySelector('.grecaptcha-logo').style.opacity = '0';
+        }, 300);
+        /*
+        grecaptcha.ready(function() {
+          try {
+        	grecaptcha
+            .execute('6LcRdKAUAAAAANRnGKb6IU-Kq8d4FdojGbA7uV45', {action: 'homepage'})
+            .then(function(token) {
+        	});
+          } catch (erorr) {}
         });
-      });
+        */
+      } catch (err) {}
     };
   },
   change: function change(obj) {
@@ -15134,6 +15148,8 @@ var StepsWrapper = _hyperappStyledComponents.default.div(_templateObject10(), pr
 
 var StepsNumber = _hyperappStyledComponents.default.div(_templateObject11(), primary, function (props) {
   return props.current === parseInt(props.step, 10) ? "\n    background: ".concat(primary, ";\n    color: #FFF;\n  ") : '';
+}, function (props) {
+  return props.current > parseInt(props.step, 10) ? "\n    text-decoration: line-through;\n    " : '';
 });
 
 var Step = _hyperappStyledComponents.default.div(_templateObject12());
@@ -15144,31 +15160,41 @@ var StepText = _hyperappStyledComponents.default.div(_templateObject13(), functi
   return props.current === parseInt(props.step, 10) ? 'display: flex;' : 'display: none;';
 });
 
+var selStep = function selStep(state) {
+  return {
+    '/accessibility': 1,
+    "/wallet": 2,
+    "/verify": 3,
+    "/success": 4
+  }[(state.location || {}).pathname] || 1;
+};
+
 var NavSteps = function NavSteps() {
   return function (state, actions) {
+    var v = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : console.log(state);
     return (0, _hyperapp.h)(StepsWrapper, null, (0, _hyperapp.h)(Step, null, (0, _hyperapp.h)(StepsNumber, {
-      current: state.step,
+      current: selStep(state),
       step: "1"
     }, "1"), " ", (0, _hyperapp.h)(StepText, {
-      current: state.step,
+      current: selStep(state),
       step: "1"
     }, "Availability")), (0, _hyperapp.h)(Step, null, (0, _hyperapp.h)(StepsNumber, {
-      current: state.step,
+      current: selStep(state),
       step: "2"
     }, "2"), " ", (0, _hyperapp.h)(StepText, {
-      current: state.step,
+      current: selStep(state),
       step: "2"
     }, "Wallet")), (0, _hyperapp.h)(Step, null, (0, _hyperapp.h)(StepsNumber, {
-      current: state.step,
+      current: selStep(state),
       step: "3"
     }, "3"), " ", (0, _hyperapp.h)(StepText, {
-      current: state.step,
+      current: selStep(state),
       step: "3"
     }, "Verify")), (0, _hyperapp.h)(Step, null, (0, _hyperapp.h)(StepsNumber, {
-      current: state.step,
+      current: selStep(state),
       step: "4"
     }, "4"), " ", (0, _hyperapp.h)(StepText, {
-      current: state.step,
+      current: selStep(state),
       step: "4"
     }, "Success")));
   };
@@ -15260,7 +15286,7 @@ actions.checkAvailable = function (obj) {
                   break;
                 }
 
-                return _context.abrupt("return", route('/verify'));
+                return _context.abrupt("return", route('/wallet'));
 
               case 3:
                 actions.change(obj);
@@ -15433,6 +15459,98 @@ var VerifyRowItem = _hyperappStyledComponents.default.div(_templateObject28(), f
   return props.left ? 'width: 100%;' : "\n    width: inherit;\n    padding-left: 0px;\n    margin-top: 30px;\n    ";
 });
 
+var VerifyButton = _hyperappStyledComponents.default.button(_templateObject29(), function (props) {
+  return props.ready ? "\n    outline: none;\n    text-decoration: underline;\n    " : '';
+}, function (props) {
+  return props.ready ? "\n  border: 3px solid ".concat(primary, ";\n  color: ").concat(primary, ";\n  ") : "\n  border: 3px solid ".concat(lightgray, ";\n  color: ").concat(grayer, ";\n  ");
+});
+
+var checkInterval;
+
+actions.intervalCheck = function () {
+  return function (state, actions) {
+    checkInterval = setInterval(actions.enable, 100);
+  };
+};
+
+actions.enable = function (e) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      _regeneratorRuntime.default.mark(function _callee2(state, actions) {
+        var enabled, accounts;
+        return _regeneratorRuntime.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                console.log(window.ethereum);
+
+                if (window.ethereum) {
+                  _context2.next = 4;
+                  break;
+                }
+
+                return _context2.abrupt("return");
+
+              case 4:
+                actions.change({
+                  ethereumAvailable: true
+                });
+                _context2.next = 7;
+                return window.ethereum.enable();
+
+              case 7:
+                enabled = _context2.sent;
+                _context2.next = 10;
+                return Eth({
+                  provider: window.web3.currentProvider
+                }).raw('eth_accounts');
+
+              case 10:
+                accounts = _context2.sent;
+                clearInterval(checkInterval);
+
+                if (accounts.length) {
+                  actions.change({
+                    accounts: accounts
+                  });
+                  route('/verify');
+                } else {
+                  actions.change({
+                    error: 'No accounts found.'
+                  });
+                }
+
+                _context2.next = 18;
+                break;
+
+              case 15:
+                _context2.prev = 15;
+                _context2.t0 = _context2["catch"](0);
+                actions.change({
+                  error: 'Error while getting accounts.'
+                });
+
+              case 18:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 15]]);
+      }));
+
+      return function (_x3, _x4) {
+        return _ref2.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+var isFirefox = (navigator.userAgent || {}).toLowerCase().indexOf('firefox') > -1;
+
 var WalletContainer = function WalletContainer() {
   return function (state, actions) {
     return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, {
@@ -15443,20 +15561,43 @@ var WalletContainer = function WalletContainer() {
       left: "1"
     }, (0, _hyperapp.h)("h3", {
       style: "margin-bottom: 10px;"
-    }, "Install A Wallet"), (0, _hyperapp.h)("p", null, "Please connect a browser-based Ethereum wallet such as ", (0, _hyperapp.h)("a", {
+    }, typeof window.ethereum === "undefined" || state.ethereumAvailable ? (0, _hyperapp.h)("span", null, "Install A Wallet") : (0, _hyperapp.h)("span", null, "Connect Your Wallet")), (0, _hyperapp.h)("p", null, "Please connect a browser-based Ethereum wallet such as ", (0, _hyperapp.h)("a", {
       href: ""
     }, "MetaMask"), " or ", (0, _hyperapp.h)("a", {
       href: ""
     }, "TrustWallet"), ".")), (0, _hyperapp.h)(VerifyRowItem, {
-      style: "display: flex; align-items: center; justify-content: center;"
+      style: "display: flex; align-items: center; justify-content: center; flex-wrap: wrap; position: relative;"
+    }, typeof window.ethereum !== "undefined" || state.ethereumAvailable ? (0, _hyperapp.h)(VerifyButton, {
+      ready: "1",
+      onclick: actions.enable
+    }, "Connect MetaMask") : (0, _hyperapp.h)("div", {
+      style: "position: relative;"
+    }, (0, _hyperapp.h)("a", {
+      oncreate: function oncreate(e) {
+        return actions.intervalCheck();
+      },
+      href: isFirefox ? 'https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/' : 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en',
+      style: "outline: none;",
+      target: "_blank"
     }, (0, _hyperapp.h)("img", {
       src: "http://airdrop-review.com/wp-content/uploads/2018/05/metamask.png",
       width: "300"
-    })))), (0, _hyperapp.h)(Footer, null));
+    })), (0, _hyperapp.h)("a", {
+      href: "/wallet",
+      style: "position: absolute; bottom: -40px; left: 0px; text-align: center; right: 0px; text-decoration: none;"
+    }, "Refresh"))))), (0, _hyperapp.h)(Footer, null));
   };
 };
 
-var VerifyButton = _hyperappStyledComponents.default.button(_templateObject29(), primary, primary);
+var HandleInput = _hyperappStyledComponents.default.input(_templateObject30(), lightgray, function (props) {
+  return props.ready ? "\n    border-color: ".concat(blackish, ";\n    color: ").concat(blackish, ";\n  ") : '';
+}, function (props) {
+  return props.at ? "\n  background: ".concat(lightgray, ";\n  border-right: 0px;\n  text-align: center;\n  ") : 'width: 100%;';
+}, function (props) {
+  return props.ready && !props.at ? "\n    border-left: 0px;\n  " : '';
+}, function (props) {
+  return props.ready && props.at ? "\n    background: #FFF;\n    padding-right: 16px;\n    color: ".concat(blackish, ";\n  ") : "\n  ";
+});
 
 var Verify = function Verify() {
   return function (state, actions) {
@@ -15468,20 +15609,35 @@ var Verify = function Verify() {
       left: "1"
     }, (0, _hyperapp.h)("h3", {
       style: "margin-bottom: 10px;"
-    }, "Verify Yourself"), (0, _hyperapp.h)("p", null, "Enter a Twitter handle and we will send you a special code through a Direct Message (DM).")), (0, _hyperapp.h)(VerifyRowItem, {
+    }, "Verify Yourself"), (0, _hyperapp.h)("p", null, "Enter a ", (0, _hyperapp.h)("b", null, "Twitter handle"), " and we will send you a Special Code through a ", (0, _hyperapp.h)("b", null, "Direct Message (DM)"), ".")), (0, _hyperapp.h)(VerifyRowItem, {
       style: "display: flex; align-items: center;"
-    }, (0, _hyperapp.h)("input", {
+    }, (0, _hyperapp.h)(HandleInput, {
       type: "text",
+      at: "1",
+      ready: state.handle ? '1' : null,
       value: "@",
-      style: "height: 30px; font-size: 22px; font-weight: 700; border: 3px solid lightgray; border-right: 0px; background: lightgray; outline: none; text-select: none; padding: 13px; flex: 1; max-width: 23px;",
+      style: "height: 30px; font-size: 22px; font-weight: 700; outline: none; text-select: none; flex: 1; max-width: 23px;",
       readonly: "readonly"
-    }), (0, _hyperapp.h)("input", {
+    }), (0, _hyperapp.h)(HandleInput, {
       type: "text",
-      placeholder: "MyTwitterHandle",
-      style: "height: 30px; font-weight: 500; border: 3px solid lightgray; outline: none; font-size: 18px; padding: 13px; flex: 1;"
+      ready: state.handle ? '1' : null,
+      oninput: function oninput(e) {
+        return actions.change({
+          handle: e.target.value
+        });
+      },
+      oncreate: function oncreate(e) {
+        return setTimeout(function (e) {
+          return document.querySelector('#handle').focus();
+        }, 10);
+      },
+      id: "handle",
+      placeholder: "MyTwitterHandle"
     }))), (0, _hyperapp.h)("div", {
       style: "display: flex; flex-direction: row; justify-content: flex-end;"
-    }, (0, _hyperapp.h)(VerifyButton, null, "Verify"))), (0, _hyperapp.h)(Footer, null));
+    }, (0, _hyperapp.h)(VerifyButton, {
+      ready: state.handle ? '1' : null
+    }, "Send Message"))), (0, _hyperapp.h)(Footer, null));
   };
 }; // routes for app
 
@@ -15534,7 +15690,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44569" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40923" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -233,15 +233,21 @@ const local = window.localStorage || {
 const actions = {
   location: location.actions,
   load: () => (state, actions) => {
-    console.log(document.querySelector('.grecaptcha-logo'));
+    try {
+      setTimeout(e => { document.querySelector('.grecaptcha-logo').style.opacity = '0'; }, 300);
 
-    setTimeout(e => { document.querySelector('.grecaptcha-logo').style.opacity = '0'; }, 300);
-
-		grecaptcha.ready(function() {
-			grecaptcha.execute('6LcRdKAUAAAAANRnGKb6IU-Kq8d4FdojGbA7uV45', {action: 'homepage'}).then(function(token) {
-        console.log(token);
-			});
-		});
+      /*
+  		grecaptcha.ready(function() {
+        try {
+    			grecaptcha
+          .execute('6LcRdKAUAAAAANRnGKb6IU-Kq8d4FdojGbA7uV45', {action: 'homepage'})
+          .then(function(token) {
+    			});
+        } catch (erorr) {}
+  		});
+      */
+    } catch (err) {
+    }
   },
   change: obj => obj,
 };
@@ -404,6 +410,12 @@ const StepsNumber = styled.div`
     background: ${primary};
     color: #FFF;
   ` : ''}
+
+  @media (max-width: 600px) {
+    ${props => props.current > parseInt(props.step, 10) ? `
+    text-decoration: line-through;
+    ` : ''}
+  }
 `;
 
 const Step = styled.div`
@@ -423,12 +435,14 @@ const StepText = styled.div`
   }
 `;
 
-const NavSteps = () => (state, actions) => (
+const selStep = state => ({ '/accessibility': 1, "/wallet": 2, "/verify": 3, "/success": 4 })[(state.location || {}).pathname] || 1;
+
+const NavSteps = () => (state, actions, v = console.log(state)) => (
   <StepsWrapper>
-    <Step><StepsNumber current={state.step} step="1">1</StepsNumber> <StepText current={state.step} step="1">Availability</StepText></Step>
-    <Step><StepsNumber current={state.step} step="2">2</StepsNumber> <StepText current={state.step} step="2">Wallet</StepText></Step>
-    <Step><StepsNumber current={state.step} step="3">3</StepsNumber> <StepText current={state.step} step="3">Verify</StepText></Step>
-    <Step><StepsNumber current={state.step} step="4">4</StepsNumber> <StepText  current={state.step} step="4">Success</StepText></Step>
+    <Step><StepsNumber current={selStep(state)} step="1">1</StepsNumber> <StepText current={selStep(state)} step="1">Availability</StepText></Step>
+    <Step><StepsNumber current={selStep(state)} step="2">2</StepsNumber> <StepText current={selStep(state)} step="2">Wallet</StepText></Step>
+    <Step><StepsNumber current={selStep(state)} step="3">3</StepsNumber> <StepText current={selStep(state)} step="3">Verify</StepText></Step>
+    <Step><StepsNumber current={selStep(state)} step="4">4</StepsNumber> <StepText  current={selStep(state)} step="4">Success</StepText></Step>
   </StepsWrapper>
 );
 
@@ -708,7 +722,7 @@ actions.checkAvailable = obj => async (state, actions) => {
     actions.change({ loadingName: true, checked: false, available: false, address: 1 });
 
   // goto next step
-  if (!state.address && obj.go) return route('/verify');
+  if (!state.address && obj.go) return route('/wallet');
 
   actions.change(obj);
 
@@ -798,6 +812,32 @@ const VerifyWrapper = styled.div`
   flex-direction: column;
   margin-top: 115px;
 
+  /* ----------- Non-Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1200px)
+    and (max-device-width: 1440px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+    width: 70%;
+  }
+
+  /* ----------- Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1200px)
+    and (max-device-width: 1440px)
+    and (max-device-height: 900px)
+    and (-webkit-min-device-pixel-ratio: 2)
+    and (min-resolution: 192dpi) {
+  }
+
+  /* ----------- Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1200px)
+    and (max-device-width: 1440px)
+    and (min-device-height: 901px)
+    and (-webkit-min-device-pixel-ratio: 2)
+    and (min-resolution: 192dpi) {
+  }
+
   @media (max-width: 600px) {
     width: 85%;
     margin-bottom: 50px;
@@ -827,6 +867,69 @@ const VerifyRowItem = styled.div`
   }
 `;
 
+const VerifyButton = styled.button`
+  font-size: 18px;
+  cursor: pointer;
+  background: #FFF;
+  padding-top: 15px;
+  padding-right: 27px;
+  padding-left: 27px;
+  padding-bottom: 15px;
+  font-weight: 700;
+  max-width: 250px;
+  outline: none;
+
+  &:hover {
+    ${props => props.ready ? `
+    outline: none;
+    text-decoration: underline;
+    ` : ''}
+  }
+
+  ${props => props.ready ? `
+  border: 3px solid ${primary};
+  color: ${primary};
+  ` : `
+  border: 3px solid ${lightgray};
+  color: ${grayer};
+  `}
+`;
+
+var checkInterval;
+
+actions.intervalCheck = () => (state, actions) => {
+  checkInterval = setInterval(actions.enable, 100);
+};
+
+actions.enable = e => async (state, actions) => {
+  try {
+    console.log(window.ethereum);
+
+    if (!window.ethereum) return;
+
+    actions.change({ ethereumAvailable: true });
+
+    const enabled = await window.ethereum.enable();
+
+    const accounts = await Eth({ provider: window.web3.currentProvider }).raw('eth_accounts');
+
+    clearInterval(checkInterval);
+
+    if (accounts.length) {
+      actions.change({ accounts });
+
+      route('/verify');
+    } else {
+      actions.change({ error: 'No accounts found.' });
+    }
+  } catch (error) {
+    actions.change({ error: 'Error while getting accounts.' });
+  }
+};
+
+const isFirefox = (navigator.userAgent || {}).toLowerCase().indexOf('firefox') > -1;
+
+
 const WalletContainer = () => (state, actions) => (
   <Wrapper>
     <Header steps="1" />
@@ -835,11 +938,21 @@ const WalletContainer = () => (state, actions) => (
 
       <VerifyRow>
         <VerifyRowItem left="1">
-          <h3 style="margin-bottom: 10px;">Install A Wallet</h3>
+          <h3 style="margin-bottom: 10px;">{(typeof window.ethereum === "undefined" || state.ethereumAvailable) ? (<span>Install A Wallet</span>) : (<span>Connect Your Wallet</span>)}</h3>
           <p>Please connect a browser-based Ethereum wallet such as <a href="">MetaMask</a> or <a href="">TrustWallet</a>.</p>
         </VerifyRowItem>
-        <VerifyRowItem style="display: flex; align-items: center; justify-content: center;">
-          <img src="http://airdrop-review.com/wp-content/uploads/2018/05/metamask.png" width="300" />
+        <VerifyRowItem style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; position: relative;">
+          {(typeof window.ethereum !== "undefined" || state.ethereumAvailable) ? (
+            <VerifyButton ready="1" onclick={actions.enable}>Connect MetaMask</VerifyButton>
+          ) : (
+          <div style="position: relative;">
+            <a oncreate={e => actions.intervalCheck()} href={isFirefox ? 'https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/' : 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en'} style="outline: none;" target="_blank">
+              <img src="http://airdrop-review.com/wp-content/uploads/2018/05/metamask.png" width="300" />
+            </a>
+
+            <a href="/wallet" style="position: absolute; bottom: -40px; left: 0px; text-align: center; right: 0px; text-decoration: none;">Refresh</a>
+          </div>
+          )}
         </VerifyRowItem>
       </VerifyRow>
 
@@ -849,24 +962,35 @@ const WalletContainer = () => (state, actions) => (
   </Wrapper>
 );
 
-const VerifyButton = styled.button`
-  border: 3px solid ${primary};
-  color: ${primary};
-  font-size: 18px;
-  cursor: pointer;
-  background: #FFF;
-  padding-top: 15px;
-  padding-right: 27px;
-  padding-left: 27px;
-  padding-bottom: 15px;
+const HandleInput = styled.input`
+  height: 30px;
   font-weight: 500;
-  max-width: 130px;
+  border: 3px solid ${lightgray};
   outline: none;
+  font-size: 18px;
+  padding: 13px;
 
-  &:hover {
-    outline: none;
-    text-decoration: underline;
-  }
+  ${props => props.ready ? `
+    border-color: ${blackish};
+    color: ${blackish};
+  ` : ''}
+
+  ${props => props.at ? `
+  background: ${lightgray};
+  border-right: 0px;
+  text-align: center;
+  ` : 'width: 100%;'}
+
+  ${props => props.ready && !props.at ? `
+    border-left: 0px;
+  ` : ''}
+
+  ${props => props.ready && props.at ? `
+    background: #FFF;
+    padding-right: 16px;
+    color: ${blackish};
+  ` : `
+  `}
 `;
 
 const Verify = () => (state, actions) => (
@@ -878,16 +1002,16 @@ const Verify = () => (state, actions) => (
       <VerifyRow notThere="1">
         <VerifyRowItem left="1">
           <h3 style="margin-bottom: 10px;">Verify Yourself</h3>
-          <p>Enter a Twitter handle and we will send you a special code through a Direct Message (DM).</p>
+          <p>Enter a <b>Twitter handle</b> and we will send you a Special Code through a <b>Direct Message (DM)</b>.</p>
         </VerifyRowItem>
         <VerifyRowItem style="display: flex; align-items: center;">
-          <input type="text" value="@" style="height: 30px; font-size: 22px; font-weight: 700; border: 3px solid lightgray; border-right: 0px; background: lightgray; outline: none; text-select: none; padding: 13px; flex: 1; max-width: 23px;" readonly="readonly" />
-          <input type="text" placeholder="MyTwitterHandle" style="height: 30px; font-weight: 500; border: 3px solid lightgray; outline: none; font-size: 18px; padding: 13px; flex: 1;" />
+          <HandleInput type="text" at="1" ready={state.handle ? '1' : null} value="@" style={`height: 30px; font-size: 22px; font-weight: 700; outline: none; text-select: none; flex: 1; max-width: 23px;`} readonly="readonly" />
+          <HandleInput type="text" ready={state.handle ? '1' : null} oninput={e => actions.change({ handle: e.target.value })} oncreate={e => setTimeout(e => document.querySelector('#handle').focus(), 10)} id="handle" placeholder="MyTwitterHandle" />
         </VerifyRowItem>
       </VerifyRow>
 
       <div style="display: flex; flex-direction: row; justify-content: flex-end;">
-        <VerifyButton>Verify</VerifyButton>
+        <VerifyButton ready={state.handle ? '1' : null}>Send Message</VerifyButton>
       </div>
 
     </VerifyWrapper>
