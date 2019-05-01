@@ -15437,13 +15437,19 @@ var WalletContainer = function WalletContainer() {
   return function (state, actions) {
     return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, {
       steps: "1"
-    }), (0, _hyperapp.h)(VerifyWrapper, null, (0, _hyperapp.h)(VerifyRow, null, (0, _hyperapp.h)(VerifyRowItem, {
+    }), (0, _hyperapp.h)(VerifyWrapper, {
+      style: "margin-bottom: 100px;"
+    }, (0, _hyperapp.h)(VerifyRow, null, (0, _hyperapp.h)(VerifyRowItem, {
       left: "1"
-    }, (0, _hyperapp.h)("h3", null, "Install A Wallet"), (0, _hyperapp.h)("p", null, "Please connect a browser-based Ethereum wallet such as ", (0, _hyperapp.h)("a", {
+    }, (0, _hyperapp.h)("h3", {
+      style: "margin-bottom: 10px;"
+    }, "Install A Wallet"), (0, _hyperapp.h)("p", null, "Please connect a browser-based Ethereum wallet such as ", (0, _hyperapp.h)("a", {
       href: ""
     }, "MetaMask"), " or ", (0, _hyperapp.h)("a", {
       href: ""
-    }, "TrustWallet"), ".")), (0, _hyperapp.h)(VerifyRowItem, null, (0, _hyperapp.h)("img", {
+    }, "TrustWallet"), ".")), (0, _hyperapp.h)(VerifyRowItem, {
+      style: "display: flex; align-items: center; justify-content: center;"
+    }, (0, _hyperapp.h)("img", {
       src: "http://airdrop-review.com/wp-content/uploads/2018/05/metamask.png",
       width: "300"
     })))), (0, _hyperapp.h)(Footer, null));
@@ -15460,7 +15466,9 @@ var Verify = function Verify() {
       notThere: "1"
     }, (0, _hyperapp.h)(VerifyRowItem, {
       left: "1"
-    }, (0, _hyperapp.h)("h3", null, "Verify Yourself"), (0, _hyperapp.h)("p", null, "Enter a Twitter handle and we will send you a special code through a Direct Message (DM).")), (0, _hyperapp.h)(VerifyRowItem, {
+    }, (0, _hyperapp.h)("h3", {
+      style: "margin-bottom: 10px;"
+    }, "Verify Yourself"), (0, _hyperapp.h)("p", null, "Enter a Twitter handle and we will send you a special code through a Direct Message (DM).")), (0, _hyperapp.h)(VerifyRowItem, {
       style: "display: flex; align-items: center;"
     }, (0, _hyperapp.h)("input", {
       type: "text",
@@ -15469,7 +15477,7 @@ var Verify = function Verify() {
       readonly: "readonly"
     }), (0, _hyperapp.h)("input", {
       type: "text",
-      placeholder: "MyTwitterName",
+      placeholder: "MyTwitterHandle",
       style: "height: 30px; font-weight: 500; border: 3px solid lightgray; outline: none; font-size: 18px; padding: 13px; flex: 1;"
     }))), (0, _hyperapp.h)("div", {
       style: "display: flex; flex-direction: row; justify-content: flex-end;"
@@ -15526,7 +15534,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35269" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44569" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

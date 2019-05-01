@@ -831,14 +831,14 @@ const WalletContainer = () => (state, actions) => (
   <Wrapper>
     <Header steps="1" />
 
-    <VerifyWrapper>
+    <VerifyWrapper style="margin-bottom: 100px;">
 
       <VerifyRow>
         <VerifyRowItem left="1">
-          <h3>Install A Wallet</h3>
+          <h3 style="margin-bottom: 10px;">Install A Wallet</h3>
           <p>Please connect a browser-based Ethereum wallet such as <a href="">MetaMask</a> or <a href="">TrustWallet</a>.</p>
         </VerifyRowItem>
-        <VerifyRowItem>
+        <VerifyRowItem style="display: flex; align-items: center; justify-content: center;">
           <img src="http://airdrop-review.com/wp-content/uploads/2018/05/metamask.png" width="300" />
         </VerifyRowItem>
       </VerifyRow>
@@ -877,12 +877,12 @@ const Verify = () => (state, actions) => (
 
       <VerifyRow notThere="1">
         <VerifyRowItem left="1">
-          <h3>Verify Yourself</h3>
+          <h3 style="margin-bottom: 10px;">Verify Yourself</h3>
           <p>Enter a Twitter handle and we will send you a special code through a Direct Message (DM).</p>
         </VerifyRowItem>
         <VerifyRowItem style="display: flex; align-items: center;">
           <input type="text" value="@" style="height: 30px; font-size: 22px; font-weight: 700; border: 3px solid lightgray; border-right: 0px; background: lightgray; outline: none; text-select: none; padding: 13px; flex: 1; max-width: 23px;" readonly="readonly" />
-          <input type="text" placeholder="MyTwitterName" style="height: 30px; font-weight: 500; border: 3px solid lightgray; outline: none; font-size: 18px; padding: 13px; flex: 1;" />
+          <input type="text" placeholder="MyTwitterHandle" style="height: 30px; font-weight: 500; border: 3px solid lightgray; outline: none; font-size: 18px; padding: 13px; flex: 1;" />
         </VerifyRowItem>
       </VerifyRow>
 
