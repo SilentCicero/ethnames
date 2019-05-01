@@ -122,6 +122,13 @@ styled.injectGlobal`
     line-height: 30px;
   }
 
+  h3 {
+    color: ${blackish};
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+
   select {
     -webkit-appearance: none;
     appearance: none;
@@ -208,6 +215,7 @@ const state = {
   name: '',
   domain: '.nongiverof.eth',
   errors: [],
+  step: 3,
 };
 
 var editor;
@@ -373,16 +381,68 @@ const NavDrop = () => (state, actions) => (
   </NavDropWrapper>
 );
 
-const Header = props => (state) => (<HeaderWrapper>
+const StepsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  color: ${primary};
+`;
+
+const StepsNumber = styled.div`
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 3px solid ${primary};
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+
+  ${props => props.current === parseInt(props.step, 10) ? `
+    background: ${primary};
+    color: #FFF;
+  ` : ''}
+`;
+
+const Step = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 20px;
+`;
+
+const StepText = styled.div`
+  ${props => props.current > parseInt(props.step, 10) ? 'text-decoration: line-through;' : ''}
+
+  @media (max-width: 600px) {
+    ${props => props.current === parseInt(props.step, 10) ? 'display: flex;' : 'display: none;'}
+  }
+`;
+
+const NavSteps = () => (state, actions) => (
+  <StepsWrapper>
+    <Step><StepsNumber current={state.step} step="1">1</StepsNumber> <StepText current={state.step} step="1">Availability</StepText></Step>
+    <Step><StepsNumber current={state.step} step="2">2</StepsNumber> <StepText current={state.step} step="2">Wallet</StepText></Step>
+    <Step><StepsNumber current={state.step} step="3">3</StepsNumber> <StepText current={state.step} step="3">Verify</StepText></Step>
+    <Step><StepsNumber current={state.step} step="4">4</StepsNumber> <StepText  current={state.step} step="4">Success</StepText></Step>
+  </StepsWrapper>
+);
+
+const Header = props => state => (<HeaderWrapper>
   <a href="/" style="border: 0px; outline: 0px; margin-top: 8px;"><LogoImage src={logo} /></a>
 
   <NavDrop />
 
+  {props.steps ? (<NavSteps />) : (
   <NavWrapper navOpen={state.navOpen}>
     <NavButton href="/faq">FAQ</NavButton>
     <NavButton href="https://github.com/silentcicero/ethnames" target="_blank">Github</NavButton>
     <NavButton href="/names" highlight="1">My Names</NavButton>
-  </NavWrapper>
+  </NavWrapper>)}
 </HeaderWrapper>);
 
 const CheckAvailability = styled.button`
@@ -732,18 +792,102 @@ const Lander = () => (state, actions, v = console.log(state)) => (
 );
 
 const VerifyWrapper = styled.div`
-  width: 80%;
+  width: 50%;
+  display: flex;
+  margin-bottom: 75px;
+  flex-direction: column;
+  margin-top: 115px;
+
+  @media (max-width: 600px) {
+    width: 85%;
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+`;
+
+const VerifyRow = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 40px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`;
+
+const VerifyRowItem = styled.div`
+  ${props => props.left ? 'width: 40%;' : 'width: 60%; padding-left: 50px;'}
+
+  @media (max-width: 600px) {
+    ${props => props.left ? 'width: 100%;' : `
+    width: inherit;
+    padding-left: 0px;
+    margin-top: 30px;
+    `}
+  }
+`;
+
+const WalletContainer = () => (state, actions) => (
+  <Wrapper>
+    <Header steps="1" />
+
+    <VerifyWrapper>
+
+      <VerifyRow>
+        <VerifyRowItem left="1">
+          <h3>Install A Wallet</h3>
+          <p>Please connect a browser-based Ethereum wallet such as <a href="">MetaMask</a> or <a href="">TrustWallet</a>.</p>
+        </VerifyRowItem>
+        <VerifyRowItem>
+          <img src="http://airdrop-review.com/wp-content/uploads/2018/05/metamask.png" width="300" />
+        </VerifyRowItem>
+      </VerifyRow>
+
+    </VerifyWrapper>
+
+    <Footer />
+  </Wrapper>
+);
+
+const VerifyButton = styled.button`
+  border: 3px solid ${primary};
+  color: ${primary};
+  font-size: 18px;
+  cursor: pointer;
+  background: #FFF;
+  padding-top: 15px;
+  padding-right: 27px;
+  padding-left: 27px;
+  padding-bottom: 15px;
+  font-weight: 500;
+  max-width: 130px;
+  outline: none;
+
+  &:hover {
+    outline: none;
+    text-decoration: underline;
+  }
 `;
 
 const Verify = () => (state, actions) => (
   <Wrapper>
-    <Header />
+    <Header steps="1" />
 
     <VerifyWrapper>
 
-      <div style="">
+      <VerifyRow notThere="1">
+        <VerifyRowItem left="1">
+          <h3>Verify Yourself</h3>
+          <p>Enter a Twitter handle and we will send you a special code through a Direct Message (DM).</p>
+        </VerifyRowItem>
+        <VerifyRowItem style="display: flex; align-items: center;">
+          <input type="text" value="@" style="height: 30px; font-size: 22px; font-weight: 700; border: 3px solid lightgray; border-right: 0px; background: lightgray; outline: none; text-select: none; padding: 13px; flex: 1; max-width: 23px;" readonly="readonly" />
+          <input type="text" placeholder="MyTwitterName" style="height: 30px; font-weight: 500; border: 3px solid lightgray; outline: none; font-size: 18px; padding: 13px; flex: 1;" />
+        </VerifyRowItem>
+      </VerifyRow>
+
+      <div style="display: flex; flex-direction: row; justify-content: flex-end;">
+        <VerifyButton>Verify</VerifyButton>
       </div>
 
     </VerifyWrapper>
@@ -756,6 +900,7 @@ const Verify = () => (state, actions) => (
 const Routes = () => (
   <Switch>
     <Route path="/" render={Lander} />
+    <Route path="/wallet" render={WalletContainer} />
     <Route path="/verify" render={Verify} />
     <Route render={NotFound} />
   </Switch>
