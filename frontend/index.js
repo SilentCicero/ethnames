@@ -1011,10 +1011,66 @@ const Verify = () => (state, actions) => (
       </VerifyRow>
 
       <div style="display: flex; flex-direction: row; justify-content: flex-end;">
-        <VerifyButton ready={state.handle ? '1' : null}>Send Message</VerifyButton>
+        <VerifyButton onclick={e => route('/success')} ready={state.handle ? '1' : null}>Send Message</VerifyButton>
       </div>
 
     </VerifyWrapper>
+
+    <Footer />
+  </Wrapper>
+);
+
+const SuccessWrapper = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+`;
+
+const successImage = require('./public/success.png');
+
+const Success = () => (state, actions) => (
+  <Wrapper>
+    <Header steps="1" />
+
+    <SuccessWrapper>
+      <img src={successImage} width="150" />
+
+      <h1 style="margin-top: 40px;">Huzzah</h1>
+
+      <p style="font-size: 30px; max-width: 500px; line-height: 40px; text-align: center; margin-top: 20px;">
+        The ENS name <b>potato.giverof.eth</b> will now resolve to <b>0x0939823</b>.
+      </p>
+
+    </SuccessWrapper>
+
+    <Footer />
+  </Wrapper>
+);
+
+const TextWrapper = styled.div`
+  width: 80%;
+`;
+
+const Terms = () => (state, actions) => (
+  <Wrapper>
+    <Header />
+
+    <TextWrapper>
+    </TextWrapper>
+
+    <Footer />
+  </Wrapper>
+);
+
+const Privacy = () => (state, actions) => (
+  <Wrapper>
+    <Header />
+
+    <TextWrapper>
+    </TextWrapper>
 
     <Footer />
   </Wrapper>
@@ -1026,6 +1082,9 @@ const Routes = () => (
     <Route path="/" render={Lander} />
     <Route path="/wallet" render={WalletContainer} />
     <Route path="/verify" render={Verify} />
+    <Route path="/success" render={Success} />
+    <Route path="/terms" render={Terms} />
+    <Route path="/privacy" render={Privacy} />
     <Route render={NotFound} />
   </Switch>
 );

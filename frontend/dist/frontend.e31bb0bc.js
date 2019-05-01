@@ -14644,6 +14644,8 @@ module.exports = "/logo.5e5c7163.svg";
 module.exports = "/downArrow.e6920ca9.svg";
 },{}],"public/done.svg":[function(require,module,exports) {
 module.exports = "/done.861796dd.svg";
+},{}],"public/success.png":[function(require,module,exports) {
+module.exports = "/success.557c5398.png";
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -14660,6 +14662,26 @@ var _hyperappStyledComponents = _interopRequireDefault(require("hyperapp-styled-
 var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject32() {
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n"]);
+
+  _templateObject32 = function _templateObject32() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject31() {
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  margin-top: 100px;\n"]);
+
+  _templateObject31 = function _templateObject31() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject30() {
   var data = _taggedTemplateLiteral(["\n  height: 30px;\n  font-weight: 500;\n  border: 3px solid ", ";\n  outline: none;\n  font-size: 18px;\n  padding: 13px;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"]);
@@ -15636,8 +15658,44 @@ var Verify = function Verify() {
     }))), (0, _hyperapp.h)("div", {
       style: "display: flex; flex-direction: row; justify-content: flex-end;"
     }, (0, _hyperapp.h)(VerifyButton, {
+      onclick: function onclick(e) {
+        return route('/success');
+      },
       ready: state.handle ? '1' : null
     }, "Send Message"))), (0, _hyperapp.h)(Footer, null));
+  };
+};
+
+var SuccessWrapper = _hyperappStyledComponents.default.div(_templateObject31());
+
+var successImage = require('./public/success.png');
+
+var Success = function Success() {
+  return function (state, actions) {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, {
+      steps: "1"
+    }), (0, _hyperapp.h)(SuccessWrapper, null, (0, _hyperapp.h)("img", {
+      src: successImage,
+      width: "150"
+    }), (0, _hyperapp.h)("h1", {
+      style: "margin-top: 40px;"
+    }, "Huzzah"), (0, _hyperapp.h)("p", {
+      style: "font-size: 30px; max-width: 500px; line-height: 40px; text-align: center; margin-top: 20px;"
+    }, "The ENS name ", (0, _hyperapp.h)("b", null, "potato.giverof.eth"), " will now resolve to ", (0, _hyperapp.h)("b", null, "0x0939823"), ".")), (0, _hyperapp.h)(Footer, null));
+  };
+};
+
+var TextWrapper = _hyperappStyledComponents.default.div(_templateObject32());
+
+var Terms = function Terms() {
+  return function (state, actions) {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(TextWrapper, null), (0, _hyperapp.h)(Footer, null));
+  };
+};
+
+var Privacy = function Privacy() {
+  return function (state, actions) {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(TextWrapper, null), (0, _hyperapp.h)(Footer, null));
   };
 }; // routes for app
 
@@ -15653,6 +15711,15 @@ var Routes = function Routes() {
     path: "/verify",
     render: Verify
   }), (0, _hyperapp.h)(_router.Route, {
+    path: "/success",
+    render: Success
+  }), (0, _hyperapp.h)(_router.Route, {
+    path: "/terms",
+    render: Terms
+  }), (0, _hyperapp.h)(_router.Route, {
+    path: "/privacy",
+    render: Privacy
+  }), (0, _hyperapp.h)(_router.Route, {
     render: NotFound
   }));
 }; // main app
@@ -15663,7 +15730,7 @@ var main = (0, _hyperapp.app)(state, actions, Routes, document.body); // load ma
 main.load(); // unsubscripe for routing
 
 var unsubscribe = _router.location.subscribe(main.location);
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js","./public/Favicon.svg":"public/Favicon.svg","./public/lander.png":"public/lander.png","./public/logo.svg":"public/logo.svg","./public/downArrow.svg":"public/downArrow.svg","./public/done.svg":"public/done.svg"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js","./public/Favicon.svg":"public/Favicon.svg","./public/lander.png":"public/lander.png","./public/logo.svg":"public/logo.svg","./public/downArrow.svg":"public/downArrow.svg","./public/done.svg":"public/done.svg","./public/success.png":"public/success.png"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -15690,7 +15757,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40923" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38805" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
