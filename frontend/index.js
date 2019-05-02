@@ -109,10 +109,10 @@ styled.injectGlobal`
 
   h1 {
     color: ${blackish};
-    font-size: 50px;
+    font-size: 55px;
     font-weight: 700;
     line-height: 60px;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
   }
 
   h2 {
@@ -235,6 +235,17 @@ const actions = {
   load: () => (state, actions) => {
     try {
       setTimeout(e => { document.querySelector('.grecaptcha-logo').style.opacity = '0'; }, 300);
+
+      // detect is ios
+      const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+      // is mobile
+      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+      // is firefox
+      const firefox = /fire|firefox|Firefox/i.test(navigator.userAgent);
+
+      actions.change({ ios, mobile, firefox });
 
       /*
   		grecaptcha.ready(function() {
@@ -469,7 +480,7 @@ const CheckAvailability = styled.button`
   text-align: center;
   background: #FFF;
   letter-spacing: .8px;
-  font-size: 20px;
+  font-size: 24px;
   flex-grow: 0;
   cursor: pointer;
   color: ${primary};
@@ -495,7 +506,8 @@ const CheckAvailability = styled.button`
 const LanderWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 60px;
+  margin-top: 120px;
+  margin-bottom:50px;
   padding: 30px;
   justify-content: center;
   align-items: center;
@@ -508,15 +520,43 @@ const LanderWrapper = styled.div`
     justify-content: start;
   }
 
+  /* ----------- Non-Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1000px)
+    and (max-device-width: 1280px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+    margin-bottom: 70px;
+
+    & h1 {
+      font-size: 50px;
+    }
+  }
+
+  /* ----------- Non-Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1290px)
+    and (max-device-width: 1440px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+    margin-bottom: 30px;
+
+    & h1 {
+      font-size: 50px;
+    }
+  }
+
   @media (max-width: 600px) {
     width: inherit;
+
+    & h1 {
+      font-size: 50px;
+    }
   }
 `;
 
 const LanderImage = styled.img`
   height: auto;
   width: auto;
-  max-width: 560px;
+  max-width: 700px;
   margin-right: 100px;
   margin-left: 40px;
 
@@ -543,9 +583,14 @@ const FooterWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   font-weight: 500;
+  font-size: 20px;
   color: ${grayer};
   justify-content: space-between;
   margin-top: 110px;
+
+  & a {
+    font-size: 22px;
+  }
 
   /* ----------- Non-Retina Screens ----------- */
   @media screen
@@ -808,9 +853,18 @@ const Lander = () => (state, actions, v = console.log(state)) => (
 const VerifyWrapper = styled.div`
   width: 50%;
   display: flex;
-  margin-bottom: 75px;
+  margin-bottom: 200px;
   flex-direction: column;
-  margin-top: 115px;
+  margin-top: 200px;
+
+
+  /* ----------- Non-Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1024px)
+    and (max-device-width: 1199px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+    width: 70%;
+  }
 
   /* ----------- Non-Retina Screens ----------- */
   @media screen
@@ -868,7 +922,7 @@ const VerifyRowItem = styled.div`
 `;
 
 const VerifyButton = styled.button`
-  font-size: 18px;
+  font-size: 23px;
   cursor: pointer;
   background: #FFF;
   padding-top: 15px;
@@ -876,7 +930,7 @@ const VerifyButton = styled.button`
   padding-left: 27px;
   padding-bottom: 15px;
   font-weight: 700;
-  max-width: 250px;
+  max-width: 300px;
   outline: none;
 
   &:hover {
@@ -934,12 +988,12 @@ const WalletContainer = () => (state, actions) => (
   <Wrapper>
     <Header steps="1" />
 
-    <VerifyWrapper style="margin-bottom: 100px;">
+    <VerifyWrapper >
 
       <VerifyRow>
         <VerifyRowItem left="1">
-          <h3 style="margin-bottom: 10px;">{(typeof window.ethereum === "undefined" || state.ethereumAvailable) ? (<span>Install A Wallet</span>) : (<span>Connect Your Wallet</span>)}</h3>
-          <p>Please connect a browser-based Ethereum wallet such as <a href="">MetaMask</a> or <a href="">TrustWallet</a>.</p>
+          <h2 style="margin-bottom: 20px;">{(typeof window.ethereum === "undefined" || state.ethereumAvailable) ? (<span>Install A Wallet</span>) : (<span>Connect Your Wallet</span>)}</h2>
+          <p style="font-size: 20px;">Please connect a browser-based Ethereum wallet such as <a href="https://metamask.io/" style="font-size: 20px;">MetaMask</a> or <a href="https://trustwallet.com/" style="font-size: 20px;">TrustWallet</a>.</p>
         </VerifyRowItem>
         <VerifyRowItem style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; position: relative;">
           {(typeof window.ethereum !== "undefined" || state.ethereumAvailable) ? (
@@ -1001,8 +1055,8 @@ const Verify = () => (state, actions) => (
 
       <VerifyRow notThere="1">
         <VerifyRowItem left="1">
-          <h3 style="margin-bottom: 10px;">Verify Yourself</h3>
-          <p>Enter a <b>Twitter handle</b> and we will send you a Special Code through a <b>Direct Message (DM)</b>.</p>
+          <h2 style="margin-bottom: 20px;">Verify Yourself</h2>
+          <p style="font-size: 20px;">Enter a <b>Twitter handle</b> and we will send you a Special Code through a <b>Direct Message (DM)</b>.</p>
         </VerifyRowItem>
         <VerifyRowItem style="display: flex; align-items: center;">
           <HandleInput type="text" at="1" ready={state.handle ? '1' : null} value="@" style={`height: 30px; font-size: 22px; font-weight: 700; outline: none; text-select: none; flex: 1; max-width: 23px;`} readonly="readonly" />
@@ -1027,6 +1081,14 @@ const SuccessWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 100px;
+
+  /* ----------- Non-Retina Screens ----------- */
+  @media screen
+    and (min-device-width: 1024px)
+    and (max-device-width: 1279px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+    margin-top: 140px;
+  }
 `;
 
 const successImage = require('./public/success.png');
@@ -1040,9 +1102,11 @@ const Success = () => (state, actions) => (
 
       <h1 style="margin-top: 40px;">Huzzah</h1>
 
-      <p style="font-size: 30px; max-width: 500px; line-height: 40px; text-align: center; margin-top: 20px;">
-        The ENS name <b>potato.giverof.eth</b> will now resolve to <b>0x0939823</b>.
+      <p style="font-size: 30px; max-width: 600px; line-height: 40px; text-align: center; margin-top: 20px;">
+        The ENS name <b>potato.giverof.eth</b> will soon resolve to <b>0x0a08...00a1</b>!!
       </p>
+
+      <a href="/names" style="margin-top: 30px; font-size: 20px; margin-bottom: 50px;">Check the Status</a>
 
     </SuccessWrapper>
 

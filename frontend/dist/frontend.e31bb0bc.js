@@ -14674,7 +14674,7 @@ function _templateObject32() {
 }
 
 function _templateObject31() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  margin-top: 100px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  margin-top: 100px;\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1024px)\n    and (max-device-width: 1279px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    margin-top: 140px;\n  }\n"]);
 
   _templateObject31 = function _templateObject31() {
     return data;
@@ -14694,7 +14694,7 @@ function _templateObject30() {
 }
 
 function _templateObject29() {
-  var data = _taggedTemplateLiteral(["\n  font-size: 18px;\n  cursor: pointer;\n  background: #FFF;\n  padding-top: 15px;\n  padding-right: 27px;\n  padding-left: 27px;\n  padding-bottom: 15px;\n  font-weight: 700;\n  max-width: 250px;\n  outline: none;\n\n  &:hover {\n    ", "\n  }\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-size: 23px;\n  cursor: pointer;\n  background: #FFF;\n  padding-top: 15px;\n  padding-right: 27px;\n  padding-left: 27px;\n  padding-bottom: 15px;\n  font-weight: 700;\n  max-width: 300px;\n  outline: none;\n\n  &:hover {\n    ", "\n  }\n\n  ", "\n"]);
 
   _templateObject29 = function _templateObject29() {
     return data;
@@ -14724,7 +14724,7 @@ function _templateObject27() {
 }
 
 function _templateObject26() {
-  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  margin-bottom: 75px;\n  flex-direction: column;\n  margin-top: 115px;\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    width: 70%;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (max-device-height: 900px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (min-device-height: 901px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n  }\n\n  @media (max-width: 600px) {\n    width: 85%;\n    margin-bottom: 50px;\n    margin-top: 50px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  margin-bottom: 200px;\n  flex-direction: column;\n  margin-top: 200px;\n\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1024px)\n    and (max-device-width: 1199px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    width: 70%;\n  }\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    width: 70%;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (max-device-height: 900px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (min-device-height: 901px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n  }\n\n  @media (max-width: 600px) {\n    width: 85%;\n    margin-bottom: 50px;\n    margin-top: 50px;\n  }\n"]);
 
   _templateObject26 = function _templateObject26() {
     return data;
@@ -14818,7 +14818,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  font-weight: 500;\n  color: ", ";\n  justify-content: space-between;\n  margin-top: 110px;\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    margin-top: 50px;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (max-device-height: 900px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n    margin-top: 100px;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (min-device-height: 901px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n    margin-top: 200px;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 768px)\n    and (max-device-width: 1024px) {\n    margin-top: 150px;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column-reverse;\n    margin-top: 40px;\n    margin-bottom: 100px;\n    font-size: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  font-weight: 500;\n  font-size: 20px;\n  color: ", ";\n  justify-content: space-between;\n  margin-top: 110px;\n\n  & a {\n    font-size: 22px;\n  }\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    margin-top: 50px;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (max-device-height: 900px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n    margin-top: 100px;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1200px)\n    and (max-device-width: 1440px)\n    and (min-device-height: 901px)\n    and (-webkit-min-device-pixel-ratio: 2)\n    and (min-resolution: 192dpi) {\n    margin-top: 200px;\n  }\n\n  /* ----------- Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 768px)\n    and (max-device-width: 1024px) {\n    margin-top: 150px;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n    flex-direction: column-reverse;\n    margin-top: 40px;\n    margin-bottom: 100px;\n    font-size: 20px;\n  }\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -14828,7 +14828,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = _taggedTemplateLiteral(["\n  height: auto;\n  width: auto;\n  max-width: 560px;\n  margin-right: 100px;\n  margin-left: 40px;\n\n  @media (max-width: 1324px) {\n    max-width: 400px;\n    margin-right: 50px;\n  }\n\n  @media (max-width: 1024px) {\n    display: none;\n  }\n\n  @media (max-width: 600px) {\n    display: block;\n    max-width: 300px;\n    margin: 0px;\n    margin-bottom: 60px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  height: auto;\n  width: auto;\n  max-width: 700px;\n  margin-right: 100px;\n  margin-left: 40px;\n\n  @media (max-width: 1324px) {\n    max-width: 400px;\n    margin-right: 50px;\n  }\n\n  @media (max-width: 1024px) {\n    display: none;\n  }\n\n  @media (max-width: 600px) {\n    display: block;\n    max-width: 300px;\n    margin: 0px;\n    margin-bottom: 60px;\n  }\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -14838,7 +14838,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  margin-top: 60px;\n  padding: 30px;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n\n  @media (max-width: 1024px) {\n    margin-top: 40px;\n    flex-direction: column;\n    align-items: start;\n    justify-content: start;\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  margin-top: 120px;\n  margin-bottom:50px;\n  padding: 30px;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n\n  @media (max-width: 1024px) {\n    margin-top: 40px;\n    flex-direction: column;\n    align-items: start;\n    justify-content: start;\n  }\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1000px)\n    and (max-device-width: 1280px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    margin-bottom: 70px;\n\n    & h1 {\n      font-size: 50px;\n    }\n  }\n\n  /* ----------- Non-Retina Screens ----------- */\n  @media screen\n    and (min-device-width: 1290px)\n    and (max-device-width: 1440px)\n    and (-webkit-min-device-pixel-ratio: 1) {\n    margin-bottom: 30px;\n\n    & h1 {\n      font-size: 50px;\n    }\n  }\n\n  @media (max-width: 600px) {\n    width: inherit;\n\n    & h1 {\n      font-size: 50px;\n    }\n  }\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -14848,7 +14848,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  border: 2px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 30px;\n  padding-left: 30px;\n  font-weight: bold;\n  text-align: center;\n  background: #FFF;\n  letter-spacing: .8px;\n  font-size: 20px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n  outline: 0;\n  display: flex;\n  align-items: center;\n\n  ", "\n\n  ", "\n\n  @media (max-width: 600px) {\n    width: 100%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border: 2px solid ", ";\n  padding: 10px;\n  margin-top: 50px;\n  padding-right: 30px;\n  padding-left: 30px;\n  font-weight: bold;\n  text-align: center;\n  background: #FFF;\n  letter-spacing: .8px;\n  font-size: 24px;\n  flex-grow: 0;\n  cursor: pointer;\n  color: ", ";\n  outline: 0;\n  display: flex;\n  align-items: center;\n\n  ", "\n\n  ", "\n\n  @media (max-width: 600px) {\n    width: 100%;\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -14980,7 +14980,7 @@ function _templateObject2() {
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  body {\n    overflow: hidden;\n    color: ", ";\n    font-size: 16px;\n    font-family: 'Work Sans', sans-serif;\n    line-height: 1;\n    overflow: hidden;\n  }\n\n  html, body {\n    margin: 0; height: 100%; overflow: hidden;\n    overflow-y: auto;\n  }\n\n  iframe {\n    opacity: 0;\n  }\n\n  html {\n    overflow-y: hidden;\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 50px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 20px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  h3 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  select {\n    -webkit-appearance: none;\n    appearance: none;\n  }\n\n  /* This is to remove the arrow of select element in IE */\n  select::-ms-expand {\tdisplay: none; }\n  select{\n      -webkit-appearance: none;\n      appearance: none;\n      outline: 0;\n      border: 0;\n  }\n\n  select:-moz-focusring {\n    color:transparent;\n    text-shadow:0 0 0 #000; /* your normal text color here */\n  }\n  select:-moz-focusring * {\n    color:#000; /* your normal text color here */\n    text-shadow:none;\n  }\n\n  button::-moz-focus-inner {\n    border: 0;\n  }\n\n  option::-moz-focus-inner {\n    border: 0;\n  }\n\n  @-moz-document url-prefix() {\n    select {\n      -moz-appearance: none;\n      text-indent: 0.01px;\n      text-overflow: \"\";\n    }\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 21.6px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 12px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  body {\n    overflow: hidden;\n    color: ", ";\n    font-size: 16px;\n    font-family: 'Work Sans', sans-serif;\n    line-height: 1;\n    overflow: hidden;\n  }\n\n  html, body {\n    margin: 0; height: 100%; overflow: hidden;\n    overflow-y: auto;\n  }\n\n  iframe {\n    opacity: 0;\n  }\n\n  html {\n    overflow-y: hidden;\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 55px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 35px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  h3 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  select {\n    -webkit-appearance: none;\n    appearance: none;\n  }\n\n  /* This is to remove the arrow of select element in IE */\n  select::-ms-expand {\tdisplay: none; }\n  select{\n      -webkit-appearance: none;\n      appearance: none;\n      outline: 0;\n      border: 0;\n  }\n\n  select:-moz-focusring {\n    color:transparent;\n    text-shadow:0 0 0 #000; /* your normal text color here */\n  }\n  select:-moz-focusring * {\n    color:#000; /* your normal text color here */\n    text-shadow:none;\n  }\n\n  button::-moz-focus-inner {\n    border: 0;\n  }\n\n  option::-moz-focus-inner {\n    border: 0;\n  }\n\n  @-moz-document url-prefix() {\n    select {\n      -moz-appearance: none;\n      text-indent: 0.01px;\n      text-overflow: \"\";\n    }\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 21.6px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 12px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-size: 14px;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -15098,7 +15098,18 @@ var actions = {
       try {
         setTimeout(function (e) {
           document.querySelector('.grecaptcha-logo').style.opacity = '0';
-        }, 300);
+        }, 300); // detect is ios
+
+        var ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream; // is mobile
+
+        var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); // is firefox
+
+        var firefox = /fire|firefox|Firefox/i.test(navigator.userAgent);
+        actions.change({
+          ios: ios,
+          mobile: mobile,
+          firefox: firefox
+        });
         /*
         grecaptcha.ready(function() {
           try {
@@ -15577,16 +15588,18 @@ var WalletContainer = function WalletContainer() {
   return function (state, actions) {
     return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, {
       steps: "1"
-    }), (0, _hyperapp.h)(VerifyWrapper, {
-      style: "margin-bottom: 100px;"
-    }, (0, _hyperapp.h)(VerifyRow, null, (0, _hyperapp.h)(VerifyRowItem, {
+    }), (0, _hyperapp.h)(VerifyWrapper, null, (0, _hyperapp.h)(VerifyRow, null, (0, _hyperapp.h)(VerifyRowItem, {
       left: "1"
-    }, (0, _hyperapp.h)("h3", {
-      style: "margin-bottom: 10px;"
-    }, typeof window.ethereum === "undefined" || state.ethereumAvailable ? (0, _hyperapp.h)("span", null, "Install A Wallet") : (0, _hyperapp.h)("span", null, "Connect Your Wallet")), (0, _hyperapp.h)("p", null, "Please connect a browser-based Ethereum wallet such as ", (0, _hyperapp.h)("a", {
-      href: ""
+    }, (0, _hyperapp.h)("h2", {
+      style: "margin-bottom: 20px;"
+    }, typeof window.ethereum === "undefined" || state.ethereumAvailable ? (0, _hyperapp.h)("span", null, "Install A Wallet") : (0, _hyperapp.h)("span", null, "Connect Your Wallet")), (0, _hyperapp.h)("p", {
+      style: "font-size: 20px;"
+    }, "Please connect a browser-based Ethereum wallet such as ", (0, _hyperapp.h)("a", {
+      href: "https://metamask.io/",
+      style: "font-size: 20px;"
     }, "MetaMask"), " or ", (0, _hyperapp.h)("a", {
-      href: ""
+      href: "https://trustwallet.com/",
+      style: "font-size: 20px;"
     }, "TrustWallet"), ".")), (0, _hyperapp.h)(VerifyRowItem, {
       style: "display: flex; align-items: center; justify-content: center; flex-wrap: wrap; position: relative;"
     }, typeof window.ethereum !== "undefined" || state.ethereumAvailable ? (0, _hyperapp.h)(VerifyButton, {
@@ -15629,9 +15642,11 @@ var Verify = function Verify() {
       notThere: "1"
     }, (0, _hyperapp.h)(VerifyRowItem, {
       left: "1"
-    }, (0, _hyperapp.h)("h3", {
-      style: "margin-bottom: 10px;"
-    }, "Verify Yourself"), (0, _hyperapp.h)("p", null, "Enter a ", (0, _hyperapp.h)("b", null, "Twitter handle"), " and we will send you a Special Code through a ", (0, _hyperapp.h)("b", null, "Direct Message (DM)"), ".")), (0, _hyperapp.h)(VerifyRowItem, {
+    }, (0, _hyperapp.h)("h2", {
+      style: "margin-bottom: 20px;"
+    }, "Verify Yourself"), (0, _hyperapp.h)("p", {
+      style: "font-size: 20px;"
+    }, "Enter a ", (0, _hyperapp.h)("b", null, "Twitter handle"), " and we will send you a Special Code through a ", (0, _hyperapp.h)("b", null, "Direct Message (DM)"), ".")), (0, _hyperapp.h)(VerifyRowItem, {
       style: "display: flex; align-items: center;"
     }, (0, _hyperapp.h)(HandleInput, {
       type: "text",
@@ -15680,8 +15695,11 @@ var Success = function Success() {
     }), (0, _hyperapp.h)("h1", {
       style: "margin-top: 40px;"
     }, "Huzzah"), (0, _hyperapp.h)("p", {
-      style: "font-size: 30px; max-width: 500px; line-height: 40px; text-align: center; margin-top: 20px;"
-    }, "The ENS name ", (0, _hyperapp.h)("b", null, "potato.giverof.eth"), " will now resolve to ", (0, _hyperapp.h)("b", null, "0x0939823"), ".")), (0, _hyperapp.h)(Footer, null));
+      style: "font-size: 30px; max-width: 600px; line-height: 40px; text-align: center; margin-top: 20px;"
+    }, "The ENS name ", (0, _hyperapp.h)("b", null, "potato.giverof.eth"), " will soon resolve to ", (0, _hyperapp.h)("b", null, "0x0a08...00a1"), "!!"), (0, _hyperapp.h)("a", {
+      href: "/names",
+      style: "margin-top: 30px; font-size: 20px; margin-bottom: 50px;"
+    }, "Check the Status")), (0, _hyperapp.h)(Footer, null));
   };
 };
 
@@ -15757,7 +15775,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38805" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32949" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
