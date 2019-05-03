@@ -14644,6 +14644,8 @@ module.exports = "/logo.5e5c7163.svg";
 module.exports = "/downArrow.e6920ca9.svg";
 },{}],"public/done.svg":[function(require,module,exports) {
 module.exports = "/done.861796dd.svg";
+},{}],"public/success.png":[function(require,module,exports) {
+module.exports = "/success.557c5398.png";
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -14660,6 +14662,56 @@ var _hyperappStyledComponents = _interopRequireDefault(require("hyperapp-styled-
 var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject26() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n"]);
+
+  _templateObject26 = function _templateObject26() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject25() {
+  var data = _taggedTemplateLiteral(["\n  font-size: 20px;\n  cursor: pointer;\n  background: #FFF;\n  padding-top: 15px;\n  padding-right: 27px;\n  padding-left: 27px;\n  padding-bottom: 15px;\n  font-weight: 700;\n  max-width: 300px;\n  margin-top: 40px;\n  outline: none;\n\n  &:hover {\n    ", "\n  }\n\n  ", "\n"]);
+
+  _templateObject25 = function _templateObject25() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject24() {
+  var data = _taggedTemplateLiteral(["\n  height: 30px;\n  font-weight: 500;\n  border: 3px solid ", ";\n  outline: none;\n  font-size: 18px;\n  padding: 13px;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"]);
+
+  _templateObject24 = function _templateObject24() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject23() {
+  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  margin-right: 10%;\n  flex-direction: column;\n  margin-left: 50px;\n  margin-bottom: 150px;\n  margin-top: 100px;\n\n  @media (max-width: 600px) {\n    margin-left: 0px;\n  }\n"]);
+
+  _templateObject23 = function _templateObject23() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject22() {
+  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  margin-left: 10%;\n  margin-bottom: 150px;\n"]);
+
+  _templateObject22 = function _templateObject22() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject21() {
   var data = _taggedTemplateLiteral(["\n  display: none;\n\n  @media (max-width: 600px) {\n    display: inline-block;\n    min-width: 40px;\n    min-height: 40px\n    z-index: 10000;\n    padding-bottom: 100px;\n    background: #FFF;\n  }\n"]);
@@ -14756,7 +14808,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 50px;\n\n  @media (max-width: 600px) {\n    margin-top: 60px;\n    margin-bottom: 60px;\n    flex-direction: column;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 50px;\n\n  @media (min-width: 601px) and (max-width: 1024px) {\n    flex-direction: column;\n  }\n\n  @media (max-width: 600px) {\n    margin-top: 60px;\n    margin-bottom: 60px;\n    flex-direction: column;\n  }\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -14806,7 +14858,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  display: none;\n\n  @media (max-width: 600px) {\n    position: absolute;\n    top: 60px;\n    right: 10%;\n    display: ", ";\n    width: 35px;\n    height: 25px;\n    flex-direction: column;\n    justify-content: space-between;\n\n    & div {\n      display: block;\n      height: 4px;\n      background: ", ";\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: none;\n\n  @media (max-width: 600px) {\n    position: absolute;\n    top: 40px;\n    right: 10%;\n    display: ", ";\n    width: 35px;\n    height: 25px;\n    flex-direction: column;\n    justify-content: space-between;\n\n    & div {\n      display: block;\n      height: 4px;\n      background: ", ";\n    }\n  }\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -14846,7 +14898,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding-top: 80px;\n  padding-bottom: 30px;\n  position: relative;\n  background: #FFF;\n  z-index: 10001;\n\n  @media (max-width: 600px) {\n    position: fixed;\n    left: 0px;\n    padding-left: 10%;\n    right: 0px;\n    padding-right: 10%;\n    top: 0px;\n    flex-direction: column;\n    align-items: start;\n    padding-top: 60px;\n    padding-bottom: 40px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding-top: 80px;\n  padding-bottom: 30px;\n  position: relative;\n  background: #FFF;\n  z-index: 10001;\n\n  @media (max-width: 600px) {\n    position: fixed;\n    left: 0px;\n    padding-left: 10%;\n    right: 0px;\n    padding-right: 10%;\n    top: 0px;\n    flex-direction: column;\n    align-items: start;\n    padding-top: 40px;\n    padding-bottom: 40px;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -14856,7 +14908,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh;\n  width: 70%;\n\n  @media (min-width: 601px) and (max-width: 1024px) {\n    width: 90%;\n  }\n\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 100px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh;\n  width: 70%;\n\n  @media (min-width: 601px) and (max-width: 1024px) {\n    width: 90%;\n  }\n\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 70px;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -14868,7 +14920,7 @@ function _templateObject2() {
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  html, body {\n    margin: 0;\n    height: 100%;\n    overflow: hidden;\n    overflow-y: auto;\n  }\n\n  body {\n    color: ", ";\n    font-size: 20px;\n    font-family: 'Work Sans', sans-serif;\n    line-height: 1;\n    overflow: auto;\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    height: 100vm;\n  }\n\n  html {\n    overflow-y: hidden;\n  }\n\n  select {\n    -webkit-appearance: none;\n    appearance: none;\n  }\n\n  /* This is to remove the arrow of select element in IE */\n  select::-ms-expand {\tdisplay: none; }\n  select{\n      -webkit-appearance: none;\n      appearance: none;\n      outline: 0;\n      border: 0;\n  }\n\n  select:-moz-focusring {\n    color:transparent;\n    text-shadow:0 0 0 #000; /* your normal text color here */\n  }\n  select:-moz-focusring * {\n    color:#000; /* your normal text color here */\n    text-shadow:none;\n  }\n\n  button::-moz-focus-inner {\n    border: 0;\n  }\n\n  option::-moz-focus-inner {\n    border: 0;\n  }\n\n  @-moz-document url-prefix() {\n    select {\n      -moz-appearance: none;\n      text-indent: 0.01px;\n      text-overflow: \"\";\n    }\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 56px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 35px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 40px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  h3 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 15px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h1, h2, h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  b, u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font-weight: 400;\n    font: inherit;\n    -webkit-font-smoothing: antialiased;\n    text-size-adjust: 100%;\n    vertical-align: baseline;\n    font-family: 'Work Sans', sans-serif;\n  }\n\n  input {\n    letter-spacing: 1.2px;\n  }\n\n  html, body {\n    margin: 0;\n  }\n\n  body {\n    color: ", ";\n    font-size: 20px;\n    font-family: 'Work Sans', sans-serif;\n    line-height: 1;\n    overflow: auto;\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n  }\n\n  select {\n    -webkit-appearance: none;\n    appearance: none;\n  }\n\n  /* This is to remove the arrow of select element in IE */\n  select::-ms-expand {\tdisplay: none; }\n  select{\n      -webkit-appearance: none;\n      appearance: none;\n      outline: 0;\n      border: 0;\n  }\n\n  select:-moz-focusring {\n    color:transparent;\n    text-shadow:0 0 0 #000; /* your normal text color here */\n  }\n  select:-moz-focusring * {\n    color:#000; /* your normal text color here */\n    text-shadow:none;\n  }\n\n  button::-moz-focus-inner {\n    border: 0;\n  }\n\n  option::-moz-focus-inner {\n    border: 0;\n  }\n\n  @-moz-document url-prefix() {\n    select {\n      -moz-appearance: none;\n      text-indent: 0.01px;\n      text-overflow: \"\";\n    }\n  }\n\n  h1 {\n    color: ", ";\n    font-size: 56px;\n    font-weight: 700;\n    line-height: 60px;\n    margin-bottom: 35px;\n  }\n\n  h2 {\n    color: ", ";\n    font-size: 40px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  h3 {\n    color: ", ";\n    font-size: 25px;\n    font-weight: 700;\n    line-height: 30px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 400;\n    line-height: 21px;\n  }\n\n  small {\n    color: ", ";\n    font-size: 15px;\n    font-weight: 400;\n    line-height: 18px;\n  }\n\n  b {\n    font-weight: 700;\n  }\n\n  a {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    font-weight: 400;\n    line-height: 27px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -14953,17 +15005,8 @@ _hyperappStyledComponents.default.injectGlobal(_templateObject(), blackish, blac
 var route = function route(pathname) {
   window.scrollTo(0, 0);
   history.pushState(null, "", pathname);
-}; // define initial app state
+}; // localmemory storage
 
-
-var state = {
-  location: _router.location.state,
-  name: '',
-  domain: '.nongiverof.eth',
-  errors: [],
-  step: 3
-};
-var editor; // localmemory storage
 
 var localMemory = {}; // localstorage
 
@@ -14974,7 +15017,16 @@ var local = window.localStorage || {
   getItem: function getItem(key) {
     return localMemory[key] || null;
   }
-}; // define initial actions
+}; // define initial app state
+
+var state = {
+  location: _router.location.state,
+  name: local.getItem('name') || '',
+  domain: local.getItem('domain') || '.nongiverof.eth',
+  errors: [],
+  step: 3
+};
+var editor; // define initial actions
 
 var actions = {
   location: _router.location.actions,
@@ -15255,14 +15307,14 @@ var Lander = function Lander() {
   return function (state, actions) {
     return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(ContentWrapper, null, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(LanderImage, {
       src: lander
-    })), (0, _hyperapp.h)(LanderColumn, null, (0, _hyperapp.h)(LanderHeader, null, "Get a unique ens name for free"), (0, _hyperapp.h)("a", {
+    })), (0, _hyperapp.h)(LanderColumn, null, (0, _hyperapp.h)("a", {
       name: "go"
-    }), (0, _hyperapp.h)("a", {
+    }), (0, _hyperapp.h)(LanderHeader, null, "Get a unique ens name for free"), (0, _hyperapp.h)("a", {
       href: "#go",
       onclick: function onclick(e) {
         return e.target.style.display = 'none';
       },
-      style: "text-align: center; width: 100%; margin-top: 60px; display: block;"
+      style: "text-align: center; width: 100%; margin-top: 25px; display: block;"
     }, (0, _hyperapp.h)(ScrollDownArrow, {
       src: downArrow
     })), (0, _hyperapp.h)(LanderInputs, null, (0, _hyperapp.h)(BigInput, {
@@ -15278,12 +15330,12 @@ var Lander = function Lander() {
       },
       onblur: function onblur(e) {
         return actions.checkAvailable({
-          name: e.target.value
+          name: String(e.target.value).trim()
         });
       },
       onkeyup: function onkeyup(e) {
         return actions.checkAvailable({
-          name: e.target.value
+          name: String(e.target.value).trim()
         });
       }
     }), (0, _hyperapp.h)(SelectWrapper, null, (0, _hyperapp.h)("select", {
@@ -15350,9 +15402,97 @@ var Lander = function Lander() {
   };
 };
 
+var VerifyColumnText = _hyperappStyledComponents.default.div(_templateObject22());
+
+var VerifyColumnInput = _hyperappStyledComponents.default.div(_templateObject23());
+
+var HandleInput = _hyperappStyledComponents.default.input(_templateObject24(), lightgray, function (props) {
+  return props.ready ? "\n    border-color: ".concat(blackish, ";\n    color: ").concat(blackish, ";\n  ") : '';
+}, function (props) {
+  return props.at ? "\n  background: ".concat(lightgray, ";\n  border-right: 0px;\n  text-align: center;\n  ") : 'width: 100%;';
+}, function (props) {
+  return props.ready && !props.at ? "\n    border-left: 0px;\n  " : '';
+}, function (props) {
+  return props.ready && props.at ? "\n    background: #FFF;\n    padding-right: 16px;\n    color: ".concat(blackish, ";\n  ") : "\n  ";
+});
+
+var VerifyButton = _hyperappStyledComponents.default.button(_templateObject25(), function (props) {
+  return props.ready ? "\n    outline: none;\n    text-decoration: underline;\n    " : '';
+}, function (props) {
+  return props.ready ? "\n  border: 3px solid ".concat(primary, ";\n  color: ").concat(primary, ";\n  ") : "\n  border: 3px solid ".concat(lightgray, ";\n  color: ").concat(grayer, ";\n  ");
+});
+
 var Verify = function Verify() {
   return function (state, actions) {
-    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(ContentWrapper, null), (0, _hyperapp.h)(Footer, null));
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(ContentWrapper, null, (0, _hyperapp.h)(VerifyColumnText, null, (0, _hyperapp.h)("h3", {
+      style: "margin-bottom: 20px;"
+    }, "Verification"), (0, _hyperapp.h)("p", null, "Please enter your ", (0, _hyperapp.h)("b", null, "Twitter Handle"), " and we will send you a special verification code via a", (0, _hyperapp.h)("b", null, " Direct Message"), " (DM).")), (0, _hyperapp.h)(VerifyColumnInput, null, state.codeSent ? (0, _hyperapp.h)("div", {
+      style: "display: flex; flex-direction: row;"
+    }, (0, _hyperapp.h)(HandleInput, {
+      placeholder: "e.g. 109283"
+    })) : (0, _hyperapp.h)("div", {
+      style: "display: flex; flex-direction: row;"
+    }, (0, _hyperapp.h)(HandleInput, {
+      type: "text",
+      at: "1",
+      ready: state.handle ? '1' : null,
+      value: "@",
+      style: "height: 30px; font-size: 22px; font-weight: 700; outline: none; text-select: none; flex: 1; max-width: 23px;",
+      readonly: "readonly"
+    }), (0, _hyperapp.h)(HandleInput, {
+      type: "text",
+      ready: state.handle ? '1' : null,
+      oninput: function oninput(e) {
+        return actions.change({
+          handle: e.target.value
+        });
+      },
+      oncreate: function oncreate(e) {
+        return setTimeout(function (e) {
+          return document.querySelector('#handle').focus();
+        }, 10);
+      },
+      id: "handle",
+      placeholder: "MyTwitterHandle"
+    })), (0, _hyperapp.h)("div", {
+      sytle: "display: flex; flex-direction: row;"
+    }, state.codeSent ? (0, _hyperapp.h)("div", {
+      style: "display: flex; flex-direction: row;"
+    }, (0, _hyperapp.h)(VerifyButton, {
+      onclick: function onclick(e) {
+        return route('/success');
+      },
+      ready: state.handle ? '1' : null
+    }, "Next")) : (0, _hyperapp.h)("div", {
+      style: "display: flex; flex-direction: row;"
+    }, (0, _hyperapp.h)(VerifyButton, {
+      onclick: function onclick(e) {
+        return state.handle ? actions.change({
+          codeSent: true
+        }) : '';
+      },
+      ready: state.handle ? '1' : null
+    }, "Send Code"))))), (0, _hyperapp.h)(Footer, null));
+  };
+};
+
+var successImage = require('./public/success.png');
+
+var SuccessWrapper = _hyperappStyledComponents.default.div(_templateObject26());
+
+var Success = function Success() {
+  return function (state, actions) {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(ContentWrapper, null, (0, _hyperapp.h)(SuccessWrapper, null, (0, _hyperapp.h)("img", {
+      src: successImage,
+      width: "150"
+    }), (0, _hyperapp.h)("h1", {
+      style: "margin-top: 40px;"
+    }, "Huzzah!!"), (0, _hyperapp.h)("p", {
+      style: "font-size: 30px; max-width: 600px; line-height: 40px; text-align: center; margin-top: 20px;"
+    }, "The ENS name ", (0, _hyperapp.h)("b", null, state.name, state.domain), " will soon resolve to ", (0, _hyperapp.h)("b", null, state.address), "!!"), (0, _hyperapp.h)("a", {
+      href: "/names",
+      style: "margin-top: 30px; font-size: 20px; margin-bottom: 50px;"
+    }, "Check the Status"))), (0, _hyperapp.h)(Footer, null));
   };
 }; // routes for app
 
@@ -15366,7 +15506,7 @@ var Routes = function Routes() {
     render: Verify
   }), (0, _hyperapp.h)(_router.Route, {
     path: "/success",
-    render: Lander
+    render: Success
   }), (0, _hyperapp.h)(_router.Route, {
     path: "/terms",
     render: Lander
@@ -15384,7 +15524,7 @@ var main = (0, _hyperapp.app)(state, actions, Routes, document.body); // load ma
 main.load(); // unsubscripe for routing
 
 var unsubscribe = _router.location.subscribe(main.location);
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js","./public/Favicon.svg":"public/Favicon.svg","./public/lander.png":"public/lander.png","./public/logo.svg":"public/logo.svg","./public/downArrow.svg":"public/downArrow.svg","./public/done.svg":"public/done.svg"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","axios":"node_modules/axios/index.js","ethers":"node_modules/ethers/dist/ethers.min.js","ethjs-extras":"node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"node_modules/hyperapp-styled-components/src/index.js","moment":"node_modules/moment/moment.js","./public/Favicon.svg":"public/Favicon.svg","./public/lander.png":"public/lander.png","./public/logo.svg":"public/logo.svg","./public/downArrow.svg":"public/downArrow.svg","./public/done.svg":"public/done.svg","./public/success.png":"public/success.png"}],"../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -15411,7 +15551,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45207" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38575" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

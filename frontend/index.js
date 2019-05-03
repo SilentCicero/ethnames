@@ -83,9 +83,6 @@ styled.injectGlobal`
 
   html, body {
     margin: 0;
-    height: 100%;
-    overflow: hidden;
-    overflow-y: auto;
   }
 
   body {
@@ -97,11 +94,6 @@ styled.injectGlobal`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 100vm;
-  }
-
-  html {
-    overflow-y: hidden;
   }
 
   select {
@@ -198,17 +190,6 @@ const route = pathname => {
   history.pushState(null, "", pathname);
 };
 
-// define initial app state
-const state = {
-  location: location.state,
-  name: '',
-  domain: '.nongiverof.eth',
-  errors: [],
-  step: 3,
-};
-
-var editor;
-
 // localmemory storage
 let localMemory = {};
 
@@ -217,6 +198,17 @@ const local = window.localStorage || {
   setItem: (key, value) => Object.assign(localMemory, { [key]: value }),
   getItem: key => localMemory[key] || null,
 };
+
+// define initial app state
+const state = {
+  location: location.state,
+  name: local.getItem('name') || '',
+  domain: local.getItem('domain') || '.nongiverof.eth',
+  errors: [],
+  step: 3,
+};
+
+var editor;
 
 // define initial actions
 const actions = {
@@ -272,7 +264,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 600px) {
     width: 80%;
-    margin-top: 100px;
+    margin-top: 70px;
   }
 `;
 const HeaderWrapper = styled.div`
@@ -295,7 +287,7 @@ const HeaderWrapper = styled.div`
     top: 0px;
     flex-direction: column;
     align-items: start;
-    padding-top: 60px;
+    padding-top: 40px;
     padding-bottom: 40px;
   }
 `;
@@ -352,7 +344,7 @@ const MobileNavWrapper = styled.div`
 
   @media (max-width: 600px) {
     position: absolute;
-    top: 60px;
+    top: 40px;
     right: 10%;
     display: ${props => props.usesSteps ? 'none' : 'flex'};
     width: 35px;
@@ -528,6 +520,10 @@ const ContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
+
+  @media (min-width: 601px) and (max-width: 1024px) {
+    flex-direction: column;
+  }
 
   @media (max-width: 600px) {
     margin-top: 60px;
@@ -729,9 +725,9 @@ const Lander = () => (state, actions) => (
     <ContentWrapper>
       <div><LanderImage src={lander} /></div>
       <LanderColumn>
-        <LanderHeader>Get a unique ens name for free</LanderHeader>
         <a name="go"></a>
-        <a href="#go" onclick={e => (e.target.style.display = 'none')} style="text-align: center; width: 100%; margin-top: 60px; display: block;">
+        <LanderHeader>Get a unique ens name for free</LanderHeader>
+        <a href="#go" onclick={e => (e.target.style.display = 'none')} style="text-align: center; width: 100%; margin-top: 25px; display: block;">
           <ScrollDownArrow src={downArrow} />
         </a>
         <LanderInputs>
@@ -741,8 +737,8 @@ const Lander = () => (state, actions) => (
             checked={state.checked && state.name.length}
             available={state.available}
             oncreate={e => setTimeout(() => document.getElementById('ethName').focus(), 100)}
-            onblur={e => actions.checkAvailable({ name: e.target.value })}
-            onkeyup={e => actions.checkAvailable({ name: e.target.value })} />
+            onblur={e => actions.checkAvailable({ name: String(e.target.value).trim() })}
+            onkeyup={e => actions.checkAvailable({ name: String(e.target.value).trim() })} />
           <SelectWrapper>
             <select id="domain"
               onblur={e => actions.checkAvailable({ domain: e.target.value })}
@@ -777,24 +773,163 @@ const Lander = () => (state, actions) => (
   </Wrapper>
 );
 
+const VerifyColumnText = styled.div`
+  width: 50%;
+  margin-left: 10%;
+  margin-bottom: 150px;
+`;
+
+const VerifyColumnInput = styled.div`
+  width: 50%;
+  display: flex;
+  margin-right: 10%;
+  flex-direction: column;
+  margin-left: 50px;
+  margin-bottom: 150px;
+  margin-top: 100px;
+
+  @media (max-width: 600px) {
+    margin-left: 0px;
+  }
+`;
+
+const HandleInput = styled.input`
+  height: 30px;
+  font-weight: 500;
+  border: 3px solid ${lightgray};
+  outline: none;
+  font-size: 18px;
+  padding: 13px;
+
+  ${props => props.ready ? `
+    border-color: ${blackish};
+    color: ${blackish};
+  ` : ''}
+
+  ${props => props.at ? `
+  background: ${lightgray};
+  border-right: 0px;
+  text-align: center;
+  ` : 'width: 100%;'}
+
+  ${props => props.ready && !props.at ? `
+    border-left: 0px;
+  ` : ''}
+
+  ${props => props.ready && props.at ? `
+    background: #FFF;
+    padding-right: 16px;
+    color: ${blackish};
+  ` : `
+  `}
+`;
+
+const VerifyButton = styled.button`
+  font-size: 20px;
+  cursor: pointer;
+  background: #FFF;
+  padding-top: 15px;
+  padding-right: 27px;
+  padding-left: 27px;
+  padding-bottom: 15px;
+  font-weight: 700;
+  max-width: 300px;
+  margin-top: 40px;
+  outline: none;
+
+  &:hover {
+    ${props => props.ready ? `
+    outline: none;
+    text-decoration: underline;
+    ` : ''}
+  }
+
+  ${props => props.ready ? `
+  border: 3px solid ${primary};
+  color: ${primary};
+  ` : `
+  border: 3px solid ${lightgray};
+  color: ${grayer};
+  `}
+`;
 
 const Verify = () => (state, actions) => (
   <Wrapper>
     <Header />
 
     <ContentWrapper>
+      <VerifyColumnText>
+        <h3 style="margin-bottom: 20px;">Verification</h3>
+        <p>Please enter your <b>Twitter Handle</b> and we will send you a special verification code via a
+          <b> Direct Message</b> (DM).</p>
+      </VerifyColumnText>
+      <VerifyColumnInput>
+        {state.codeSent ? (
+            <div style="display: flex; flex-direction: row;">
+              <HandleInput placeholder="e.g. 109283" />
+            </div>
+          ) : (
+            <div style="display: flex; flex-direction: row;">
+              <HandleInput type="text" at="1" ready={state.handle ? '1' : null} value="@" style={`height: 30px; font-size: 22px; font-weight: 700; outline: none; text-select: none; flex: 1; max-width: 23px;`} readonly="readonly" />
+              <HandleInput type="text" ready={state.handle ? '1' : null} oninput={e => actions.change({ handle: e.target.value })} oncreate={e => setTimeout(e => document.querySelector('#handle').focus(), 10)} id="handle" placeholder="MyTwitterHandle" />
+            </div>
+          )}
+        <div sytle="display: flex; flex-direction: row;">
+          {state.codeSent ? (
+              <div style="display: flex; flex-direction: row;">
+                <VerifyButton onclick={e => route('/success')} ready={state.handle ? '1' : null}>Next</VerifyButton>
+              </div>
+            ) : (
+              <div style="display: flex; flex-direction: row;">
+                <VerifyButton onclick={e => state.handle ? actions.change({ codeSent: true }) : ''} ready={state.handle ? '1' : null}>Send Code</VerifyButton>
+              </div>
+            )}
+        </div>
+      </VerifyColumnInput>
     </ContentWrapper>
 
     <Footer />
   </Wrapper>
 );
 
+const successImage = require('./public/success.png');
+
+const SuccessWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Success = () => (state, actions) => (
+  <Wrapper>
+    <Header />
+
+    <ContentWrapper>
+      <SuccessWrapper>
+        <img src={successImage} width="150" />
+
+        <h1 style="margin-top: 40px;">Huzzah!!</h1>
+
+        <p style="font-size: 30px; max-width: 600px; line-height: 40px; text-align: center; margin-top: 20px;">
+          The ENS name <b>{state.name}{state.domain}</b> will soon resolve to <b>{state.address}</b>!!
+        </p>
+
+        <a href="/names" style="margin-top: 30px; font-size: 20px; margin-bottom: 50px;">Check the Status</a>
+      </SuccessWrapper>
+    </ContentWrapper>
+
+    <Footer />
+  </Wrapper>
+);
+
+
 // routes for app
 const Routes = () => (
   <Switch>
     <Route path="/" render={Lander} />
     <Route path="/verify" render={Verify} />
-    <Route path="/success" render={Lander} />
+    <Route path="/success" render={Success} />
     <Route path="/terms" render={Lander} />
     <Route path="/privacy" render={Lander} />
     <Route render={NotFound} />
