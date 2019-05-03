@@ -14663,8 +14663,38 @@ var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject26() {
+function _templateObject29() {
   var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n"]);
+
+  _templateObject29 = function _templateObject29() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject28() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  border: 3px solid ", ";\n  padding: 20px;\n  padding-left: 30px;\n  padding-right: 30px;\n  font-size: 23px;\n  cursor: pointer;\n  color: ", ";\n  text-decoration: none;\n\n  &:hover {\n    text-decoration: underline;\n  }\n\n  & img {\n    margin-right: 20px;\n  }\n\n  & span {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n  }\n"]);
+
+  _templateObject28 = function _templateObject28() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject27() {
+  var data = _taggedTemplateLiteral(["\n  width: 30%;\n  display: flex;\n  flex-direction: column;\n  background: #FFF;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n"]);
+
+  _templateObject27 = function _templateObject27() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject26() {
+  var data = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 0px;\n  bottom: 0px;\n  left: 0px;\n  right: 0px;\n  background: rgba(255,255,255,.8);\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  z-index: 12000;\n"]);
 
   _templateObject26 = function _templateObject26() {
     return data;
@@ -14694,7 +14724,7 @@ function _templateObject24() {
 }
 
 function _templateObject23() {
-  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  margin-right: 10%;\n  flex-direction: column;\n  margin-left: 50px;\n  margin-bottom: 150px;\n  margin-top: 100px;\n\n  @media (max-width: 600px) {\n    margin-left: 0px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  margin-right: 10%;\n  flex-direction: column;\n  margin-left: 50px;\n  margin-bottom: 150px;\n  margin-top: 100px;\n\n  @media (max-width: 1024px) {\n    margin-left: 0px;\n    width: 80%;\n  }\n"]);
 
   _templateObject23 = function _templateObject23() {
     return data;
@@ -14704,7 +14734,7 @@ function _templateObject23() {
 }
 
 function _templateObject22() {
-  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  margin-left: 10%;\n  margin-bottom: 150px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 50%;\n  margin-left: 10%;\n  margin-bottom: 150px;\n\n  @media (max-width: 1024px) {\n    margin-top: 30px;\n    width: 80%;\n    margin-bottom: 40px;\n  }\n"]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -15242,6 +15272,8 @@ actions.checkAvailable = function (obj) {
                 });
 
                 if (address === null) {
+                  local.setItem('name', ovState.name);
+                  local.setItem('domain', ovState.domain);
                   actions.change({
                     checked: true,
                     available: true,
@@ -15422,9 +15454,35 @@ var VerifyButton = _hyperappStyledComponents.default.button(_templateObject25(),
   return props.ready ? "\n  border: 3px solid ".concat(primary, ";\n  color: ").concat(primary, ";\n  ") : "\n  border: 3px solid ".concat(lightgray, ";\n  color: ").concat(grayer, ";\n  ");
 });
 
+var BlurWrapper = _hyperappStyledComponents.default.div(_templateObject26());
+
+var BlurInner = _hyperappStyledComponents.default.div(_templateObject27());
+
+var WalletButton = _hyperappStyledComponents.default.a(_templateObject28(), grayer, blackish);
+
+var GetAWallet = function GetAWallet() {
+  return function (state, actions) {
+    return (0, _hyperapp.h)(BlurWrapper, null, (0, _hyperapp.h)(BlurInner, null, (0, _hyperapp.h)("h1", null, "No Wallet found :("), (0, _hyperapp.h)("p", null, "In order to use this app, you will need to install one of the following browser-enabled ", (0, _hyperapp.h)("a", {
+      href: "https://ethereum.org/use/#_3-what-is-a-wallet-and-which-one-should-i-use",
+      target: "_blank"
+    }, "Ethereum"), " wallet and then ", (0, _hyperapp.h)("b", null, "refresh the page"), "."), (0, _hyperapp.h)("div", {
+      style: "display: flex; flex-direction: row; margin-top: 40px;"
+    }, (0, _hyperapp.h)(WalletButton, {
+      href: "https://metamask.io/",
+      target: "_blank"
+    }, (0, _hyperapp.h)("img", {
+      src: "https://cdn.worldvectorlogo.com/logos/metamask.svg",
+      width: "100"
+    }), (0, _hyperapp.h)("span", null, "Install MetaMask"))), (0, _hyperapp.h)("a", {
+      href: "/verify",
+      style: "margin-top: 40px;"
+    }, "Refresh")));
+  };
+};
+
 var Verify = function Verify() {
   return function (state, actions) {
-    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(ContentWrapper, null, (0, _hyperapp.h)(VerifyColumnText, null, (0, _hyperapp.h)("h3", {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), typeof window.ethereum === "undefined" ? (0, _hyperapp.h)(GetAWallet, null) : window.ethereum.enable(), (0, _hyperapp.h)(ContentWrapper, null, (0, _hyperapp.h)(VerifyColumnText, null, (0, _hyperapp.h)("h3", {
       style: "margin-bottom: 20px;"
     }, "Verification"), (0, _hyperapp.h)("p", null, "Please enter your ", (0, _hyperapp.h)("b", null, "Twitter Handle"), " and we will send you a special verification code via a", (0, _hyperapp.h)("b", null, " Direct Message"), " (DM).")), (0, _hyperapp.h)(VerifyColumnInput, null, state.codeSent ? (0, _hyperapp.h)("div", {
       style: "display: flex; flex-direction: row;"
@@ -15478,7 +15536,7 @@ var Verify = function Verify() {
 
 var successImage = require('./public/success.png');
 
-var SuccessWrapper = _hyperappStyledComponents.default.div(_templateObject26());
+var SuccessWrapper = _hyperappStyledComponents.default.div(_templateObject29());
 
 var Success = function Success() {
   return function (state, actions) {
@@ -15551,7 +15609,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38575" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40565" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

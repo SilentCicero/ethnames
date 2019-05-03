@@ -564,6 +564,9 @@ actions.checkAvailable = obj => async (state, actions) => {
     actions.change({ loadingName: false });
 
     if (address === null) {
+      local.setItem('name', ovState.name);
+      local.setItem('domain', ovState.domain);
+
       actions.change({ checked: true, available: true, loadingName: false, address });
     } else {
       actions.change({ checked: true, available: false, loadingName: false, address });
@@ -777,6 +780,12 @@ const VerifyColumnText = styled.div`
   width: 50%;
   margin-left: 10%;
   margin-bottom: 150px;
+
+  @media (max-width: 1024px) {
+    margin-top: 30px;
+    width: 80%;
+    margin-bottom: 40px;
+  }
 `;
 
 const VerifyColumnInput = styled.div`
@@ -788,8 +797,9 @@ const VerifyColumnInput = styled.div`
   margin-bottom: 150px;
   margin-top: 100px;
 
-  @media (max-width: 600px) {
+  @media (max-width: 1024px) {
     margin-left: 0px;
+    width: 80%;
   }
 `;
 
@@ -853,9 +863,81 @@ const VerifyButton = styled.button`
   `}
 `;
 
+const BlurWrapper = styled.div`
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: rgba(255,255,255,.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 12000;
+`;
+
+const BlurInner = styled.div`
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  background: #FFF;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+
+const WalletButton = styled.a`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid ${grayer};
+  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 23px;
+  cursor: pointer;
+  color: ${blackish};
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  & img {
+    margin-right: 20px;
+  }
+
+  & span {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+const GetAWallet = () => (state, actions) => (
+  <BlurWrapper>
+    <BlurInner>
+      <h1>No Wallet found :(</h1>
+      <p>In order to use this app, you will need to install one of the following browser-enabled <a href="https://ethereum.org/use/#_3-what-is-a-wallet-and-which-one-should-i-use" target="_blank">Ethereum</a> wallet and then <b>refresh the page</b>.</p>
+      <div style="display: flex; flex-direction: row; margin-top: 40px;">
+        <WalletButton href="https://metamask.io/" target="_blank">
+          <img src="https://cdn.worldvectorlogo.com/logos/metamask.svg" width="100" />
+          <span>Install MetaMask</span>
+        </WalletButton>
+      </div>
+      <a href="/verify" style="margin-top: 40px;">Refresh</a>
+    </BlurInner>
+  </BlurWrapper>
+);
+
 const Verify = () => (state, actions) => (
   <Wrapper>
     <Header />
+
+    {typeof window.ethereum === "undefined" ? (<GetAWallet />) : window.ethereum.enable()}
 
     <ContentWrapper>
       <VerifyColumnText>
