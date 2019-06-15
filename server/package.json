@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "The server portion of Ethnames",
+  "main": "src/processor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silentcicero/ethnames.git"
+  },
+  "keywords": [
+    "server",
+    "ethnames",
+    "ethereum",
+    "names"
+  ],
+  "author": "Nick Dodson <thenickdodso@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/silentcicero/ethnames/issues"
+  },
+  "homepage": "https://github.com/silentcicero/ethnames#readme",
+  "dependencies": {
+    "login-with-twitter": "^1.2.0",
+    "micro-cors": "^0.1.1"
+  }
+}
