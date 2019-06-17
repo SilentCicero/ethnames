@@ -26,7 +26,7 @@ oauth2.accessToken = accessToken;
 // validate notify
 const validationSchema = {
   nonce: Joi.string().required(),
-  names: Joi.Array().required(), // ens names to purchase
+  names: Joi.array().items(Joi.string()), // ens names to purchase
   owner: Joi.string().required(), // owner address
 };
 
@@ -36,7 +36,9 @@ module.exports = cors(async (req, res) => {
     // intercept and parse post body
     const body = (await json(req));
     const {
-      hash,
+      nonce,
+      names,
+      owner,
     } = body;
 
     // joi validate the body
@@ -52,23 +54,24 @@ module.exports = cors(async (req, res) => {
 
     // Charge the customer's card
     const transactionsApi = new squareConnect.TransactionsApi();
+    const amount = names.length * 600;
     const data = await transactionsApi.charge(locationId, {
-      card_nonce: requestParams.nonce,
+      card_nonce: nonce,
       amount_money: {
-        amount: 100, // $1.00 charge
+        amount, // $1.00 charge
         currency: 'USD',
       },
       idempotency_key: idempotencyKey,
     });
 
     const payment = new Payment({
-      transactionId: data.result.transaciton.id,
-      names: Array, // names purchased
-      owner: String, // owner of the names
-      card: Object, // card details
-      amount: Number, // amount of money
-      currency: String, // currency used
-      created: Date, // created
+      transactionId: data.transaction.id,
+      names: names, // names purchased
+      owner: owner, // owner of the names
+      card: data.transaction.tenders[0].card_details, // card details
+      amount, // amount of money
+      currency: 'USD', // currency used
+      created: new Date(), // created
     });
     await payment.save();
 

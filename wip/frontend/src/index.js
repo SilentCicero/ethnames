@@ -41,6 +41,9 @@ const local = window.localStorage || {
 // provider for mainnet
 const infuraProvider = new providers.InfuraProvider('mainnet', '7bd5971b072e46f9b6e7ac721938dacc');
 
+// window
+const eth = new Eth({ provider: (window.web3 || {}).currentProvider });
+
 // null address
 const nullAddress = '0x0000000000000000000000000000000000000000';
 
@@ -77,6 +80,7 @@ const actions = {
   load: () => (state, actions) => {
     setTimeout(() => document.querySelector('#ensName').focus(), 1);
   },
+  getState: () => state => state,
   setup: () => (state, actions) => {
 
     // Create and initialize a payment form object
@@ -94,6 +98,15 @@ const actions = {
           placeholderColor: '#a0a0a0',
           backgroundColor: 'transparent',
       }],
+
+      applePay: {
+        elementId: 'sq-apple-pay'
+      },
+
+      googlePay: {
+        elementId: 'sq-google-pay'
+      },
+
 
       // Initialize the credit card placeholders
       cardNumber: {
@@ -113,8 +126,47 @@ const actions = {
           placeholder: 'Postal'
       },
 
+
       // SqPaymentForm callback functions
       callbacks: {
+        methodsSupported: function (methods) {
+          var googlePayBtn = document.getElementById('sq-google-pay');
+
+          if (methods.googlePay === true) {
+            googlePayBtn.style.display = 'inline-block';
+          }
+
+          var applePayLabel = document.getElementById('sq-apple-pay-label');
+
+           if (methods.applePay === true) {
+             applePayBtn.style.display = 'inline-block';
+             applePayLabel.style.display = 'none' ;
+           }
+        },
+
+        createPaymentRequest: function () {
+          var paymentRequestJson = {
+              requestShippingAddress: false,
+              requestBillingInfo: true,
+              currencyCode: "USD",
+              countryCode: "US",
+              total: {
+                label: "EthNames.io",
+                amount: "6.00",
+                pending: false
+              },
+              lineItems: [
+                {
+                  label: "Subtotal",
+                  amount: "6.00",
+                  pending: false
+                },
+              ]
+            };
+
+          return paymentRequestJson;
+        },
+
           /*
           * callback function: cardNonceResponseReceived
           * Triggered when: SqPaymentForm completes a card nonce request
@@ -132,9 +184,11 @@ const actions = {
 
             axios.post('http://localhost:3000', JSON.stringify({
               nonce,
-              names: [state.nameValue],
-              owner: state.ownerValue,
-            })).then(console.log).catch(console.log);
+              names: [actions.getState().nameValue],
+              owner: actions.getState().ownerValue,
+            }))
+            .then(console.log)
+            .catch(console.log);
 
             // alert(`The generated nonce is:\n${nonce}`);
             // Uncomment the following block to
@@ -167,7 +221,7 @@ const actions = {
   searchValue: e => async (state, actions) => {
     const name = String(e.target.value).trim().replace('.eth', '');
 
-    actions.change({ nameValue: e.target.value });
+    actions.change({ nameValue: name });
     actions.change({ available: false });
     clearTimeout(doneTyping);
 
@@ -195,7 +249,7 @@ const NotFound = () => (
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 40%;
   margin: 0px auto;
   margin-top: 70px;
   font-family: 'Source Code Pro', monospace;
@@ -231,10 +285,8 @@ const Lander = () => (state, actions) => (
       <p>Fastest way to get an ENS name without Ether</p>
     </div>
 
-    <br /><br />
-
-    <div>
-      <div id="form-container">
+    <div style="position: relative;">
+      <div>
         <div id="sq-ccbox">
           <form oncreate={e => actions.setup()} id="nonce-form" novalidate action="" method="post">
             <fieldset>
@@ -249,15 +301,33 @@ const Lander = () => (state, actions) => (
               <label>Ownership</label><br /><br />
               <fieldset>
                 <div style="display: flex; position: relative; flex-direction: column;">
-                  <SearchInput type="text" placeholder="0x...Your..Address.." style="margin-bottom: 10px;" oninput={actions.ownerAddress} />
-                  <a href="#" style="position: absolute; right: 20px; top: 10px; text-decoration: none; background: #FFF; padding: 10px;">connect</a>
+                  <SearchInput type="text" placeholder="0x...Your..Address.." value={state.ownerValue} style="margin-bottom: 10px;" oninput={actions.ownerAddress} />
+                  <a href="#"
+                    onclick={async e => {
+                      try {
+                        window.ethereum.enable();
+                        const accounts = await eth.raw('eth_accounts');
+                        if (!accounts.length) throw new Error('No accounts..');
+                        actions.change({ ownerValue: accounts[0] });
+                      } catch (error) {
+                        actions.change({ result: 'Problem connect wallet :(' })
+                      }
+                    }}
+                    style="position: absolute; right: 20px; top: 10px; text-decoration: none; background: #FFF; padding: 10px;">connect</a>
                   <a href="#" style="text-decoration: none;">Make me one</a>
                 </div>
               </fieldset>
             </div>
             <br /><br /><br />
-            <div style={`opacity: ${(state.ownerValue || '').length ? '1' : '.3'};`}>
+            <div style={`opacity: ${(state.ownerValue || '').length > 22 ? '1' : '.3'};`}>
               <label>Billing Information (via <a href="http://squareup.com" target="_blank">Square</a>)</label><br /><br />
+              <fieldset>
+                <div id="sq-walletbox">
+                  <div id="sq-apple-pay-label" class="wallet-not-enabled">{state.cool ? 'Apple Pay on the Web not enabled' : ''}</div>
+                  <button id="sq-apple-pay" class="button-apple-pay"></button>
+                  <button id="sq-google-pay" class="button-google-pay"></button>
+                </div>
+              </fieldset>
               <fieldset>
                 <div id="sq-card-number"></div>
                 <div class="third">

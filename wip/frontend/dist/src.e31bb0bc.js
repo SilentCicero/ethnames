@@ -14640,7 +14640,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 60%;\n  margin: 0px auto;\n  margin-top: 70px;\n  font-family: 'Source Code Pro', monospace;\n  margin-bottom: 100px;\n  align-items: start;\n\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 70px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 40%;\n  margin: 0px auto;\n  margin-top: 70px;\n  font-family: 'Source Code Pro', monospace;\n  margin-bottom: 100px;\n  align-items: start;\n\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 70px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -14703,7 +14703,11 @@ var local = window.localStorage || {
   }
 }; // provider for mainnet
 
-var infuraProvider = new providers.InfuraProvider('mainnet', '7bd5971b072e46f9b6e7ac721938dacc'); // null address
+var infuraProvider = new providers.InfuraProvider('mainnet', '7bd5971b072e46f9b6e7ac721938dacc'); // window
+
+var eth = new Eth({
+  provider: window.web3.currentProvider
+}); // null address
 
 var nullAddress = '0x0000000000000000000000000000000000000000'; // We connect to the Contract using a Provider, so we will only
 // have read-only access to the Contract
@@ -14728,6 +14732,11 @@ var actions = {
       }, 1);
     };
   },
+  getState: function getState() {
+    return function (state) {
+      return state;
+    };
+  },
   setup: function setup() {
     return function (state, actions) {
       // Create and initialize a payment form object
@@ -14744,6 +14753,12 @@ var actions = {
           placeholderColor: '#a0a0a0',
           backgroundColor: 'transparent'
         }],
+        applePay: {
+          elementId: 'sq-apple-pay'
+        },
+        googlePay: {
+          elementId: 'sq-google-pay'
+        },
         // Initialize the credit card placeholders
         cardNumber: {
           elementId: 'sq-card-number',
@@ -14763,6 +14778,40 @@ var actions = {
         },
         // SqPaymentForm callback functions
         callbacks: {
+          methodsSupported: function methodsSupported(methods) {
+            var googlePayBtn = document.getElementById('sq-google-pay');
+
+            if (methods.googlePay === true) {
+              googlePayBtn.style.display = 'inline-block';
+            }
+
+            var applePayLabel = document.getElementById('sq-apple-pay-label');
+
+            if (methods.applePay === true) {
+              applePayBtn.style.display = 'inline-block';
+              applePayLabel.style.display = 'none';
+            }
+          },
+          createPaymentRequest: function createPaymentRequest() {
+            var paymentRequestJson = {
+              requestShippingAddress: false,
+              requestBillingInfo: true,
+              currencyCode: "USD",
+              countryCode: "US",
+              total: {
+                label: "EthNames.io",
+                amount: "6.00",
+                pending: false
+              },
+              lineItems: [{
+                label: "Subtotal",
+                amount: "6.00",
+                pending: false
+              }]
+            };
+            return paymentRequestJson;
+          },
+
           /*
           * callback function: cardNonceResponseReceived
           * Triggered when: SqPaymentForm completes a card nonce request
@@ -14780,8 +14829,8 @@ var actions = {
 
             _axios.default.post('http://localhost:3000', JSON.stringify({
               nonce: nonce,
-              names: [state.nameValue],
-              owner: state.ownerValue
+              names: [actions.getState().nameValue],
+              owner: actions.getState().ownerValue
             })).then(console.log).catch(console.log); // alert(`The generated nonce is:\n${nonce}`);
             // Uncomment the following block to
             // 1. assign the nonce to a form field and
@@ -14914,7 +14963,7 @@ var actions = {
                 case 0:
                   name = String(e.target.value).trim().replace('.eth', '');
                   actions.change({
-                    nameValue: e.target.value
+                    nameValue: name
                   });
                   actions.change({
                     available: false
@@ -14966,9 +15015,9 @@ var SearchInput = _hyperappStyledComponents.default.input(_templateObject2());
 
 var Lander = function Lander() {
   return function (state, actions) {
-    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("h1", null, "EthNames"), (0, _hyperapp.h)("p", null, "Fastest way to get an ENS name without Ether")), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("div", {
-      id: "form-container"
-    }, (0, _hyperapp.h)("div", {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("h1", null, "EthNames"), (0, _hyperapp.h)("p", null, "Fastest way to get an ENS name without Ether")), (0, _hyperapp.h)("div", {
+      style: "position: relative;"
+    }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("div", {
       id: "sq-ccbox"
     }, (0, _hyperapp.h)("form", {
       oncreate: function oncreate(e) {
@@ -15002,20 +15051,84 @@ var Lander = function Lander() {
     }, (0, _hyperapp.h)(SearchInput, {
       type: "text",
       placeholder: "0x...Your..Address..",
+      value: state.ownerValue,
       style: "margin-bottom: 10px;",
       oninput: actions.ownerAddress
     }), (0, _hyperapp.h)("a", {
       href: "#",
+      onclick:
+      /*#__PURE__*/
+      function () {
+        var _ref4 = _asyncToGenerator(
+        /*#__PURE__*/
+        _regeneratorRuntime.default.mark(function _callee4(e) {
+          var accounts;
+          return _regeneratorRuntime.default.wrap(function _callee4$(_context4) {
+            while (1) {
+              switch (_context4.prev = _context4.next) {
+                case 0:
+                  _context4.prev = 0;
+                  window.ethereum.enable();
+                  _context4.next = 4;
+                  return eth.raw('eth_accounts');
+
+                case 4:
+                  accounts = _context4.sent;
+
+                  if (accounts.length) {
+                    _context4.next = 7;
+                    break;
+                  }
+
+                  throw new Error('No accounts..');
+
+                case 7:
+                  actions.change({
+                    ownerValue: accounts[0]
+                  });
+                  _context4.next = 13;
+                  break;
+
+                case 10:
+                  _context4.prev = 10;
+                  _context4.t0 = _context4["catch"](0);
+                  actions.change({
+                    result: 'Problem connect wallet :('
+                  });
+
+                case 13:
+                case "end":
+                  return _context4.stop();
+              }
+            }
+          }, _callee4, this, [[0, 10]]);
+        }));
+
+        return function (_x7) {
+          return _ref4.apply(this, arguments);
+        };
+      }(),
       style: "position: absolute; right: 20px; top: 10px; text-decoration: none; background: #FFF; padding: 10px;"
     }, "connect"), (0, _hyperapp.h)("a", {
       href: "#",
       style: "text-decoration: none;"
     }, "Make me one")))), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("div", {
-      style: "opacity: ".concat((state.ownerValue || '').length ? '1' : '.3', ";")
+      style: "opacity: ".concat((state.ownerValue || '').length > 22 ? '1' : '.3', ";")
     }, (0, _hyperapp.h)("label", null, "Billing Information (via ", (0, _hyperapp.h)("a", {
       href: "http://squareup.com",
       target: "_blank"
     }, "Square"), ")"), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)("div", {
+      id: "sq-walletbox"
+    }, (0, _hyperapp.h)("div", {
+      id: "sq-apple-pay-label",
+      class: "wallet-not-enabled"
+    }, state.cool ? 'Apple Pay on the Web not enabled' : ''), (0, _hyperapp.h)("button", {
+      id: "sq-apple-pay",
+      class: "button-apple-pay"
+    }), (0, _hyperapp.h)("button", {
+      id: "sq-google-pay",
+      class: "button-google-pay"
+    }))), (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)("div", {
       id: "sq-card-number"
     }), (0, _hyperapp.h)("div", {
       class: "third"
@@ -15096,7 +15209,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42063" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42905" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
