@@ -26,6 +26,8 @@ oauth2.accessToken = accessToken;
 // validate notify
 const validationSchema = {
   nonce: Joi.string().required(),
+  names: Joi.Array().required(), // ens names to purchase
+  owner: Joi.string().required(), // owner address
 };
 
 // Notify lambda
@@ -58,6 +60,17 @@ module.exports = cors(async (req, res) => {
       },
       idempotency_key: idempotencyKey,
     });
+
+    const payment = new Payment({
+      transactionId: data.result.transaciton.id,
+      names: Array, // names purchased
+      owner: String, // owner of the names
+      card: Object, // card details
+      amount: Number, // amount of money
+      currency: String, // currency used
+      created: Date, // created
+    });
+    await payment.save();
 
     // return true
     send(res, 200, { result: data });

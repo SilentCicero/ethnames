@@ -9,7 +9,7 @@ const infuraID = process.env.infuraidethnames;
 
 // Square
 const accessToken = process.env.accesstokenethnames;
-const locationId = process.env.localtionidethnames;
+const locationId = process.env.locationidethnames;
 
 // Main infura URL
 const infuraMainnetURL = `https://mainnet.infura.io/v3/${infuraID}`;

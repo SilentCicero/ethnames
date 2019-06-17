@@ -14629,8 +14629,18 @@ var _moment = _interopRequireDefault(require("moment"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  padding: 20px;\n  font-size: 16px;\n  border-radius: 3px;\n  margin-bottom: 20px;\n  width: 100%;\n  box-shadow: none;\n  border: 1px solid;\n  border-color: lightgray;\n  outline: none;\n\n  &:focus {\n    border: 1px solid purple;\n  }\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 60%;\n  margin: 0px auto;\n  margin-top: 70px;\n  font-family: 'Source Code Pro', monospace;\n  margin-bottom: 100px;\n\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 70px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 60%;\n  margin: 0px auto;\n  margin-top: 70px;\n  font-family: 'Source Code Pro', monospace;\n  margin-bottom: 100px;\n  align-items: start;\n\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 70px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -14641,6 +14651,10 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var ethers = require('ethers');
@@ -14648,6 +14662,7 @@ var ethers = require('ethers');
 var _require = require('ethers'),
     utils = _require.utils,
     Wallet = _require.Wallet,
+    Contract = _require.Contract,
     providers = _require.providers;
 
 var _require2 = require('ethjs-extras'),
@@ -14686,12 +14701,23 @@ var local = window.localStorage || {
   getItem: function getItem(key) {
     return localMemory[key] || null;
   }
-}; // define initial app state
+}; // provider for mainnet
+
+var infuraProvider = new providers.InfuraProvider('mainnet', '7bd5971b072e46f9b6e7ac721938dacc'); // null address
+
+var nullAddress = '0x0000000000000000000000000000000000000000'; // We connect to the Contract using a Provider, so we will only
+// have read-only access to the Contract
+
+var registrarContract = new Contract('0xf0ad5cad05e10572efceb849f6ff0c68f9700455', ['function available(string name) public view returns (bool)', 'function makeCommitment(string name,address owner,bytes32 secret) public view returns (bytes32)', 'function commit(bytes32 commitment)', 'function register(string name,address owner,uint256 duration,bytes32 secret)', 'event NameRegistered(string name,bytes32 label,address owner,uint256 cost,uint256 expires)'], infuraProvider); // main ens contract
+
+var ensContract = new Contract('0x314159265dD8dbb310642f98f50C066173C1259b', ['function owner(bytes32 node) external view returns (address)', 'function resolver(bytes32 node) external view returns (address)'], infuraProvider);
+ensContract.owner(utils.namehash('nickpay.eth')).then(console.log).catch(console.log); // define initial app state
 
 var state = {
   location: _router.location.state
 };
-var paymentForm = null; // define initial actions
+var paymentForm = null;
+var doneTyping; // define initial actions
 
 var actions = {
   location: _router.location.actions,
@@ -14749,7 +14775,9 @@ var actions = {
             }
 
             _axios.default.post('http://localhost:3000', JSON.stringify({
-              nonce: nonce
+              nonce: nonce,
+              names: [state.nameValue],
+              owner: state.ownerValue
             })).then(console.log).catch(console.log); // alert(`The generated nonce is:\n${nonce}`);
             // Uncomment the following block to
             // 1. assign the nonce to a form field and
@@ -14765,6 +14793,137 @@ var actions = {
       });
       paymentForm.build();
     };
+  },
+  ownerAddress: function ownerAddress(e) {
+    return (
+      /*#__PURE__*/
+      function () {
+        var _ref = _asyncToGenerator(
+        /*#__PURE__*/
+        _regeneratorRuntime.default.mark(function _callee(state, actions) {
+          return _regeneratorRuntime.default.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  actions.change({
+                    ownerValue: e.target.value
+                  });
+
+                case 1:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }));
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }()
+    );
+  },
+  searchName: function searchName(name) {
+    return (
+      /*#__PURE__*/
+      function () {
+        var _ref2 = _asyncToGenerator(
+        /*#__PURE__*/
+        _regeneratorRuntime.default.mark(function _callee2(state, actions) {
+          return _regeneratorRuntime.default.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.prev = 0;
+                  _context2.next = 3;
+                  return registrarContract.available(name);
+
+                case 3:
+                  _context2.t0 = _context2.sent;
+
+                  if (!_context2.t0) {
+                    _context2.next = 10;
+                    break;
+                  }
+
+                  _context2.next = 7;
+                  return ensContract.owner(utils.namehash("".concat(name, ".eth")));
+
+                case 7:
+                  _context2.t1 = _context2.sent;
+                  _context2.t2 = nullAddress;
+                  _context2.t0 = _context2.t1 === _context2.t2;
+
+                case 10:
+                  if (!_context2.t0) {
+                    _context2.next = 12;
+                    break;
+                  }
+
+                  actions.change({
+                    available: true
+                  });
+
+                case 12:
+                  _context2.next = 17;
+                  break;
+
+                case 14:
+                  _context2.prev = 14;
+                  _context2.t3 = _context2["catch"](0);
+                  console.log(_context2.t3);
+
+                case 17:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2, this, [[0, 14]]);
+        }));
+
+        return function (_x3, _x4) {
+          return _ref2.apply(this, arguments);
+        };
+      }()
+    );
+  },
+  searchValue: function searchValue(e) {
+    return (
+      /*#__PURE__*/
+      function () {
+        var _ref3 = _asyncToGenerator(
+        /*#__PURE__*/
+        _regeneratorRuntime.default.mark(function _callee3(state, actions) {
+          var name;
+          return _regeneratorRuntime.default.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  name = String(e.target.value).trim().replace('.eth', '');
+                  actions.change({
+                    nameValue: e.target.value
+                  });
+                  actions.change({
+                    available: false
+                  });
+                  clearTimeout(doneTyping);
+                  if (name.length) doneTyping = setTimeout(function (e) {
+                    return actions.searchName(name);
+                  }, 500);
+
+                case 5:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3, this);
+        }));
+
+        return function (_x5, _x6) {
+          return _ref3.apply(this, arguments);
+        };
+      }()
+    );
   },
   onGetCardNonce: function onGetCardNonce(e) {
     return function (state, acitons) {
@@ -14790,9 +14949,11 @@ var NotFound = function NotFound() {
 
 var Wrapper = _hyperappStyledComponents.default.div(_templateObject());
 
+var SearchInput = _hyperappStyledComponents.default.input(_templateObject2());
+
 var Lander = function Lander() {
   return function (state, actions) {
-    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("div", {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("h1", null, "EthNames"), (0, _hyperapp.h)("p", null, "Fastest way to get an ENS name without Ether")), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("div", {
       id: "form-container"
     }, (0, _hyperapp.h)("div", {
       id: "sq-ccbox"
@@ -14802,9 +14963,19 @@ var Lander = function Lander() {
       },
       id: "nonce-form",
       novalidate: true,
-      action: "http://localhost:3000",
+      action: "",
       method: "post"
-    }, (0, _hyperapp.h)("fieldset", null, "process-payment", (0, _hyperapp.h)("div", {
+    }, (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)(SearchInput, {
+      type: "text",
+      placeholder: "MyName.eth",
+      oninput: actions.searchValue
+    }), (0, _hyperapp.h)("br", null), state.available === true ? (0, _hyperapp.h)("span", {
+      style: "color: green"
+    }, "Available!") : state.available === false ? 'Unavailable :(' : ''), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("label", null, "Ownership"), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)(SearchInput, {
+      type: "text",
+      placeholder: "0x...your..address..",
+      oninput: actions.ownerAddress
+    })), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("label", null, "Billing Information"), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)("div", {
       id: "sq-card-number"
     }), (0, _hyperapp.h)("div", {
       class: "third"
@@ -14818,13 +14989,20 @@ var Lander = function Lander() {
       class: "third"
     }, (0, _hyperapp.h)("div", {
       id: "sq-postal-code"
-    }))), (0, _hyperapp.h)("button", {
+    }))), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)("input", {
+      type: "checkbox"
+    }), " I agree to the EthNames.io ", (0, _hyperapp.h)("a", {
+      href: ""
+    }, "Privacy Policy"), " and ", (0, _hyperapp.h)("a", {
+      href: ""
+    }, "Terms of Service")), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("button", {
       id: "sq-creditcard",
+      style: "border-radius: 3px;",
       class: "button-credit-card",
       onclick: function onclick(e) {
         return actions.onGetCardNonce(e);
       }
-    }, "Pay $1.00"), (0, _hyperapp.h)("input", {
+    }, "Buy ENS Name $6.00"), (0, _hyperapp.h)("input", {
       type: "hidden",
       id: "card-nonce",
       name: "nonce"
@@ -14878,7 +15056,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36265" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42763" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

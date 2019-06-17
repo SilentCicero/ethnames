@@ -27,8 +27,13 @@ async function connect() {
 
       // Transaction modal
       connection.model('Payment', {
-        _id: String, // mongo hash idx
-        c: Date, // created
+        transactionId: String, // transaction id from Square
+        name: Array, // names purchased
+        owner: String, // owner of the names
+        card: Object, // card details
+        amount: Number, // amount of money
+        currency: String, // currency used
+        created: Date, // created
       });
     }
 

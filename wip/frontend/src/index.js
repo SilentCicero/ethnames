@@ -3,14 +3,13 @@ import { h, app } from "hyperapp";
 import { Link, Route, location, Switch } from "@hyperapp/router";
 import axios from 'axios';
 const ethers = require('ethers');
-const { utils, Wallet, providers } = require('ethers');
+const { utils, Wallet, Contract, providers } = require('ethers');
 const { sendTransaction, balanceOf, call, Eth, onReceipt } = require('ethjs-extras');
 import styled from 'hyperapp-styled-components';
 import moment from 'moment';
 
 // Set the application ID
 const applicationId = "sandbox-sq0idp-EcBv5547FSK_0PlJ4Wz1rg";
-
 
 // colors
 const lightgray = '#E9E9E9';
@@ -39,12 +38,38 @@ const local = window.localStorage || {
   getItem: key => localMemory[key] || null,
 };
 
+// provider for mainnet
+const infuraProvider = new providers.InfuraProvider('mainnet', '7bd5971b072e46f9b6e7ac721938dacc');
+
+// null address
+const nullAddress = '0x0000000000000000000000000000000000000000';
+
+// We connect to the Contract using a Provider, so we will only
+// have read-only access to the Contract
+const registrarContract = new Contract('0xf0ad5cad05e10572efceb849f6ff0c68f9700455', [
+  'function available(string name) public view returns (bool)',
+  'function makeCommitment(string name,address owner,bytes32 secret) public view returns (bytes32)',
+  'function commit(bytes32 commitment)',
+  'function register(string name,address owner,uint256 duration,bytes32 secret)',
+  'event NameRegistered(string name,bytes32 label,address owner,uint256 cost,uint256 expires)',
+], infuraProvider);
+
+// main ens contract
+const ensContract = new Contract('0x314159265dD8dbb310642f98f50C066173C1259b', [
+  'function owner(bytes32 node) external view returns (address)',
+  'function resolver(bytes32 node) external view returns (address)',
+], infuraProvider);
+
+ensContract.owner(utils.namehash('nickpay.eth'))
+ .then(console.log).catch(console.log);
+
 // define initial app state
 const state = {
   location: location.state,
 };
 
 let paymentForm = null;
+let doneTyping;
 
 // define initial actions
 const actions = {
@@ -104,7 +129,11 @@ const actions = {
                 return;
             }
 
-            axios.post('http://localhost:3000', JSON.stringify({ nonce })).then(console.log).catch(console.log);
+            axios.post('http://localhost:3000', JSON.stringify({
+              nonce,
+              names: [state.nameValue],
+              owner: state.ownerValue,
+            })).then(console.log).catch(console.log);
 
             // alert(`The generated nonce is:\n${nonce}`);
             // Uncomment the following block to
@@ -118,6 +147,29 @@ const actions = {
       }
     });
     paymentForm.build();
+  },
+  ownerAddress: e => async(state, actions) => {
+    actions.change({ ownerValue: e.target.value });
+  },
+  searchName: name => async(state, actions) => {
+    try {
+      if ((await registrarContract.available(name))
+        && (await ensContract.owner(utils.namehash(`${name}.eth`))) === nullAddress) {
+        actions.change({ available: true });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  searchValue: e => async (state, actions) => {
+    const name = String(e.target.value).trim().replace('.eth', '');
+
+    actions.change({ nameValue: e.target.value });
+    actions.change({ available: false });
+    clearTimeout(doneTyping);
+
+    if (name.length)
+      doneTyping = setTimeout(e => actions.searchName(name), 500);
   },
   onGetCardNonce: e => (state, acitons) => {
     // Don't submit the form until SqPaymentForm returns with a nonce
@@ -145,6 +197,7 @@ const Wrapper = styled.div`
   margin-top: 70px;
   font-family: 'Source Code Pro', monospace;
   margin-bottom: 100px;
+  align-items: start;
 
   @media (max-width: 600px) {
     width: 80%;
@@ -152,13 +205,48 @@ const Wrapper = styled.div`
   }
 `;
 
+const SearchInput = styled.input`
+  padding: 20px;
+  font-size: 16px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid;
+  border-color: lightgray;
+  outline: none;
+
+  &:focus {
+    border: 1px solid purple;
+  }
+`;
+
 const Lander = () => (state, actions) => (
   <Wrapper>
     <div>
+      <h1>EthNames</h1>
+      <p>Fastest way to get an ENS name without Ether</p>
+    </div>
+
+    <br /><br />
+
+    <div>
       <div id="form-container">
         <div id="sq-ccbox">
-          <form oncreate={e => actions.setup()} id="nonce-form" novalidate action="http://localhost:3000" method="post">
-            <fieldset>process-payment
+          <form oncreate={e => actions.setup()} id="nonce-form" novalidate action="" method="post">
+            <fieldset>
+              <SearchInput type="text" placeholder="MyName.eth" oninput={actions.searchValue} />
+              <br />
+              {state.available === true ? (<span style="color: green">Available!</span>) : (state.available === false ? 'Unavailable :(' : '')}
+            </fieldset>
+            <br /><br />
+            <label>Ownership</label><br /><br />
+            <fieldset>
+              <SearchInput type="text" placeholder="0x...your..address.." oninput={actions.ownerAddress} />
+            </fieldset>
+            <br /><br />
+            <label>Billing Information</label><br /><br />
+            <fieldset>
               <div id="sq-card-number"></div>
               <div class="third">
                 <div id="sq-expiration-date"></div>
@@ -170,7 +258,12 @@ const Lander = () => (state, actions) => (
                 <div id="sq-postal-code"></div>
               </div>
             </fieldset>
-            <button id="sq-creditcard" class="button-credit-card" onclick={e => actions.onGetCardNonce(e)}>Pay $1.00</button>
+            <br /><br />
+            <fieldset>
+              <input type="checkbox" /> I agree to the EthNames.io <a href="">Privacy Policy</a> and <a href="">Terms of Service</a>
+            </fieldset>
+            <br />
+            <button id="sq-creditcard" style="border-radius: 3px;" class="button-credit-card" onclick={e => actions.onGetCardNonce(e)}>Buy ENS Name $6.00</button>
 
             <input type="hidden" id="card-nonce" name="nonce" />
           </form>
