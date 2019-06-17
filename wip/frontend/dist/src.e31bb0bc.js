@@ -2422,7 +2422,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"./../utils":"../node_modules/axios/lib/utils.js","./../core/settle":"../node_modules/axios/lib/core/settle.js","./../helpers/buildURL":"../node_modules/axios/lib/helpers/buildURL.js","./../helpers/parseHeaders":"../node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"../node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"../node_modules/axios/lib/core/createError.js","./../helpers/cookies":"../node_modules/axios/lib/helpers/cookies.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
+},{"./../utils":"../node_modules/axios/lib/utils.js","./../core/settle":"../node_modules/axios/lib/core/settle.js","./../helpers/buildURL":"../node_modules/axios/lib/helpers/buildURL.js","./../helpers/parseHeaders":"../node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"../node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"../node_modules/axios/lib/core/createError.js","./../helpers/cookies":"../node_modules/axios/lib/helpers/cookies.js"}],"../../../../../.npm-global/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -2733,7 +2733,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"../node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/http":"../node_modules/axios/lib/adapters/xhr.js","./adapters/xhr":"../node_modules/axios/lib/adapters/xhr.js","process":"../../../../.npm-global/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../node_modules/axios/lib/helpers/isAbsoluteURL.js":[function(require,module,exports) {
+},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"../node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/http":"../node_modules/axios/lib/adapters/xhr.js","./adapters/xhr":"../node_modules/axios/lib/adapters/xhr.js","process":"../../../../../.npm-global/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../node_modules/axios/lib/helpers/isAbsoluteURL.js":[function(require,module,exports) {
 'use strict';
 
 /**
@@ -4040,7 +4040,7 @@ var define;
   }
 })();
 
-},{"process":"../../../../.npm-global/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../node_modules/ethers-utils/throw-error.js":[function(require,module,exports) {
+},{"process":"../../../../../.npm-global/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../node_modules/ethers-utils/throw-error.js":[function(require,module,exports) {
 'use strict';
 
 function throwError(message, params) {
@@ -4357,7 +4357,7 @@ module.exports = {
     toUtf8String: bytesToUtf8,
 };
 
-},{"./convert.js":"../node_modules/ethers-utils/convert.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/_empty.js":[function(require,module,exports) {
+},{"./convert.js":"../node_modules/ethers-utils/convert.js"}],"../../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/_empty.js":[function(require,module,exports) {
 
 },{}],"../node_modules/bn.js/lib/bn.js":[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
@@ -7789,7 +7789,7 @@ var Buffer = require("buffer").Buffer;
   };
 })(typeof module === 'undefined' || module, this);
 
-},{"buffer":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/_empty.js"}],"../node_modules/ethers-utils/bignumber.js":[function(require,module,exports) {
+},{"buffer":"../../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/_empty.js"}],"../node_modules/ethers-utils/bignumber.js":[function(require,module,exports) {
 /**
  *  BigNumber
  *
@@ -8419,7 +8419,7 @@ var global = arguments[3];
   }
 })();
 
-},{"process":"../../../../.npm-global/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../node_modules/ethers-utils/keccak256.js":[function(require,module,exports) {
+},{"process":"../../../../../.npm-global/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../node_modules/ethers-utils/keccak256.js":[function(require,module,exports) {
 'use strict';
 
 var sha3 = require('js-sha3');
@@ -10097,7 +10097,7 @@ exports.presets = presets;
 styled.tags.forEach(tag => styled[tag] = makeElement(tag));
 const keyframes = styled.keyframes = makeKeyframes;
 exports.keyframes = keyframes;
-},{"./lib/hash":"../node_modules/hyperapp-styled-components/src/lib/hash.js","hyperapp":"../node_modules/hyperapp/src/index.js"}],"../../../../node_modules/moment/moment.js":[function(require,module,exports) {
+},{"./lib/hash":"../node_modules/hyperapp-styled-components/src/lib/hash.js","hyperapp":"../node_modules/hyperapp/src/index.js"}],"../../../../../node_modules/moment/moment.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 //! moment.js
@@ -14722,7 +14722,11 @@ var doneTyping; // define initial actions
 var actions = {
   location: _router.location.actions,
   load: function load() {
-    return function (state, actions) {};
+    return function (state, actions) {
+      setTimeout(function () {
+        return document.querySelector('#ensName').focus();
+      }, 1);
+    };
   },
   setup: function setup() {
     return function (state, actions) {
@@ -14835,28 +14839,37 @@ var actions = {
               switch (_context2.prev = _context2.next) {
                 case 0:
                   _context2.prev = 0;
-                  _context2.next = 3;
-                  return registrarContract.available(name);
 
-                case 3:
-                  _context2.t0 = _context2.sent;
-
-                  if (!_context2.t0) {
-                    _context2.next = 10;
+                  if (!(name.indexOf(' ') !== -1)) {
+                    _context2.next = 3;
                     break;
                   }
 
-                  _context2.next = 7;
+                  throw new Error('Invalid name');
+
+                case 3:
+                  _context2.next = 5;
+                  return registrarContract.available(name);
+
+                case 5:
+                  _context2.t0 = _context2.sent;
+
+                  if (!_context2.t0) {
+                    _context2.next = 12;
+                    break;
+                  }
+
+                  _context2.next = 9;
                   return ensContract.owner(utils.namehash("".concat(name, ".eth")));
 
-                case 7:
+                case 9:
                   _context2.t1 = _context2.sent;
                   _context2.t2 = nullAddress;
                   _context2.t0 = _context2.t1 === _context2.t2;
 
-                case 10:
+                case 12:
                   if (!_context2.t0) {
-                    _context2.next = 12;
+                    _context2.next = 14;
                     break;
                   }
 
@@ -14864,21 +14877,21 @@ var actions = {
                     available: true
                   });
 
-                case 12:
-                  _context2.next = 17;
+                case 14:
+                  _context2.next = 19;
                   break;
 
-                case 14:
-                  _context2.prev = 14;
+                case 16:
+                  _context2.prev = 16;
                   _context2.t3 = _context2["catch"](0);
                   console.log(_context2.t3);
 
-                case 17:
+                case 19:
                 case "end":
                   return _context2.stop();
               }
             }
-          }, _callee2, this, [[0, 14]]);
+          }, _callee2, this, [[0, 16]]);
         }));
 
         return function (_x3, _x4) {
@@ -14965,17 +14978,44 @@ var Lander = function Lander() {
       novalidate: true,
       action: "",
       method: "post"
-    }, (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)(SearchInput, {
+    }, (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)("div", {
+      style: "display: flex;"
+    }, (0, _hyperapp.h)(SearchInput, {
       type: "text",
-      placeholder: "MyName.eth",
-      oninput: actions.searchValue
-    }), (0, _hyperapp.h)("br", null), state.available === true ? (0, _hyperapp.h)("span", {
+      id: "ensName",
+      placeholder: "MyName",
+      oninput: actions.searchValue,
+      style: "width: 80%;"
+    }), (0, _hyperapp.h)(SearchInput, {
+      type: "text",
+      disabled: "disabled",
+      value: ".eth",
+      style: "width: 20%; font-weight: bold;"
+    })), state.available === true ? (0, _hyperapp.h)("span", {
       style: "color: green"
-    }, "Available!") : state.available === false ? 'Unavailable :(' : ''), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("label", null, "Ownership"), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)(SearchInput, {
+    }, "Available!") : state.available === false ? (0, _hyperapp.h)("span", {
+      style: "color: red"
+    }, "Unavailable :(") : ''), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("div", {
+      style: "opacity: ".concat(state.available ? '1' : '.3', ";")
+    }, (0, _hyperapp.h)("label", null, "Ownership"), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)("div", {
+      style: "display: flex; position: relative; flex-direction: column;"
+    }, (0, _hyperapp.h)(SearchInput, {
       type: "text",
-      placeholder: "0x...your..address..",
+      placeholder: "0x...Your..Address..",
+      style: "margin-bottom: 10px;",
       oninput: actions.ownerAddress
-    })), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("label", null, "Billing Information"), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)("div", {
+    }), (0, _hyperapp.h)("a", {
+      href: "#",
+      style: "position: absolute; right: 20px; top: 10px; text-decoration: none; background: #FFF; padding: 10px;"
+    }, "connect"), (0, _hyperapp.h)("a", {
+      href: "#",
+      style: "text-decoration: none;"
+    }, "Make me one")))), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("div", {
+      style: "opacity: ".concat((state.ownerValue || '').length ? '1' : '.3', ";")
+    }, (0, _hyperapp.h)("label", null, "Billing Information (via ", (0, _hyperapp.h)("a", {
+      href: "http://squareup.com",
+      target: "_blank"
+    }, "Square"), ")"), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("fieldset", null, (0, _hyperapp.h)("div", {
       id: "sq-card-number"
     }), (0, _hyperapp.h)("div", {
       class: "third"
@@ -15002,7 +15042,7 @@ var Lander = function Lander() {
       onclick: function onclick(e) {
         return actions.onGetCardNonce(e);
       }
-    }, "Buy ENS Name $6.00"), (0, _hyperapp.h)("input", {
+    }, "Buy ENS Name $6.00")), (0, _hyperapp.h)("input", {
       type: "hidden",
       id: "card-nonce",
       name: "nonce"
@@ -15029,7 +15069,7 @@ var main = (0, _hyperapp.app)(state, actions, Routes, document.body); // load ma
 main.load(); // unsubscripe for routing
 
 var unsubscribe = _router.location.subscribe(main.location);
-},{"regenerator-runtime":"../node_modules/regenerator-runtime/runtime.js","hyperapp":"../node_modules/hyperapp/src/index.js","@hyperapp/router":"../node_modules/@hyperapp/router/src/index.js","axios":"../node_modules/axios/index.js","ethers":"../node_modules/ethers/dist/ethers.min.js","ethjs-extras":"../node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"../node_modules/hyperapp-styled-components/src/index.js","moment":"../../../../node_modules/moment/moment.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime":"../node_modules/regenerator-runtime/runtime.js","hyperapp":"../node_modules/hyperapp/src/index.js","@hyperapp/router":"../node_modules/@hyperapp/router/src/index.js","axios":"../node_modules/axios/index.js","ethers":"../node_modules/ethers/dist/ethers.min.js","ethjs-extras":"../node_modules/ethjs-extras/lib/index.js","hyperapp-styled-components":"../node_modules/hyperapp-styled-components/src/index.js","moment":"../../../../../node_modules/moment/moment.js"}],"../../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -15056,7 +15096,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42763" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42063" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -15198,5 +15238,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["../../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/src.e31bb0bc.map

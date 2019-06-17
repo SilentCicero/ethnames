@@ -75,6 +75,7 @@ let doneTyping;
 const actions = {
   location: location.actions,
   load: () => (state, actions) => {
+    setTimeout(() => document.querySelector('#ensName').focus(), 1);
   },
   setup: () => (state, actions) => {
 
@@ -153,6 +154,8 @@ const actions = {
   },
   searchName: name => async(state, actions) => {
     try {
+      if (name.indexOf(' ') !== -1) throw new Error('Invalid name');
+
       if ((await registrarContract.available(name))
         && (await ensContract.owner(utils.namehash(`${name}.eth`))) === nullAddress) {
         actions.change({ available: true });
@@ -235,29 +238,38 @@ const Lander = () => (state, actions) => (
         <div id="sq-ccbox">
           <form oncreate={e => actions.setup()} id="nonce-form" novalidate action="" method="post">
             <fieldset>
-              <SearchInput type="text" placeholder="MyName.eth" oninput={actions.searchValue} />
-              <br />
-              {state.available === true ? (<span style="color: green">Available!</span>) : (state.available === false ? 'Unavailable :(' : '')}
+              <div style="display: flex;">
+                <SearchInput type="text" id="ensName" placeholder="MyName" oninput={actions.searchValue} style="width: 80%;" />
+                <SearchInput type="text" disabled="disabled" value=".eth" style="width: 20%; font-weight: bold;" />
+              </div>
+              {state.available === true ? (<span style="color: green">Available!</span>) : (state.available === false ? (<span style="color: red">Unavailable :(</span>) : '')}
             </fieldset>
             <br /><br />
-            <label>Ownership</label><br /><br />
-            <fieldset>
-              <SearchInput type="text" placeholder="0x...your..address.." oninput={actions.ownerAddress} />
-            </fieldset>
-            <br /><br />
-            <label>Billing Information</label><br /><br />
-            <fieldset>
-              <div id="sq-card-number"></div>
-              <div class="third">
-                <div id="sq-expiration-date"></div>
-              </div>
-              <div class="third">
-                <div id="sq-cvv"></div>
-              </div>
-              <div class="third">
-                <div id="sq-postal-code"></div>
-              </div>
-            </fieldset>
+            <div style={`opacity: ${state.available ? '1' : '.3'};`}>
+              <label>Ownership</label><br /><br />
+              <fieldset>
+                <div style="display: flex; position: relative; flex-direction: column;">
+                  <SearchInput type="text" placeholder="0x...Your..Address.." style="margin-bottom: 10px;" oninput={actions.ownerAddress} />
+                  <a href="#" style="position: absolute; right: 20px; top: 10px; text-decoration: none; background: #FFF; padding: 10px;">connect</a>
+                  <a href="#" style="text-decoration: none;">Make me one</a>
+                </div>
+              </fieldset>
+            </div>
+            <br /><br /><br />
+            <div style={`opacity: ${(state.ownerValue || '').length ? '1' : '.3'};`}>
+              <label>Billing Information (via <a href="http://squareup.com" target="_blank">Square</a>)</label><br /><br />
+              <fieldset>
+                <div id="sq-card-number"></div>
+                <div class="third">
+                  <div id="sq-expiration-date"></div>
+                </div>
+                <div class="third">
+                  <div id="sq-cvv"></div>
+                </div>
+                <div class="third">
+                  <div id="sq-postal-code"></div>
+                </div>
+              </fieldset>
             <br /><br />
             <fieldset>
               <input type="checkbox" /> I agree to the EthNames.io <a href="">Privacy Policy</a> and <a href="">Terms of Service</a>
@@ -265,6 +277,7 @@ const Lander = () => (state, actions) => (
             <br />
             <button id="sq-creditcard" style="border-radius: 3px;" class="button-credit-card" onclick={e => actions.onGetCardNonce(e)}>Buy ENS Name $6.00</button>
 
+          </div>
             <input type="hidden" id="card-nonce" name="nonce" />
           </form>
         </div>
