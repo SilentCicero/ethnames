@@ -17,7 +17,6 @@
 }
 
 body, html {
-  background-color: #F7F8F9;
   color: #373F4A;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
@@ -58,9 +57,9 @@ fieldset {
 .sq-input {
   height: 56px;
   box-sizing: border-box;
-  border: 1px solid #E0E2E3;
+  border: none;
+  border-bottom: 1px solid #E0E2E3;
   background-color: white;
-  border-radius: 6px;
   display: inline-block;
   -webkit-transition: border-color .2s ease-in-out;
      -moz-transition: border-color .2s ease-in-out;
@@ -70,12 +69,12 @@ fieldset {
 
 /* Define how SqPaymentForm iframes should look when they have focus */
 .sq-input--focus {
-  border: 1px solid #6E4EEC;
+  border-bottom: 1px solid #6E4EEC;
 }
 
 /* Define how SqPaymentForm iframes should look when they contain invalid values */
 .sq-input--error {
-  border: 1px solid #E02F2F;
+  border-bottom: 1px solid #E02F2F;
 }
 
 #sq-card-number {

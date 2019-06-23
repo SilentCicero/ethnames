@@ -4,12 +4,22 @@ import { Link, Route, location, Switch } from "@hyperapp/router";
 import axios from 'axios';
 const ethers = require('ethers');
 const { utils, Wallet, Contract, providers } = require('ethers');
-const { sendTransaction, balanceOf, call, Eth, onReceipt } = require('ethjs-extras');
+const { Eth } = require('ethjs-extras');
 import styled from 'hyperapp-styled-components';
-import moment from 'moment';
+const { randomBytes, secretbox } = require('tweetnacl');
+const scryptAsync = require("scrypt-async");
 
 // Set the application ID
 const applicationId = "sandbox-sq0idp-EcBv5547FSK_0PlJ4Wz1rg";
+
+const Check = () => (
+  <svg version="1.1" id="Capa_1" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;">
+    <g>
+      <polygon fill="green" points="211.344,306.703 160,256 128,288 211.414,368 384,176 351.703,144 	"/>
+      <path fill="green" d="M256,0C114.609,0,0,114.609,0,256c0,141.391,114.609,256,256,256c141.391,0,256-114.609,256-256 C512,114.609,397.391,0,256,0z M256,472c-119.297,0-216-96.703-216-216S136.703,40,256,40s216,96.703,216,216S375.297,472,256,472z"/>
+    </g>
+  </svg>
+);
 
 // colors
 const lightgray = '#E9E9E9';
@@ -23,6 +33,18 @@ const bluegray = '#8A979D';
 const grayer = '#95979C';
 const blackish = '#1C1F26';
 
+// change global style..
+styled.injectGlobal`
+  a {
+    text-decoration: none;
+    outline: none;
+  }
+
+  a:focus {
+    outline: none;
+  }
+`;
+
 // standard route method
 const route = pathname => {
   window.scrollTo(0, 0);
@@ -31,6 +53,52 @@ const route = pathname => {
 
 // localmemory storage
 let localMemory = {};
+
+// scrypt memory hashing for simple passwords promisified
+const scrypt = (password, salt) => new Promise((resolve, reject) => {
+  try {
+    scryptAsync(password, salt, {
+      N: (1 << 17), // about 6 seconds per try..
+      r: 8,
+      p: 1,
+      dkLen: 32,
+      encoding: 'hex'
+    }, hash => resolve(`0x${hash}`));
+  } catch (error) { reject(error); } // handle error
+});
+
+// lock the box (string, string, string) => lockbox hex string
+const naclLock = (passwordHex, data) => {
+  // create a key from the password hash
+  const key = utils.arrayify(passwordHex); // array it
+
+  // create a nonce
+  const nonce = randomBytes(secretbox.nonceLength);
+
+  // create a box
+  const box = secretbox(utils.toUtf8Bytes(data), nonce, key);
+
+  // box plus nonce
+  return utils.hexlify(utils.concat([nonce, box]));
+};
+
+// unlock the box (hex, hex) => unecnrypted data..
+const naclUnlock = (passwordHex, lockBoxHex) => {
+  // create a key from the password hash
+  const key = utils.arrayify(passwordHex); // array it
+
+  // box as array
+  const lockBoxArray = utils.arrayify(lockBoxHex);
+
+  // create a nonce
+  const nonce = lockBoxArray.slice(0, secretbox.nonceLength);
+
+  // box
+  const box = lockBoxArray.slice(secretbox.nonceLength, lockBoxArray.length);
+
+  // create a box
+  return utils.toUtf8String(secretbox.open(box, nonce, key));
+};
 
 // localstorage
 const local = window.localStorage || {
@@ -79,6 +147,10 @@ const actions = {
   location: location.actions,
   load: () => (state, actions) => {
     setTimeout(() => document.querySelector('#ensName').focus(), 1);
+
+    if (window.ethereum || window.web3) {
+      actions.change({ hasWeb3: true });
+    }
   },
   getState: () => state => state,
   setup: () => (state, actions) => {
@@ -125,7 +197,6 @@ const actions = {
           elementId: 'sq-postal-code',
           placeholder: 'Postal'
       },
-
 
       // SqPaymentForm callback functions
       callbacks: {
@@ -212,21 +283,37 @@ const actions = {
 
       if ((await registrarContract.available(name))
         && (await ensContract.owner(utils.namehash(`${name}.eth`))) === nullAddress) {
-        actions.change({ available: true });
+        actions.change({ available: true, pending: false });
+      } else {
+        actions.change({ pending: false });
       }
     } catch (error) {
       console.log(error);
+      actions.change({ pending: false });
     }
   },
   searchValue: e => async (state, actions) => {
     const name = String(e.target.value).trim().replace('.eth', '');
 
     actions.change({ nameValue: name });
-    actions.change({ available: false });
+    actions.change({ available: false, pending: true });
     clearTimeout(doneTyping);
 
     if (name.length)
       doneTyping = setTimeout(e => actions.searchName(name), 500);
+  },
+  makeMeOne: e => (state, actions) => { // make a wallet
+    const wallet = new Wallet(utils.hexlify(utils.randomBytes(32)));
+    const ownerValue = wallet.address;
+
+    // update wallet address
+    actions.change({ ownerValue });
+
+    // const encryptedPrivateKey = naclLock();
+
+
+    // const wallet = new Wallet();
+    // const setWallet = local.setItem('wallets', JSON.parse(local.getItem('wallets')))
   },
   onGetCardNonce: e => (state, acitons) => {
     // Don't submit the form until SqPaymentForm returns with a nonce
@@ -264,26 +351,27 @@ const Wrapper = styled.div`
 
 const SearchInput = styled.input`
   padding: 20px;
-  font-size: 16px;
-  border-radius: 3px;
+  font-size: 25px;
   margin-bottom: 20px;
   width: 100%;
   box-shadow: none;
-  border: 1px solid;
-  border-color: lightgray;
+  border: none;
+  border-bottom: 1px solid lightgray;
   outline: none;
 
   &:focus {
-    border: 1px solid purple;
+    border-bottom: 1px solid purple;
   }
 `;
 
 const Lander = () => (state, actions) => (
   <Wrapper>
     <div>
-      <h1>EthNames</h1>
-      <p>Fastest way to get an ENS name without Ether</p>
+      <h1>EthNames<small style="font-size: 20px; color: purple;">.io</small></h1>
+      <p>The Fastest way to get an ENS name <i>without Ether!</i></p>
     </div>
+
+    <br /><br />
 
     <div style="position: relative;">
       <div>
@@ -291,45 +379,55 @@ const Lander = () => (state, actions) => (
           <form oncreate={e => actions.setup()} id="nonce-form" novalidate action="" method="post">
             <fieldset>
               <div style="display: flex;">
-                <SearchInput type="text" id="ensName" placeholder="MyName" oninput={actions.searchValue} style="width: 80%;" />
-                <SearchInput type="text" disabled="disabled" value=".eth" style="width: 20%; font-weight: bold;" />
+                <SearchInput type="text" tabindex="1" id="ensName" placeholder="MyName" oninput={actions.searchValue} style={`width: 30%;`} />
+                <SearchInput type="text" disabled="disabled" value=".eth" style="width: 75px; font-size: 25px; border: none; background: none; padding-left: 0px;" />
+                <div style="margin-bottom: 20px; width: 20%; font-size: 23px; display: flex; flex-direction: column; align-items: start; justify-content: center;">
+                  {state.available === true
+                      ? (<span style="display: flex; flex-direction: row; align-items: center; color: green;">
+                        <div style="margin-right: 10px;">Available</div><Check /></span>)
+                      : (state.available === false && state.pending === false
+                          ? (<span style="color: red">Unavailable</span>) : '')}
+                  {state.pending === true ? (<span>Checking...</span>) : ''}
+                </div>
               </div>
-              {state.available === true ? (<span style="color: green">Available!</span>) : (state.available === false ? (<span style="color: red">Unavailable :(</span>) : '')}
             </fieldset>
             <br /><br />
-            <div style={`opacity: ${state.available ? '1' : '.3'};`}>
-              <label>Ownership</label><br /><br />
-              <fieldset>
-                <div style="display: flex; position: relative; flex-direction: column;">
-                  <SearchInput type="text" placeholder="0x...Your..Address.." value={state.ownerValue} style="margin-bottom: 10px;" oninput={actions.ownerAddress} />
-                  <a href="#"
-                    onclick={async e => {
-                      try {
-                        window.ethereum.enable();
-                        const accounts = await eth.raw('eth_accounts');
-                        if (!accounts.length) throw new Error('No accounts..');
-                        actions.change({ ownerValue: accounts[0] });
-                      } catch (error) {
-                        actions.change({ result: 'Problem connect wallet :(' })
-                      }
-                    }}
-                    style="position: absolute; right: 20px; top: 10px; text-decoration: none; background: #FFF; padding: 10px;">connect</a>
-                  <a href="#" style="text-decoration: none;">Make me one</a>
-                </div>
-              </fieldset>
+            <div style={`opacity: ${state.available ? '1' : '0'};`}>
+              <div style="display: flex; position: relative; flex-direction: column;">
+                <SearchInput type="text" tabindex="2" placeholder="Your Ethereum Address" value={state.ownerValue} style="margin-bottom: 10px; " oninput={actions.ownerAddress} />
+                {(state.hasWeb3 = false) ? (<a tabindex="-1" href="#"
+                  onclick={async e => {
+                    try {
+                      await window.ethereum.enable();
+                      const accounts = await eth.raw('eth_accounts');
+                      if (!accounts.length) throw new Error('No accounts..');
+                      actions.change({ ownerValue: accounts[0] });
+                    } catch (error) {
+                      actions.change({ result: 'Problem connect wallet :(' })
+                    }
+                  }}
+                  style="position: absolute; right: 0px; top: 10px; text-decoration: none; background: #FFF; padding: 10px;">connect</a>)
+                  : (<a href="#" tabindex="-1"
+                    onclick={actions.makeMeOne}
+                    style="position: absolute; right: 0px; top: 10px; text-decoration: none; background: #FFF; padding: 10px;">
+                    Make me one</a>)}
+
+                  <br /><br />
+                  {state.ownerValue ? (
+                    <a href="mailto:thenickdodson@gmail.com?subject=DoNotDelete">Email Yourself the Password</a>
+                  ) : ''}
+              </div>
             </div>
             <br /><br /><br />
-            <div style={`opacity: ${(state.ownerValue || '').length > 22 ? '1' : '.3'};`}>
-              <label>Billing Information (via <a href="http://squareup.com" target="_blank">Square</a>)</label><br /><br />
+            <div style={`opacity: ${(state.ownerValue || '').length > 22 ? '1' : '0'};`}>
+              <label>Billing (via <a href="http://squareup.com" tabindex="-1" target="_blank">Square</a>)</label>
+              <br /><br />
+
+              <div id="sq-apple-pay-label" class="wallet-not-enabled">{state.cool ? 'Apple Pay on the Web not enabled' : ''}</div>
+              <button id="sq-apple-pay"  tabindex="-1" class="button-apple-pay"></button>
+              <button id="sq-google-pay" tabindex="-1" class="button-google-pay"></button>
               <fieldset>
-                <div id="sq-walletbox">
-                  <div id="sq-apple-pay-label" class="wallet-not-enabled">{state.cool ? 'Apple Pay on the Web not enabled' : ''}</div>
-                  <button id="sq-apple-pay" class="button-apple-pay"></button>
-                  <button id="sq-google-pay" class="button-google-pay"></button>
-                </div>
-              </fieldset>
-              <fieldset>
-                <div id="sq-card-number"></div>
+                <div id="sq-card-number" tabindex="3"></div>
                 <div class="third">
                   <div id="sq-expiration-date"></div>
                 </div>
@@ -341,9 +439,10 @@ const Lander = () => (state, actions) => (
                 </div>
               </fieldset>
             <br /><br />
-            <fieldset>
-              <input type="checkbox" /> I agree to the EthNames.io <a href="">Privacy Policy</a> and <a href="">Terms of Service</a>
-            </fieldset>
+            <div style="display: flex; flex-direction: row; align-items: start; align-items: center;">
+              <input type="checkbox" style="height: 30px; width: 30px; margin-right: 20px;" />
+              <div>I agree to the EthNames.io <a href="">Privacy Policy</a> and <a href="">Terms of Service</a></div>
+            </div>
             <br />
             <button id="sq-creditcard" style="border-radius: 3px;" class="button-credit-card" onclick={e => actions.onGetCardNonce(e)}>Buy ENS Name $6.00</button>
 
