@@ -3522,7 +3522,7 @@ var _hyperappStyledComponents = _interopRequireDefault(require("hyperapp-styled-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font: inherit;\n    vertical-align: baseline;\n  }\n\n  a {\n    text-decoration: none;\n    outline: none;\n  }\n\n  input {\n    border: none;\n    border-bottom: 2px solid lightgray;\n    font-family: Arial;\n    font-size: 20px;\n    padding: 0px;\n    margin: 0px;\n    outline: none;\n    border-radius: none;\n    padding: 20px;\n    -webkit-writing-mode: horizontal-tb !important;\n  }\n\n  input:focus {\n    outline: none;\n  }\n\n  a:focus {\n    outline: none;\n  }\n\n\n  * {\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n  }\n\n  body, html {\n    font-family: Arial;\n  }\n\n  body {\n    overflow: hidden;\n  }\n\n  h2 {\n    margin-bottom: 10px;\n  }\n\n  button {\n    border: 0;\n    font-weight: 500;\n  }\n\n  fieldset {\n    border: none;\n    padding: 0px;\n    margin: 0px;\n  }\n\n  #form-container {\n    border: none;\n    width: inherit;\n  }\n\n  .third {\n  }\n\n  .third:last-of-type {\n    margin-right: 0;\n  }\n\n  /* Define how SqPaymentForm iframes should look */\n  .sq-input {\n    padding: 20px;\n    border: none;\n    border-bottom: 2px solid lightgray;\n    font-family: Arial;\n    padding: 0px;\n    margin: 0px;\n    font-size: 20px;\n  }\n\n  /* Define how SqPaymentForm iframes should look when they have focus */\n  .sq-input--focus {\n  }\n\n  /* Define how SqPaymentForm iframes should look when they contain invalid values */\n  .sq-input--error {\n  }\n\n  #sq-card-number {\n    padding: 0px;\n    margin: 0px;\n    margin-bottom: 20px;\n    font-size: 20px;\n  }\n\n  /* Customize the \"Pay with Credit Card\" button */\n  .button-credit-card {\n    padding: 20px;\n    margin-top: 20px;\n    background: lightgray;\n  }\n\n  .button-credit-card:hover {\n  }\n\n"]);
+  var data = _taggedTemplateLiteral(["\n  html, body, div, span, applet, object, iframe,\n  h3, h4, h5, h6, p, blockquote, pre,\n  a, abbr, acronym, address, big, cite, code,\n  del, dfn, em, img, ins, kbd, q, s, samp,\n  small, strike, strong, sub, sup, tt, var,\n  u, i, center,\n  dl, dt, dd, ol, ul, li,\n  fieldset, form, label, legend,\n  table, caption, tbody, tfoot, thead, tr, th, td,\n  article, aside, canvas, details, embed,\n  figure, figcaption, footer, header, hgroup,\n  menu, nav, output, ruby, section, summary,\n  time, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font: inherit;\n    vertical-align: baseline;\n  }\n\n  a {\n    text-decoration: none;\n    outline: none;\n  }\n\n  input {\n    border: none;\n    border-bottom: 2px solid lightgray;\n    font-family: Arial;\n    font-size: 20px;\n    padding: 0px;\n    margin: 0px;\n    outline: none;\n    border-radius: none;\n    padding: 20px;\n    -webkit-writing-mode: horizontal-tb !important;\n  }\n\n  input:focus {\n    outline: none;\n  }\n\n  a:focus {\n    outline: none;\n  }\n\n\n  * {\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n  }\n\n  body, html {\n    font-family: Arial;\n  }\n\n  body {\n    overflow: hidden;\n  }\n\n  h2 {\n    margin-bottom: 10px;\n  }\n\n  button {\n    border: 0;\n    padding: 20px;\n    font-weight: 500;\n  }\n\n  fieldset {\n    border: none;\n    padding: 0px;\n    margin: 0px;\n  }\n\n  #form-container {\n    border: none;\n    width: inherit;\n  }\n\n  .third {\n  }\n\n  .third:last-of-type {\n    margin-right: 0;\n  }\n\n  /* Define how SqPaymentForm iframes should look */\n  .sq-input {\n    padding: 20px;\n    border: none;\n    border-bottom: 2px solid lightgray;\n    font-family: Arial;\n    padding: 0px;\n    margin: 0px;\n    font-size: 20px;\n  }\n\n  /* Define how SqPaymentForm iframes should look when they have focus */\n  .sq-input--focus {\n  }\n\n  /* Define how SqPaymentForm iframes should look when they contain invalid values */\n  .sq-input--error {\n  }\n\n  #sq-card-number {\n    padding: 0px;\n    margin: 0px;\n    margin-bottom: 20px;\n    font-size: 20px;\n  }\n\n  /* Customize the \"Pay with Credit Card\" button */\n  .button-credit-card {\n    padding: 20px;\n    margin-top: 20px;\n    background: lightgray;\n  }\n\n  .button-credit-card:hover {\n  }\n\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -3621,6 +3621,26 @@ var _square = require("./square");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    ", "\n  "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  padding: 20px;\n  margin-top: 40px;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
   var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 40%;\n  margin: 0px auto;\n  margin-top: 70px;\n  margin-bottom: 100px;\n\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 20px;\n    margin-bottom: 20px;\n  }\n"]);
 
@@ -3633,22 +3653,210 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 var _require = require('ethers'),
     utils = _require.utils,
     Wallet = _require.Wallet,
     Contract = _require.Contract,
     providers = _require.providers;
 
-// define initial app state
+// null address
+var nullAddress = '0x0000000000000000000000000000000000000000'; // Check mark
+
+var Check = function Check() {
+  return (0, _hyperapp.h)("svg", {
+    version: "1.1",
+    id: "Capa_1",
+    x: "0px",
+    y: "0px",
+    width: "20px",
+    height: "20px",
+    viewBox: "0 0 512 512",
+    style: "enable-background:new 0 0 512 512;"
+  }, (0, _hyperapp.h)("g", null, (0, _hyperapp.h)("polygon", {
+    fill: "green",
+    points: "211.344,306.703 160,256 128,288 211.414,368 384,176 351.703,144 \t"
+  }), (0, _hyperapp.h)("path", {
+    fill: "green",
+    d: "M256,0C114.609,0,0,114.609,0,256c0,141.391,114.609,256,256,256c141.391,0,256-114.609,256-256 C512,114.609,397.391,0,256,0z M256,472c-119.297,0-216-96.703-216-216S136.703,40,256,40s216,96.703,216,216S375.297,472,256,472z"
+  })));
+}; // provider for mainnet
+
+
+var infuraProvider = new providers.InfuraProvider('mainnet', '7bd5971b072e46f9b6e7ac721938dacc'); // We connect to the Contract using a Provider, so we will only
+// have read-only access to the Contract
+
+var registrarContract = new Contract('0xf0ad5cad05e10572efceb849f6ff0c68f9700455', ['function available(string name) public view returns (bool)'], infuraProvider); // main ens contract
+
+var ensContract = new Contract('0x314159265dD8dbb310642f98f50C066173C1259b', ['function owner(bytes32 node) external view returns (address)', 'function resolver(bytes32 node) external view returns (address)'], infuraProvider); // generic done typing
+
+var doneTyping = null; // define initial app state
+
 var state = {
-  location: _router.location.state
-}; // define initial actions
+  location: _router.location.state,
+  stage: 1
+}; // validate email address
+
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+} // define initial actions
+
 
 var actions = {
   location: _router.location.actions,
   load: function load() {
     return function (state, actions) {
-      (0, _square.buildForm)();
+      var script = document.createElement('script');
+
+      script.onload = function () {};
+
+      script.src = 'https://js.squareup.com/v2/paymentform';
+      document.head.appendChild(script); //or something of the likes
+    };
+  },
+  searchName: function searchName(name) {
+    return (
+      /*#__PURE__*/
+      function () {
+        var _ref = _asyncToGenerator(
+        /*#__PURE__*/
+        _regeneratorRuntime.default.mark(function _callee(state, actions) {
+          return _regeneratorRuntime.default.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+
+                  if (!(name.indexOf(' ') !== -1)) {
+                    _context.next = 3;
+                    break;
+                  }
+
+                  throw new Error('Invalid name');
+
+                case 3:
+                  _context.next = 5;
+                  return registrarContract.available(name);
+
+                case 5:
+                  _context.t0 = _context.sent;
+
+                  if (!_context.t0) {
+                    _context.next = 12;
+                    break;
+                  }
+
+                  _context.next = 9;
+                  return ensContract.owner(utils.namehash("".concat(name, ".eth")));
+
+                case 9:
+                  _context.t1 = _context.sent;
+                  _context.t2 = nullAddress;
+                  _context.t0 = _context.t1 === _context.t2;
+
+                case 12:
+                  if (!_context.t0) {
+                    _context.next = 16;
+                    break;
+                  }
+
+                  actions.change({
+                    available: true,
+                    pending: false
+                  });
+                  _context.next = 17;
+                  break;
+
+                case 16:
+                  actions.change({
+                    pending: false
+                  });
+
+                case 17:
+                  _context.next = 23;
+                  break;
+
+                case 19:
+                  _context.prev = 19;
+                  _context.t3 = _context["catch"](0);
+                  console.log(_context.t3);
+                  actions.change({
+                    pending: false
+                  });
+
+                case 23:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this, [[0, 19]]);
+        }));
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }()
+    );
+  },
+  searchValue: function searchValue(e) {
+    return (
+      /*#__PURE__*/
+      function () {
+        var _ref2 = _asyncToGenerator(
+        /*#__PURE__*/
+        _regeneratorRuntime.default.mark(function _callee2(state, actions) {
+          var name;
+          return _regeneratorRuntime.default.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  try {
+                    name = String(e.target.value).trim().replace('.eth', '');
+                    actions.change({
+                      nameValue: name
+                    });
+                    actions.change({
+                      available: false,
+                      pending: true
+                    });
+                    clearTimeout(doneTyping);
+                    if (name.length) doneTyping = setTimeout(function (e) {
+                      return actions.searchName(name);
+                    }, 500);
+                  } catch (error) {
+                    console.log(error);
+                  }
+
+                case 1:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2, this);
+        }));
+
+        return function (_x3, _x4) {
+          return _ref2.apply(this, arguments);
+        };
+      }()
+    );
+  },
+  emailValue: function emailValue(e) {
+    return function (state, actions) {
+      var val = e.target.value;
+      clearTimeout(doneTyping);
+      actions.change({
+        emailValue: val
+      });
+      if (val.length) doneTyping = setTimeout(function (e) {
+        return actions.change({
+          emailValid: validateEmail(val)
+        });
+      }, 500);
     };
   },
   change: function change(obj) {
@@ -3667,59 +3875,284 @@ var NotFound = function NotFound() {
 
 var Wrapper = _style.default.div(_templateObject());
 
-var Lander = function Lander() {
+var NextButton = _style.default.button(_templateObject2()); // standard route method
+
+
+var route = function route(pathname) {
+  window.scrollTo(0, 0);
+  history.pushState(null, "", pathname);
+};
+
+var makeProps = function makeProps(props) {
+  return "\n  display: ".concat(props.display ? props.display : 'flex', ";\n  ").concat(props.row ? 'flex-direction: row;' : '', "\n  ").concat(props.col ? 'flex-direction: column;' : '', "\n  ").concat(props.between ? 'justify-content: space-between;' : '', "\n  ").concat(props.alignCenter ? 'align-items: center;' : '', "\n  ").concat(props.pointer ? 'cursor: pointer;' : '', "\n  ").concat(props.flex ? "flex: ".concat(props.flex, ";") : '', "\n\n  ").concat(props.fontSize ? "font-size: ".concat(props.fontSize, ";") : '', "\n  ").concat(props.height ? "height: ".concat(props.height, ";") : '', "\n  ").concat(props.width ? "width: ".concat(props.width, ";") : '', "\n  ").concat(props.minHeight ? "min-height: ".concat(props.minHeight, ";") : '', "\n  ").concat(props.minWidth ? "min-width: ".concat(props.minWidth, ";") : '', "\n\n  ").concat(props.color ? "color: ".concat(props.color, ";") : '', "\n  ").concat(props.bold ? "font-weight: bold;" : '', "\n\n  ").concat(props.p ? "padding: ".concat(props.p, ";") : '', "\n  ").concat(props.pl ? "padding-left: ".concat(props.pl, ";") : '', "\n  ").concat(props.pr ? "padding-right: ".concat(props.pr, ";") : '', "\n  ").concat(props.pb ? "padding-bottom: ".concat(props.pb, ";") : '', "\n  ").concat(props.pt ? "padding-top: ".concat(props.pt, ";") : '', "\n\n  ").concat(props.ml ? "margin-left: ".concat(props.ml, ";") : '', "\n  ").concat(props.mr ? "margin-right: ".concat(props.mr, ";") : '', "\n  ").concat(props.mb ? "margin-bottom: ".concat(props.mb, ";") : '', "\n  ").concat(props.mt ? "margin-top: ".concat(props.mt, ";") : '', "\n");
+}; // div stuff
+
+
+var El = function El(type, moreProps) {
+  return function () {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var inner = _style.default[type](_templateObject3(), function (props) {
+      return makeProps(moreProps ? Object.assign(props, moreProps) : props);
+    });
+
+    if (args[0].route) args[0].onclick = function () {
+      return route(args[0].route);
+    };
+    return inner.apply(void 0, args);
+  };
+};
+
+var Div = El('div');
+var H2 = El('h2');
+var H3 = El('h3');
+var H4 = El('h4');
+var A = El('a', {
+  pointer: ""
+});
+var Span = El('span');
+var Input = El('input'); // header
+
+var Header = function Header() {
+  return function () {
+    return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(H2, {
+      between: true,
+      pointer: true
+    }, (0, _hyperapp.h)(Span, {
+      route: "/"
+    }, "EthNames", (0, _hyperapp.h)("small", {
+      style: "font-size: 15px;"
+    }, ".io")), " ", (0, _hyperapp.h)(Div, {
+      fontSize: "20px",
+      route: "/names"
+    }, "My Names")), (0, _hyperapp.h)("p", null, "Buy ENS names without Ether"), (0, _hyperapp.h)(Div, {
+      p: "40px"
+    }));
+  };
+};
+
+var Empty = function Empty() {
+  return function () {
+    return (0, _hyperapp.h)("span", null);
+  };
+};
+
+var Lander = function Lander(_ref3) {
+  var match = _ref3.match;
   return function (state, actions) {
-    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)("h2", null, "EthNames", (0, _hyperapp.h)("small", null, ".io")), (0, _hyperapp.h)("p", null, "Buy ENS names without Ether"), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("div", {
-      style: "flex: 1; display: flex; flex-direction: row; align-items: center;"
-    }, (0, _hyperapp.h)("input", {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (match.params || {}).stage !== 'success' ? (0, _hyperapp.h)(Div, {
+      row: true,
+      between: true,
+      mb: "40px"
+    }, (0, _hyperapp.h)(Div, {
+      pointer: true,
+      onclick: function onclick() {
+        return route('/');
+      }
+    }, "1. Choose A Name"), (0, _hyperapp.h)(Div, {
+      pointer: true,
+      onclick: function onclick() {
+        return state.available ? route('/stage/email') : null;
+      }
+    }, "2. Email"), (0, _hyperapp.h)(Div, {
+      pointer: true,
+      onclick: function onclick() {
+        return state.available && state.emailValid ? route('/stage/payment') : '';
+      }
+    }, "3. Payment")) : '', (0, _hyperapp.h)(_router.Route, {
+      path: "/",
+      render: function render() {
+        return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(Div, {
+          flex: "1",
+          row: true,
+          alignCenter: true,
+          mb: "20px"
+        }, (0, _hyperapp.h)(Input, {
+          type: "text",
+          id: "name",
+          oncreate: function oncreate() {
+            return document.querySelector('#name').focus();
+          },
+          width: "40%",
+          placeholder: "Your Name",
+          value: state.nameValue,
+          oninput: actions.searchValue,
+          onblur: function onblur() {
+            return actions.change({
+              pending: false
+            });
+          }
+        }), (0, _hyperapp.h)("b", {
+          style: "margin-left: 20px; font-size: 20px;"
+        }, ".eth")), state.available === true && (state.nameValue || '').length ? (0, _hyperapp.h)(Span, {
+          row: true,
+          alignCenter: true,
+          color: "green"
+        }, (0, _hyperapp.h)(Div, {
+          mr: "10px"
+        }, "Available"), (0, _hyperapp.h)(Check, null)) : state.available === false && state.pending === false && (state.nameValue || '').length ? (0, _hyperapp.h)(Span, {
+          color: "red"
+        }, "Unavailable") : '', state.pending === true && (state.nameValue || '').length ? (0, _hyperapp.h)("span", null, "Checking...") : '', (0, _hyperapp.h)(Div, {
+          p: "20px"
+        }), (0, _hyperapp.h)(NextButton, {
+          onclick: function onclick() {
+            return state.available ? route('/stage/email') : null;
+          }
+        }, "Next"));
+      }
+    }), (0, _hyperapp.h)(_router.Route, {
+      path: "/stage/email",
+      render: function render() {
+        return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(Div, {
+          flex: "1",
+          mb: "20px",
+          style: "width: 100%"
+        }, (0, _hyperapp.h)(Input, {
+          width: "80%",
+          type: "email",
+          id: "email",
+          oncreate: function oncreate() {
+            return document.querySelector('#email').focus();
+          },
+          placeholder: "Email",
+          autocomplete: "on",
+          value: state.emailValue,
+          oninput: actions.emailValue
+        })), state.emailValid ? 'Go for it.' : '', (0, _hyperapp.h)(Div, {
+          p: "20px"
+        }), (0, _hyperapp.h)(NextButton, {
+          onclick: function onclick() {
+            return state.emailValid ? route('/stage/payment') : '';
+          }
+        }, "Next"));
+      }
+    }), (0, _hyperapp.h)(_router.Route, {
+      path: "/stage/payment",
+      render: function render() {
+        return (0, _hyperapp.h)("div", {
+          oncreate: _square.buildForm
+        }, (0, _hyperapp.h)(Div, {
+          flex: "1",
+          minHeight: "280px",
+          id: "form-container"
+        }, (0, _hyperapp.h)("div", {
+          id: "sq-ccbox"
+        }, (0, _hyperapp.h)("form", {
+          id: "nonce-form",
+          novalidate: true,
+          action: "/stage/success",
+          method: "post"
+        }, (0, _hyperapp.h)("div", {
+          style: "display: flex; flex-direction: column; margin-bottom: 20px;"
+        }, (0, _hyperapp.h)("div", {
+          style: "width: 100%;",
+          id: "sq-card-number"
+        }), (0, _hyperapp.h)("div", {
+          style: "display: flex; flex-direction: row; min-height: 40px;"
+        }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("div", {
+          id: "sq-expiration-date"
+        })), (0, _hyperapp.h)("div", {
+          style: "margin-left: 20px;"
+        }, (0, _hyperapp.h)("div", {
+          id: "sq-cvv"
+        })), (0, _hyperapp.h)("div", {
+          style: "margin-left: 20px;"
+        }, (0, _hyperapp.h)("div", {
+          id: "sq-postal-code"
+        })))), (0, _hyperapp.h)("input", {
+          type: "hidden",
+          id: "card-nonce",
+          name: "nonce"
+        }), (0, _hyperapp.h)(Empty, null, (0, _hyperapp.h)("button", {
+          id: "sq-creditcard",
+          class: "button-credit-card",
+          onclickreal: "onGetCardNonce(event)"
+        }, "Pay $6.00 (USD)"))))), (0, _hyperapp.h)(NextButton, {
+          onclick: function onclick() {
+            return route('/stage/success');
+          }
+        }, "Complete"));
+      }
+    }), (0, _hyperapp.h)(_router.Route, {
+      path: "/stage/success",
+      render: function render() {
+        return (0, _hyperapp.h)(Div, {
+          col: true
+        }, (0, _hyperapp.h)("h1", null, "Success!!!!"), (0, _hyperapp.h)("p", null, "Your ENS name ", (0, _hyperapp.h)("b", null, state.nameValue, ".eth"), " is being processed.. please wait a few minutes"), (0, _hyperapp.h)(A, {
+          mt: "40px",
+          route: "/names"
+        }, "Goto My Names"));
+      }
+    }));
+  };
+}; // for Payment button
+//  onclickreal="onGetCardNonce(event)"
+// my names page
+
+
+var MyNames = function MyNames() {
+  return function (state, actions) {
+    return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), (0, _hyperapp.h)(Div, {
+      col: true
+    }, (0, _hyperapp.h)(Div, {
+      row: true,
+      between: true,
+      p: "20px",
+      pr: "0px",
+      pl: "0px",
+      route: "/names/nickpay.eth"
+    }, (0, _hyperapp.h)("div", null, "nickpay.eth"), (0, _hyperapp.h)(A, {
+      href: "#",
+      to: "/names/nickpay.eth"
+    }, "transfer / resolve")), (0, _hyperapp.h)(Div, {
+      row: true,
+      between: true,
+      p: "20px",
+      pr: "0px",
+      pl: "0px",
+      route: "/names/nickdodson.eth"
+    }, (0, _hyperapp.h)("div", null, "nickdodson.eth"), (0, _hyperapp.h)(A, {
+      href: "#",
+      to: "/names/nickdodson.eth"
+    }, "transfer / resolve")), (0, _hyperapp.h)(Div, {
+      row: true,
+      mt: "20px"
+    }, (0, _hyperapp.h)(Input, {
       type: "text",
-      style: "width: 40%;",
-      placeholder: "Your Name"
-    }), (0, _hyperapp.h)("b", {
-      style: "margin-left: 20px; font-size: 20px;"
-    }, ".eth")), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("div", {
-      style: "flex: 1; display: flex; width: 100%;"
-    }, (0, _hyperapp.h)("input", {
-      style: "width: 80%;",
-      type: "email",
-      placeholder: "Email",
-      autocomplete: "on"
-    })), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("div", {
-      style: "flex: 1; display: flex; min-height: 280px;",
-      id: "form-container"
-    }, (0, _hyperapp.h)("div", {
-      id: "sq-ccbox"
-    }, (0, _hyperapp.h)("form", {
-      id: "nonce-form",
-      novalidate: true,
-      action: "process-payment",
-      method: "post"
-    }, (0, _hyperapp.h)("div", {
-      style: "display: flex; flex-direction: column;"
-    }, (0, _hyperapp.h)("div", {
-      style: "width: 100%;",
-      id: "sq-card-number"
-    }), (0, _hyperapp.h)("div", {
-      style: "display: flex; flex-direction: row; min-height: 40px;"
-    }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("div", {
-      id: "sq-expiration-date"
-    })), (0, _hyperapp.h)("div", {
-      style: "margin-left: 20px;"
-    }, (0, _hyperapp.h)("div", {
-      id: "sq-cvv"
-    })), (0, _hyperapp.h)("div", {
-      style: "margin-left: 20px;"
-    }, (0, _hyperapp.h)("div", {
-      id: "sq-postal-code"
-    })))), (0, _hyperapp.h)("input", {
-      type: "hidden",
-      id: "card-nonce",
-      name: "nonce"
-    }), (0, _hyperapp.h)("br", null), (0, _hyperapp.h)("button", {
-      id: "sq-creditcard",
-      class: "button-credit-card",
-      onclick: "onGetCardNonce(event)"
-    }, "Pay $6.00 (USD)")))));
+      width: "50%",
+      placeholder: "add name",
+      p: "0px",
+      mb: "20px",
+      pb: "10px"
+    }))), (0, _hyperapp.h)(_router.Route, {
+      path: "/names/:name",
+      render: function render(options) {
+        return (0, _hyperapp.h)(Div, {
+          col: true,
+          mt: "40px"
+        }, (0, _hyperapp.h)("h2", null, options.match.params.name), (0, _hyperapp.h)(H3, {
+          bold: true,
+          mt: "40px"
+        }, "Transfer Ownership"), (0, _hyperapp.h)(Div, {
+          between: true,
+          row: true
+        }, (0, _hyperapp.h)(Input, {
+          type: "text",
+          placeholder: "Ethereum Address"
+        }), " ", (0, _hyperapp.h)("button", null, "Transfer")), (0, _hyperapp.h)(H3, {
+          bold: true,
+          mt: "40px"
+        }, "Set Resolver"), (0, _hyperapp.h)(Div, {
+          between: true,
+          row: true
+        }, (0, _hyperapp.h)(Input, {
+          type: "text",
+          placeholder: "Ethereum Address"
+        }), " ", (0, _hyperapp.h)("button", null, "Set")));
+      }
+    }));
   };
 }; // routes for app
 
@@ -3728,6 +4161,15 @@ var Routes = function Routes() {
   return (0, _hyperapp.h)(_router.Switch, null, (0, _hyperapp.h)(_router.Route, {
     path: "/",
     render: Lander
+  }), (0, _hyperapp.h)(_router.Route, {
+    path: "/stage/:stage",
+    render: Lander
+  }), (0, _hyperapp.h)(_router.Route, {
+    path: "/names/:name",
+    render: MyNames
+  }), (0, _hyperapp.h)(_router.Route, {
+    path: "/names",
+    render: MyNames
   }), (0, _hyperapp.h)(_router.Route, {
     render: NotFound
   }));
@@ -3766,7 +4208,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38043" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33929" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

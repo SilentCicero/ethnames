@@ -72,6 +72,7 @@ styled.injectGlobal`
 
   button {
     border: 0;
+    padding: 20px;
     font-weight: 500;
   }
 
