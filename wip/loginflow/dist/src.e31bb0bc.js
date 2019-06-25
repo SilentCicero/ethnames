@@ -3964,7 +3964,12 @@ var Lander = function Lander(_ref3) {
     }, "3. Payment")) : '', (0, _hyperapp.h)(_router.Route, {
       path: "/",
       render: function render() {
-        return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(Div, {
+        return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("form", {
+          onsubmit: function onsubmit(e) {
+            e.preventDefault();
+            if (state.available) route('/stage/email');
+          }
+        }, (0, _hyperapp.h)(Div, {
           flex: "1",
           row: true,
           alignCenter: true,
@@ -3986,7 +3991,7 @@ var Lander = function Lander(_ref3) {
           }
         }), (0, _hyperapp.h)("b", {
           style: "margin-left: 20px; font-size: 20px;"
-        }, ".eth")), state.available === true && (state.nameValue || '').length ? (0, _hyperapp.h)(Span, {
+        }, ".eth"))), state.available === true && (state.nameValue || '').length ? (0, _hyperapp.h)(Span, {
           row: true,
           alignCenter: true,
           color: "green"
@@ -4005,7 +4010,12 @@ var Lander = function Lander(_ref3) {
     }), (0, _hyperapp.h)(_router.Route, {
       path: "/stage/email",
       render: function render() {
-        return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(Div, {
+        return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("form", {
+          onsubmit: function onsubmit(e) {
+            e.preventDefault();
+            if (state.emailValid) route('/stage/payment');
+          }
+        }, (0, _hyperapp.h)(Div, {
           flex: "1",
           mb: "20px",
           style: "width: 100%"
@@ -4020,7 +4030,7 @@ var Lander = function Lander(_ref3) {
           autocomplete: "on",
           value: state.emailValue,
           oninput: actions.emailValue
-        })), state.emailValid ? 'Go for it.' : '', (0, _hyperapp.h)(Div, {
+        }))), state.emailValid ? 'Go for it.' : '', (0, _hyperapp.h)(Div, {
           p: "20px"
         }), (0, _hyperapp.h)(NextButton, {
           onclick: function onclick() {
@@ -4028,54 +4038,52 @@ var Lander = function Lander(_ref3) {
           }
         }, "Next"));
       }
-    }), (0, _hyperapp.h)(_router.Route, {
-      path: "/stage/payment",
-      render: function render() {
-        return (0, _hyperapp.h)("div", {
-          oncreate: _square.buildForm
-        }, (0, _hyperapp.h)(Div, {
-          flex: "1",
-          minHeight: "280px",
-          id: "form-container"
-        }, (0, _hyperapp.h)("div", {
-          id: "sq-ccbox"
-        }, (0, _hyperapp.h)("form", {
-          id: "nonce-form",
-          novalidate: true,
-          action: "/stage/success",
-          method: "post"
-        }, (0, _hyperapp.h)("div", {
-          style: "display: flex; flex-direction: column; margin-bottom: 20px;"
-        }, (0, _hyperapp.h)("div", {
-          style: "width: 100%;",
-          id: "sq-card-number"
-        }), (0, _hyperapp.h)("div", {
-          style: "display: flex; flex-direction: row; min-height: 40px;"
-        }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("div", {
-          id: "sq-expiration-date"
-        })), (0, _hyperapp.h)("div", {
-          style: "margin-left: 20px;"
-        }, (0, _hyperapp.h)("div", {
-          id: "sq-cvv"
-        })), (0, _hyperapp.h)("div", {
-          style: "margin-left: 20px;"
-        }, (0, _hyperapp.h)("div", {
-          id: "sq-postal-code"
-        })))), (0, _hyperapp.h)("input", {
-          type: "hidden",
-          id: "card-nonce",
-          name: "nonce"
-        }), (0, _hyperapp.h)(Empty, null, (0, _hyperapp.h)("button", {
-          id: "sq-creditcard",
-          class: "button-credit-card",
-          onclickreal: "onGetCardNonce(event)"
-        }, "Pay $6.00 (USD)"))))), (0, _hyperapp.h)(NextButton, {
-          onclick: function onclick() {
-            return route('/stage/success');
-          }
-        }, "Complete"));
+    }), (0, _hyperapp.h)(Div, {
+      col: true,
+      style: "display: ".concat((match.params || {}).stage === 'payment' ? 'flex' : 'none'),
+      oncreate: _square.buildForm
+    }, (0, _hyperapp.h)(Div, {
+      flex: "1",
+      minHeight: "180px",
+      id: "form-container"
+    }, (0, _hyperapp.h)("div", {
+      id: "sq-ccbox"
+    }, (0, _hyperapp.h)("form", {
+      id: "nonce-form",
+      novalidate: true,
+      action: "/stage/success",
+      method: "post"
+    }, (0, _hyperapp.h)("div", {
+      style: "display: flex; flex-direction: column; margin-bottom: 20px;"
+    }, (0, _hyperapp.h)("div", {
+      style: "width: 100%;",
+      id: "sq-card-number"
+    }), (0, _hyperapp.h)("div", {
+      style: "display: flex; flex-direction: row; min-height: 40px;"
+    }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("div", {
+      id: "sq-expiration-date"
+    })), (0, _hyperapp.h)("div", {
+      style: "margin-left: 20px;"
+    }, (0, _hyperapp.h)("div", {
+      id: "sq-cvv"
+    })), (0, _hyperapp.h)("div", {
+      style: "margin-left: 20px;"
+    }, (0, _hyperapp.h)("div", {
+      id: "sq-postal-code"
+    })))), (0, _hyperapp.h)("input", {
+      type: "hidden",
+      id: "card-nonce",
+      name: "nonce"
+    }), (0, _hyperapp.h)(Empty, null, (0, _hyperapp.h)("button", {
+      id: "sq-creditcard",
+      class: "button-credit-card",
+      onclickreal: "onGetCardNonce(event)"
+    }, "Pay $6.00 (USD)"))))), (0, _hyperapp.h)(NextButton, {
+      mt: "40px",
+      onclick: function onclick() {
+        return route('/stage/success');
       }
-    }), (0, _hyperapp.h)(_router.Route, {
+    }, "Complete")), (0, _hyperapp.h)(_router.Route, {
       path: "/stage/success",
       render: function render() {
         return (0, _hyperapp.h)(Div, {
@@ -4208,7 +4216,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33929" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42971" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

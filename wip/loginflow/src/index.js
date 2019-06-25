@@ -203,10 +203,15 @@ const Lander = ({ match }) => (state, actions) => (
     </Div>) : ''}
 
     <Route path="/" render={() => (<div>
-      <Div flex="1" row alignCenter mb="20px">
+      <form onsubmit={e => {
+        e.preventDefault();
+        if (state.available) route('/stage/email');
+      }}>
+        <Div flex="1" row alignCenter mb="20px">
         <Input type="text" id="name" oncreate={() => document
           .querySelector('#name').focus()} width="40%" placeholder="Your Name" value={state.nameValue} oninput={actions.searchValue} onblur={() => actions.change({ pending: false })} />
           <b style="margin-left: 20px; font-size: 20px;">.eth</b></Div>
+      </form>
 
       {state.available === true && (state.nameValue || '').length
           ? (<Span row alignCenter color="green">
@@ -221,10 +226,15 @@ const Lander = ({ match }) => (state, actions) => (
     </div>)} />
 
     <Route path="/stage/email" render={() => (<div>
-      <Div flex="1" mb="20px" style="width: 100%">
-        <Input width="80%" type="email" id="email" oncreate={() => document
-          .querySelector('#email').focus()}
-          placeholder="Email" autocomplete="on" value={state.emailValue} oninput={actions.emailValue} /></Div>
+      <form onsubmit={e => {
+        e.preventDefault();
+        if (state.emailValid) route('/stage/payment');
+      }}>
+        <Div flex="1" mb="20px" style="width: 100%">
+          <Input width="80%" type="email" id="email" oncreate={() => document
+            .querySelector('#email').focus()}
+            placeholder="Email" autocomplete="on" value={state.emailValue} oninput={actions.emailValue} /></Div>
+      </form>
 
       {state.emailValid ? 'Go for it.' : ''}
 
@@ -233,8 +243,8 @@ const Lander = ({ match }) => (state, actions) => (
       <NextButton onclick={() => state.emailValid ? route('/stage/payment') : ''}>Next</NextButton>
     </div>)} />
 
-    <Route path="/stage/payment" render={() => (<div oncreate={buildForm}>
-      <Div flex="1" minHeight="280px" id="form-container">
+    <Div col style={`display: ${(match.params || {}).stage === 'payment' ? 'flex' : 'none'}`} oncreate={buildForm}>
+      <Div flex="1" minHeight="180px" id="form-container">
         <div id="sq-ccbox">
           <form id="nonce-form" novalidate action="/stage/success" method="post">
             <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
@@ -252,8 +262,8 @@ const Lander = ({ match }) => (state, actions) => (
         </div>
        </Div>
 
-       <NextButton onclick={() => route('/stage/success')}>Complete</NextButton>
-    </div>)} />
+       <NextButton mt="40px" onclick={() => route('/stage/success')}>Complete</NextButton>
+    </Div>
 
     <Route path="/stage/success" render={() => (<Div col>
       <h1>Success!!!!</h1>
