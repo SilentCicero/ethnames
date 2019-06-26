@@ -9,6 +9,8 @@
     { "src": "dist/*.png", "use": "@now/static" }
   ],
   "routes": [
-    { "src": "^/(.*)", "dest": "/dist/$1"}
+    { "src": "^/(.*)", "dest": "/dist/$1"},
+    { "src": "^/stage/(.*)", "dest": "/dist/$1"},
+    { "src": "^/names/(.*)", "dest": "/dist/$1"}
   ]
 }

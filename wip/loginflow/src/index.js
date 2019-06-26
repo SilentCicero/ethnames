@@ -1,10 +1,11 @@
 import { Link, Route, location, Switch } from "@hyperapp/router";
 import regeneratorRuntime from "regenerator-runtime";
-const { utils, Wallet, Contract, providers } = require('ethers');
+const { utils, providers } = require('ethers');
+const { call, HttpProvider } = require('ethjs-extras');
 import { h, app } from "hyperapp";
 import axios from 'axios';
 import styled from './style';
-import { onGetCardNonce, buildForm } from './square';
+import { onGetCardNonce, buildForm, getForm } from './square';
 
 // null address
 const nullAddress = '0x0000000000000000000000000000000000000000';
@@ -21,18 +22,25 @@ const Check = () => (
 
 // provider for mainnet
 const infuraProvider = new providers.InfuraProvider('mainnet', '7bd5971b072e46f9b6e7ac721938dacc');
-
-// We connect to the Contract using a Provider, so we will only
-// have read-only access to the Contract
-const registrarContract = new Contract('0xf0ad5cad05e10572efceb849f6ff0c68f9700455', [
-  'function available(string name) public view returns (bool)',
-], infuraProvider);
-
-// main ens contract
-const ensContract = new Contract('0x314159265dD8dbb310642f98f50C066173C1259b', [
-  'function owner(bytes32 node) external view returns (address)',
-  'function resolver(bytes32 node) external view returns (address)',
-], infuraProvider);
+const provider = new HttpProvider('https://mainnet.infura.io/v3/7bd5971b072e46f9b6e7ac721938dacc');
+const available = ensName => call({
+  provider,
+  to: '0xF0AD5cAd05e10572EfcEB849f6Ff0c68f9700455',
+  solidity: 'available(string name):(bool)',
+  args: [ensName],
+});
+const owner = ensName => call({
+  provider,
+  to: '0x314159265dD8dbb310642f98f50C066173C1259b',
+  solidity: 'owner(bytes32 node):(address)',
+  args: [utils.namehash(ensName)],
+});
+const resolver = ensName => call({
+  provider,
+  to: '0x314159265dD8dbb310642f98f50C066173C1259b',
+  solidity: 'resolver(bytes32 node):(address)',
+  args: [utils.namehash(ensName)],
+});
 
 // generic done typing
 let doneTyping = null;
@@ -41,6 +49,7 @@ let doneTyping = null;
 const state = {
   location: location.state,
   stage: 1,
+  names: ['nickpay.eth', 'nickdodson.eth'],
 };
 
 // validate email address
@@ -62,8 +71,8 @@ const actions = {
     try {
       if (name.indexOf(' ') !== -1) throw new Error('Invalid name');
 
-      if ((await registrarContract.available(name))
-        && (await ensContract.owner(utils.namehash(`${name}.eth`))) === nullAddress) {
+      if ((await available(name))[0] === true
+          && (await owner(name))[0] === nullAddress) {
         actions.change({ available: true, pending: false });
       } else {
         actions.change({ pending: false });
@@ -106,6 +115,10 @@ const NotFound = () => (
   </div>
 );
 
+const colors = {
+  primary: 'lightblue',
+};
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -119,11 +132,6 @@ const Wrapper = styled.div`
     margin-top: 20px;
     margin-bottom: 20px;
   }
-`;
-
-const NextButton = styled.button`
-  padding: 20px;
-  margin-top: 40px;
 `;
 
 // standard route method
@@ -178,6 +186,12 @@ const A = El('a', { pointer: "" });
 const Span = El('span');
 const Input = El('input');
 
+const NextButton = styled.button`
+  padding: 20px;
+  margin-top: 40px;
+  background-color: ${props => props.available ? colors.primary : 'lightgray'};
+`;
+
 // header
 const Header = () => () => (
   <div>
@@ -192,14 +206,14 @@ const Header = () => () => (
 
 const Empty = () => () => (<span></span>);
 
-const Lander = ({ match }) => (state, actions) => (
+const Lander = ({ match }) => (state, actions, stage = (match.params || {}).stage) => (
   <Wrapper>
     <Header />
 
-    {(match.params || {}).stage !== 'success' ? (<Div row between mb="40px">
-      <Div pointer onclick={() => route('/')}>1. Choose A Name</Div>
-      <Div pointer onclick={() => state.available ? route('/stage/email') : null}>2. Email</Div>
-      <Div pointer onclick={() => state.available && state.emailValid ? route('/stage/payment') : ''}>3. Payment</Div>
+    {stage !== 'success' ? (<Div row between mb="40px">
+      <Div pointer bold={!stage} onclick={() => route('/')}>1. Choose A Name</Div>
+      <Div pointer bold={stage === 'email'} onclick={() => state.available ? route('/stage/email') : null}>2. Email</Div>
+      <Div pointer bold={stage === 'payment'} onclick={() => state.available && state.emailValid ? route('/stage/payment') : ''}>3. Payment</Div>
     </Div>) : ''}
 
     <Route path="/" render={() => (<div>
@@ -222,7 +236,7 @@ const Lander = ({ match }) => (state, actions) => (
 
       <Div p="20px" />
 
-      <NextButton onclick={() => state.available ? route('/stage/email') : null}>Next</NextButton>
+      <NextButton available={state.available} onclick={() => state.available ? route('/stage/email') : null}>Next</NextButton>
     </div>)} />
 
     <Route path="/stage/email" render={() => (<div>
@@ -240,10 +254,17 @@ const Lander = ({ match }) => (state, actions) => (
 
       <Div p="20px" />
 
-      <NextButton onclick={() => state.emailValid ? route('/stage/payment') : ''}>Next</NextButton>
+      <NextButton available={state.emailValid} onclick={() => state.emailValid ? route('/stage/payment') : ''}>Next</NextButton>
     </div>)} />
 
-    <Div col style={`display: ${(match.params || {}).stage === 'payment' ? 'flex' : 'none'}`} oncreate={buildForm}>
+    {(match.params || {}).stage === 'payment' && state.paymentFormReady ? (
+      <div oncreate={e => {
+        getForm().recalculateSize();
+        getForm().focus("cardNumber");
+      }}></div>
+    ) : ''}
+
+    <Div col style={`display: ${(match.params || {}).stage === 'payment' ? 'flex' : 'none'}`} oncreate={() => buildForm(actions)}>
       <Div flex="1" minHeight="180px" id="form-container">
         <div id="sq-ccbox">
           <form id="nonce-form" novalidate action="/stage/success" method="post">
@@ -256,20 +277,21 @@ const Lander = ({ match }) => (state, actions) => (
               </div>
             </div>
             <input type="hidden" id="card-nonce" name="nonce" />
-
-            <Empty><button id="sq-creditcard" class="button-credit-card" onclickreal="onGetCardNonce(event)">Pay $6.00 (USD)</button></Empty>
           </form>
         </div>
        </Div>
 
-       <NextButton mt="40px" onclick={() => route('/stage/success')}>Complete</NextButton>
+       <NextButton mt="40px" onclick={(e) => {
+         onGetCardNonce(e)
+         route('/stage/success');
+       }}>Complete</NextButton>
     </Div>
 
     <Route path="/stage/success" render={() => (<Div col>
       <h1>Success!!!!</h1>
       <p>Your ENS name <b>{state.nameValue}.eth</b> is being processed.. please wait a few minutes</p>
 
-      <A mt="40px" route="/names">Goto My Names</A>
+      <A mt="40px" href="#" route="/names">Goto My Names</A>
     </Div>)} />
 
   </Wrapper>
@@ -284,10 +306,11 @@ const MyNames = () => (state, actions) => (
     <Header />
 
     <Div col>
-      <Div row between p="20px" pr="0px" pl="0px" route="/names/nickpay.eth">
-        <div>nickpay.eth</div><A href="#" to="/names/nickpay.eth">transfer / resolve</A></Div>
-      <Div row between p="20px" pr="0px" pl="0px" route="/names/nickdodson.eth">
-        <div>nickdodson.eth</div><A href="#" to="/names/nickdodson.eth">transfer / resolve</A></Div>
+      {state.names.map(name => (
+        <Div row between p="20px" pr="0px" pl="0px" route={`/names/${name}`}>
+          <div>{name}</div><A href="#" to={`/names/${name}`}>transfer / resolve</A></Div>
+      ))}
+
       <Div row mt="20px"><Input type="text" width="50%" placeholder="add name" p="0px" mb="20px" pb="10px" /></Div>
     </Div>
 

@@ -8,61 +8,76 @@ function onGetCardNonce(evt) {
   paymentForm.requestCardNonce();
 }
 
-function buildForm() {
-  // Create and initialize a payment form object
-  paymentForm = new SqPaymentForm({
-    // Initialize the payment form elements
-    applicationId: applicationId,
-    inputClass: 'sq-input',
+async function buildForm(actions) {
+  try {
 
-    // Customize the CSS for SqPaymentForm iframe elements
-    inputStyles: [{
-      fontSize: '20px',
-      lineHeight: '24px',
-      padding: '20px',
-      backgroundColor: 'transparent',
-    }],
+    // Create and initialize a payment form object
+    paymentForm = new SqPaymentForm({
+      // Initialize the payment form elements
+      applicationId: applicationId,
+      inputClass: 'sq-input',
 
-    // Initialize the credit card placeholders
-    cardNumber: {
-      elementId: 'sq-card-number',
-      placeholder: 'Card Number'
-    },
-    cvv: {
-      elementId: 'sq-cvv',
-      placeholder: 'CVV'
-    },
-    expirationDate: {
-      elementId: 'sq-expiration-date',
-      placeholder: 'MM/YY'
-    },
-    postalCode: {
-      elementId: 'sq-postal-code',
-      placeholder: 'Postal'
-    },
+      // Customize the CSS for SqPaymentForm iframe elements
+      inputStyles: [{
+        fontSize: '20px',
+        lineHeight: '24px',
+        padding: '20px',
+        backgroundColor: 'transparent',
+      }],
 
-    // SqPaymentForm callback functions
-    callbacks: {
-      cardNonceResponseReceived: function (errors, nonce, cardData) {
-        if (errors) {
-            // Log errors from nonce generation to the browser developer console.
-            console.error('Encountered errors:');
-            errors.forEach(function (error) {
-                console.error('  ' + error.message);
-            });
-            alert('Encountered errors, check browser developer console for more details');
-            return;
+      // Initialize the credit card placeholders
+      cardNumber: {
+        elementId: 'sq-card-number',
+        placeholder: 'Card Number'
+      },
+      cvv: {
+        elementId: 'sq-cvv',
+        placeholder: 'CVV'
+      },
+      expirationDate: {
+        elementId: 'sq-expiration-date',
+        placeholder: 'MM/YY'
+      },
+      postalCode: {
+        elementId: 'sq-postal-code',
+        placeholder: 'Postal'
+      },
+
+      // SqPaymentForm callback functions
+      callbacks: {
+        paymentFormLoaded: () => {
+          // set payment form to ready
+          actions.change({ paymentFormReady: true });
+        },
+        cardNonceResponseReceived: function (errors, nonce, cardData) {
+          if (errors) {
+              // Log errors from nonce generation to the browser developer console.
+              console.error('Encountered errors:');
+              errors.forEach(function (error) {
+                  console.error('  ' + error.message);
+              });
+              alert('Encountered errors, check browser developer console for more details');
+              return;
+          }
+
+          alert(`The generated nonce is:\n${nonce}`);
         }
+      },
+    });
 
-        alert(`The generated nonce is:\n${nonce}`);
-      }
-    },
-  });
+    // build payment form
+    paymentForm.build();
+  } catch (error) {
+    // console.log(error);
+  }
+}
 
-  paymentForm.build();
+function getForm() {
+  return paymentForm;
 }
 
 module.exports = {
   onGetCardNonce,
   buildForm,
+  getForm,
 };
