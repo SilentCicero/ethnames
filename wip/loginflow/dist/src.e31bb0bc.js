@@ -10541,7 +10541,7 @@ var route = function route(pathname) {
 };
 
 var makeProps = function makeProps(props) {
-  return "\n  display: ".concat(props.display ? props.display : 'flex', ";\n  ").concat(props.row ? 'flex-direction: row;' : '', "\n  ").concat(props.col ? 'flex-direction: column;' : '', "\n  ").concat(props.between ? 'justify-content: space-between;' : '', "\n  ").concat(props.alignCenter ? 'align-items: center;' : '', "\n  ").concat(props.pointer ? 'cursor: pointer;' : '', "\n  ").concat(props.flex ? "flex: ".concat(props.flex, ";") : '', "\n\n  ").concat(props.fontSize ? "font-size: ".concat(props.fontSize, ";") : '', "\n  ").concat(props.height ? "height: ".concat(props.height, ";") : '', "\n  ").concat(props.width ? "width: ".concat(props.width, ";") : '', "\n  ").concat(props.minHeight ? "min-height: ".concat(props.minHeight, ";") : '', "\n  ").concat(props.minWidth ? "min-width: ".concat(props.minWidth, ";") : '', "\n\n  ").concat(props.color ? "color: ".concat(props.color, ";") : '', "\n  ").concat(props.bold ? "font-weight: bold;" : '', "\n\n  ").concat(props.p ? "padding: ".concat(props.p, ";") : '', "\n  ").concat(props.pl ? "padding-left: ".concat(props.pl, ";") : '', "\n  ").concat(props.pr ? "padding-right: ".concat(props.pr, ";") : '', "\n  ").concat(props.pb ? "padding-bottom: ".concat(props.pb, ";") : '', "\n  ").concat(props.pt ? "padding-top: ".concat(props.pt, ";") : '', "\n\n  ").concat(props.ml ? "margin-left: ".concat(props.ml, ";") : '', "\n  ").concat(props.mr ? "margin-right: ".concat(props.mr, ";") : '', "\n  ").concat(props.mb ? "margin-bottom: ".concat(props.mb, ";") : '', "\n  ").concat(props.mt ? "margin-top: ".concat(props.mt, ";") : '', "\n");
+  return "\n  display: ".concat(props.display ? props.display : 'flex', ";\n  ").concat(props.row ? 'flex-direction: row;' : '', "\n  ").concat(props.col ? 'flex-direction: column;' : '', "\n  ").concat(props.between ? 'justify-content: space-between;' : '', "\n  ").concat(props.alignCenter ? 'align-items: center;' : '', "\n  ").concat(props.pointer ? 'cursor: pointer;' : '', "\n  ").concat(props.flex ? "flex: ".concat(props.flex, ";") : '', "\n\n  ").concat(props.fontSize ? "font-size: ".concat(props.fontSize, ";") : '', "\n  ").concat(props.height ? "height: ".concat(props.height, ";") : '', "\n  ").concat(props.width ? "width: ".concat(props.width, ";") : '', "\n  ").concat(props.minHeight ? "min-height: ".concat(props.minHeight, ";") : '', "\n  ").concat(props.minWidth ? "min-width: ".concat(props.minWidth, ";") : '', "\n\n  ").concat(props.color ? "color: ".concat(props.color, ";") : '', "\n  ").concat(props.bold ? "font-weight: bold;" : '', "\n\n  ").concat(props.p ? "padding: ".concat(props.p, ";") : '', "\n  ").concat(props.pl ? "padding-left: ".concat(props.pl, ";") : '', "\n  ").concat(props.pr ? "padding-right: ".concat(props.pr, ";") : '', "\n  ").concat(props.pb ? "padding-bottom: ".concat(props.pb, ";") : '', "\n  ").concat(props.pt ? "padding-top: ".concat(props.pt, ";") : '', "\n\n  ").concat(props.ml ? "margin-left: ".concat(props.ml, ";") : '', "\n  ").concat(props.mr ? "margin-right: ".concat(props.mr, ";") : '', "\n  ").concat(props.mb ? "margin-bottom: ".concat(props.mb, ";") : '', "\n  ").concat(props.mt ? "margin-top: ".concat(props.mt, ";") : '', "\n\n  ").concat(props.overflowHidden ? "overflow: hidden;" : '', "\n");
 }; // div stuff
 
 
@@ -10748,6 +10748,7 @@ var Lander = function Lander(_ref4) {
       }
     }), (0, _hyperapp.h)(Div, {
       col: true,
+      overflowHidden: true,
       style: "\n      ".concat((match.params || {}).stage === 'payment' ? 'opacity: 1; z-index: 1200;' : 'visibility: hidden; opacity: 0; z-index: 100;', "\n      "),
       oncreate: function oncreate() {
         return (0, _square.buildForm)(actions);
@@ -10908,7 +10909,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43809" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39695" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

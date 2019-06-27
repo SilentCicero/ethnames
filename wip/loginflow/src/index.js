@@ -169,6 +169,8 @@ const makeProps = props => `
   ${props.mr ? `margin-right: ${props.mr};` : ''}
   ${props.mb ? `margin-bottom: ${props.mb};` : ''}
   ${props.mt ? `margin-top: ${props.mt};` : ''}
+
+  ${props.overflowHidden ? `overflow: hidden;` : ''}
 `;
 
 // div stuff
@@ -285,7 +287,7 @@ const Lander = ({ match }) => (state, actions, stage = (match.params || {}).stag
       <A mt="40px" href="#" route="/names">Goto My Names</A>
     </Div>)} />
 
-    <Div col style={`
+    <Div col overflowHidden style={`
       ${(match.params || {}).stage === 'payment' ? 'opacity: 1; z-index: 1200;' : 'visibility: hidden; opacity: 0; z-index: 100;'}
       `} oncreate={() => buildForm(actions)}>
       <Div flex="1" minHeight="180px" id="form-container">
