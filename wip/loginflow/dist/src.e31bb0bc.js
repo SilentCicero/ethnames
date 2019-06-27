@@ -10357,6 +10357,11 @@ var state = {
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
+}
+
+function parseEnsName(name) {
+  return String(name).trim().replace('.eth', '');
+  ;
 } // define initial actions
 
 
@@ -10470,7 +10475,7 @@ var actions = {
               switch (_context2.prev = _context2.next) {
                 case 0:
                   try {
-                    name = String(e.target.value).trim().replace('.eth', '');
+                    name = parseEnsName(e.target.value);
                     actions.change({
                       nameValue: name
                     });
@@ -10499,6 +10504,23 @@ var actions = {
         };
       }()
     );
+  },
+  removeName: function removeName(name) {
+    return function (state, actions) {
+      actions.change({
+        names: state.names.filter(function (val) {
+          return val !== "".concat(parseEnsName(name), ".eth");
+        })
+      });
+      route('/names');
+    };
+  },
+  followName: function followName(name) {
+    return function (state, actions) {
+      actions.change({
+        names: state.names.concat(["".concat(parseEnsName(name), ".eth")])
+      });
+    };
   },
   emailValue: function emailValue(e) {
     return function (state, actions) {
@@ -10613,7 +10635,7 @@ var CreationNav = function CreationNav(_ref3) {
     }, (0, _hyperapp.h)(NextButton, {
       onclick: back
     }, "Back"), (0, _hyperapp.h)(NextButton, {
-      available: state.available,
+      available: available,
       onclick: next
     }, "Next"));
   };
@@ -10714,14 +10736,15 @@ var Lander = function Lander(_ref4) {
           oncreate: function oncreate() {
             return document.querySelector('#email').focus();
           },
+          style: "border-bottom: ".concat(state.emailValid ? '2px solid green' : '2px solid lightgray', ";"),
           placeholder: "Email",
           autocomplete: "on",
           value: state.emailValue,
           oninput: actions.emailValue
-        }))), state.emailValid ? 'Go for it.' : '', (0, _hyperapp.h)(Div, {
+        }))), (0, _hyperapp.h)(Div, {
           p: "20px"
         }), (0, _hyperapp.h)(CreationNav, {
-          available: state.emailValid && state.available,
+          available: state.emailValid,
           next: function next() {
             return state.emailValid ? route('/stage/payment') : '';
           },
@@ -10730,7 +10753,7 @@ var Lander = function Lander(_ref4) {
           }
         }));
       }
-    }), (match.params || {}).stage === 'payment' && state.paymentFormReady ? (0, _hyperapp.h)("div", {
+    }), stage === 'payment' && state.paymentFormReady ? (0, _hyperapp.h)("div", {
       oncreate: function oncreate(e) {
         // getForm().recalculateSize();
         (0, _square.getForm)().focus("cardNumber");
@@ -10809,6 +10832,7 @@ var MyNames = function MyNames() {
       return (0, _hyperapp.h)(Div, {
         row: true,
         between: true,
+        pointer: true,
         p: "20px",
         pr: "0px",
         pl: "0px",
@@ -10822,7 +10846,17 @@ var MyNames = function MyNames() {
       mt: "20px"
     }, (0, _hyperapp.h)(Input, {
       type: "text",
+      id: "addName",
       width: "50%",
+      oncreate: function oncreate() {
+        return document.querySelector('#addName').focus();
+      },
+      onkeydown: function onkeydown(e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          actions.followName(e.target.value);
+        }
+      },
       placeholder: "add name",
       p: "0px",
       mb: "20px",
@@ -10851,7 +10885,13 @@ var MyNames = function MyNames() {
         }, (0, _hyperapp.h)(Input, {
           type: "text",
           placeholder: "Ethereum Address"
-        }), " ", (0, _hyperapp.h)("button", null, "Set")));
+        }), " ", (0, _hyperapp.h)("button", null, "Set")), (0, _hyperapp.h)(A, {
+          mt: "60px",
+          href: "#",
+          onclick: function onclick(e) {
+            return actions.removeName(options.match.params.name);
+          }
+        }, "Remove Name"));
       }
     }));
   };
@@ -10909,7 +10949,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39695" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46277" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

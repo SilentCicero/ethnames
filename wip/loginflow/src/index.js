@@ -58,6 +58,10 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
+function parseEnsName(name) {
+  return String(name).trim().replace('.eth', '');;
+}
+
 // define initial actions
 const actions = {
   location: location.actions,
@@ -84,7 +88,7 @@ const actions = {
   },
   searchValue: e => async (state, actions) => {
     try {
-      const name = String(e.target.value).trim().replace('.eth', '');
+      const name = parseEnsName(e.target.value);
 
       actions.change({ nameValue: name });
       actions.change({ available: false, pending: true });
@@ -93,6 +97,17 @@ const actions = {
       if (name.length)
         doneTyping = setTimeout(e => actions.searchName(name), 500);
     } catch (error) { console.log(error); }
+  },
+  removeName: name => (state, actions) => {
+    actions.change({
+      names: state.names.filter(val => val !== `${parseEnsName(name)}.eth`),
+    });
+    route('/names');
+  },
+  followName: name => (state, actions) => {
+    actions.change({
+      names: state.names.concat([`${parseEnsName(name)}.eth`]),
+    });
   },
   emailValue: e => (state, actions) => {
     const val = e.target.value;
@@ -212,7 +227,7 @@ const Empty = () => () => (<span></span>);
 const CreationNav = ({ available, next, back }) => () => (
   <Div row between mt="20px">
     <NextButton onclick={back}>Back</NextButton>
-    <NextButton available={state.available} onclick={next}>Next</NextButton>
+    <NextButton available={available} onclick={next}>Next</NextButton>
   </Div>
 );
 
@@ -260,20 +275,19 @@ const Lander = ({ match }) => (state, actions, stage = (match.params || {}).stag
         <Div flex="1" mb="20px" style="width: 100%">
           <Input width="80%" type="email" id="email" oncreate={() => document
             .querySelector('#email').focus()}
+            style={`border-bottom: ${state.emailValid ? '2px solid green' : '2px solid lightgray'};`}
             placeholder="Email" autocomplete="on" value={state.emailValue} oninput={actions.emailValue} /></Div>
       </form>
-
-      {state.emailValid ? 'Go for it.' : ''}
 
       <Div p="20px" />
 
       <CreationNav
-        available={state.emailValid && state.available}
+        available={state.emailValid}
         next={() => state.emailValid ? route('/stage/payment') : ''}
         back={() => route('/')} />
     </div>)} />
 
-    {(match.params || {}).stage === 'payment' && state.paymentFormReady ? (
+    {stage === 'payment' && state.paymentFormReady ? (
       <div oncreate={e => {
         // getForm().recalculateSize();
         getForm().focus("cardNumber");
@@ -328,11 +342,19 @@ const MyNames = () => (state, actions) => (
 
     <Div col>
       {state.names.map(name => (
-        <Div row between p="20px" pr="0px" pl="0px" route={`/names/${name}`}>
+        <Div row between pointer p="20px" pr="0px" pl="0px" route={`/names/${name}`}>
           <div>{name}</div><A href="#" to={`/names/${name}`}>transfer / resolve</A></Div>
       ))}
 
-      <Div row mt="20px"><Input type="text" width="50%" placeholder="add name" p="0px" mb="20px" pb="10px" /></Div>
+      <Div row mt="20px"><Input type="text" id="addName" width="50%"
+        oncreate={() => document.querySelector('#addName').focus()}
+        onkeydown={e => {
+          if(e.keyCode === 13) {
+            e.preventDefault();
+            actions.followName(e.target.value);
+          }
+        }}
+        placeholder="add name" p="0px" mb="20px" pb="10px" /></Div>
     </Div>
 
     <Route path="/names/:name" render={options => (<Div col mt="40px">
@@ -343,6 +365,8 @@ const MyNames = () => (state, actions) => (
 
       <H3 bold mt="40px">Set Resolver</H3>
       <Div between row><Input type="text" placeholder="Ethereum Address" /> <button>Set</button></Div>
+
+      <A mt="60px" href="#" onclick={e => actions.removeName(options.match.params.name)}>Remove Name</A>
     </Div>)} />
   </Wrapper>
 );
