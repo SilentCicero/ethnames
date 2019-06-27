@@ -46,6 +46,7 @@ styled.injectGlobal`
 
   input:focus {
     outline: none;
+    border-bottom: 2px solid lightblue;
   }
 
   a:focus {
@@ -107,6 +108,7 @@ styled.injectGlobal`
 
   /* Define how SqPaymentForm iframes should look when they have focus */
   .sq-input--focus {
+    border-bottom: 2px solid lightblue;
   }
 
   /* Define how SqPaymentForm iframes should look when they contain invalid values */
