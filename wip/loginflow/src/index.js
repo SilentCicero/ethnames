@@ -126,6 +126,7 @@ const Wrapper = styled.div`
   margin: 0px auto;
   margin-top: 70px;
   margin-bottom: 100px;
+  z-index: 1000;
 
   @media (max-width: 600px) {
     width: 80%;
@@ -206,6 +207,13 @@ const Header = () => () => (
 
 const Empty = () => () => (<span></span>);
 
+const CreationNav = ({ available, next, back }) => () => (
+  <Div row between mt="20px">
+    <NextButton onclick={back}>Back</NextButton>
+    <NextButton available={state.available} onclick={next}>Next</NextButton>
+  </Div>
+);
+
 const Lander = ({ match }) => (state, actions, stage = (match.params || {}).stage) => (
   <Wrapper>
     <Header />
@@ -236,7 +244,10 @@ const Lander = ({ match }) => (state, actions, stage = (match.params || {}).stag
 
       <Div p="20px" />
 
-      <NextButton available={state.available} onclick={() => state.available ? route('/stage/email') : null}>Next</NextButton>
+      <CreationNav
+        available={state.available}
+        next={() => state.available ? route('/stage/email') : null}
+        back={() => route('/')} />
     </div>)} />
 
     <Route path="/stage/email" render={() => (<div>
@@ -254,22 +265,34 @@ const Lander = ({ match }) => (state, actions, stage = (match.params || {}).stag
 
       <Div p="20px" />
 
-      <NextButton available={state.emailValid} onclick={() => state.emailValid ? route('/stage/payment') : ''}>Next</NextButton>
+      <CreationNav
+        available={state.emailValid && state.available}
+        next={() => state.emailValid ? route('/stage/payment') : ''}
+        back={() => route('/')} />
     </div>)} />
 
     {(match.params || {}).stage === 'payment' && state.paymentFormReady ? (
       <div oncreate={e => {
-        getForm().recalculateSize();
+        // getForm().recalculateSize();
         getForm().focus("cardNumber");
       }}></div>
     ) : ''}
 
-    <Div col style={`display: ${(match.params || {}).stage === 'payment' ? 'flex' : 'none'}`} oncreate={() => buildForm(actions)}>
+    <Route path="/stage/success" render={() => (<Div col>
+      <h1>Success!!!!</h1>
+      <p>Your ENS name <b>{state.nameValue}.eth</b> is being processed.. please wait a few minutes</p>
+
+      <A mt="40px" href="#" route="/names">Goto My Names</A>
+    </Div>)} />
+
+    <Div col style={`
+      ${(match.params || {}).stage === 'payment' ? 'opacity: 1; z-index: 1200;' : 'visibility: hidden; opacity: 0; z-index: 100;'}
+      `} oncreate={() => buildForm(actions)}>
       <Div flex="1" minHeight="180px" id="form-container">
         <div id="sq-ccbox">
           <form id="nonce-form" novalidate action="/stage/success" method="post">
             <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
-              <div style="width: 100%;" id="sq-card-number"></div>
+              <div style="width: 100%; padding-left: 20px; padding-top: 20px;" id="sq-card-number"></div>
               <div style="display: flex; flex-direction: row; min-height: 40px;">
                 <div><div id="sq-expiration-date"></div></div>
                 <div style="margin-left: 20px;"><div id="sq-cvv"></div></div>
@@ -281,18 +304,14 @@ const Lander = ({ match }) => (state, actions, stage = (match.params || {}).stag
         </div>
        </Div>
 
-       <NextButton mt="40px" onclick={(e) => {
-         onGetCardNonce(e)
-         route('/stage/success');
-       }}>Complete</NextButton>
+       <CreationNav
+         available={state.emailValid && state.available}
+         next={e => {
+           onGetCardNonce(e)
+           route('/stage/success');
+         }}
+         back={() => route('/stage/email')} />
     </Div>
-
-    <Route path="/stage/success" render={() => (<Div col>
-      <h1>Success!!!!</h1>
-      <p>Your ENS name <b>{state.nameValue}.eth</b> is being processed.. please wait a few minutes</p>
-
-      <A mt="40px" href="#" route="/names">Goto My Names</A>
-    </Div>)} />
 
   </Wrapper>
 );

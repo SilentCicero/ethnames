@@ -10269,7 +10269,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 40%;\n  margin: 0px auto;\n  margin-top: 70px;\n  margin-bottom: 100px;\n\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 20px;\n    margin-bottom: 20px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 40%;\n  margin: 0px auto;\n  margin-top: 70px;\n  margin-bottom: 100px;\n  z-index: 1000;\n\n  @media (max-width: 600px) {\n    width: 80%;\n    margin-top: 20px;\n    margin-bottom: 20px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -10601,8 +10601,26 @@ var Empty = function Empty() {
   };
 };
 
-var Lander = function Lander(_ref3) {
-  var match = _ref3.match;
+var CreationNav = function CreationNav(_ref3) {
+  var available = _ref3.available,
+      next = _ref3.next,
+      back = _ref3.back;
+  return function () {
+    return (0, _hyperapp.h)(Div, {
+      row: true,
+      between: true,
+      mt: "20px"
+    }, (0, _hyperapp.h)(NextButton, {
+      onclick: back
+    }, "Back"), (0, _hyperapp.h)(NextButton, {
+      available: state.available,
+      onclick: next
+    }, "Next"));
+  };
+};
+
+var Lander = function Lander(_ref4) {
+  var match = _ref4.match;
   return function (state, actions) {
     var stage = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : (match.params || {}).stage;
     return (0, _hyperapp.h)(Wrapper, null, (0, _hyperapp.h)(Header, null), stage !== 'success' ? (0, _hyperapp.h)(Div, {
@@ -10667,12 +10685,15 @@ var Lander = function Lander(_ref3) {
           color: "red"
         }, "Unavailable") : '', state.pending === true && (state.nameValue || '').length ? (0, _hyperapp.h)("span", null, "Checking...") : '', (0, _hyperapp.h)(Div, {
           p: "20px"
-        }), (0, _hyperapp.h)(NextButton, {
+        }), (0, _hyperapp.h)(CreationNav, {
           available: state.available,
-          onclick: function onclick() {
+          next: function next() {
             return state.available ? route('/stage/email') : null;
+          },
+          back: function back() {
+            return route('/');
           }
-        }, "Next"));
+        }));
       }
     }), (0, _hyperapp.h)(_router.Route, {
       path: "/stage/email",
@@ -10699,21 +10720,35 @@ var Lander = function Lander(_ref3) {
           oninput: actions.emailValue
         }))), state.emailValid ? 'Go for it.' : '', (0, _hyperapp.h)(Div, {
           p: "20px"
-        }), (0, _hyperapp.h)(NextButton, {
-          available: state.emailValid,
-          onclick: function onclick() {
+        }), (0, _hyperapp.h)(CreationNav, {
+          available: state.emailValid && state.available,
+          next: function next() {
             return state.emailValid ? route('/stage/payment') : '';
+          },
+          back: function back() {
+            return route('/');
           }
-        }, "Next"));
+        }));
       }
     }), (match.params || {}).stage === 'payment' && state.paymentFormReady ? (0, _hyperapp.h)("div", {
       oncreate: function oncreate(e) {
-        (0, _square.getForm)().recalculateSize();
+        // getForm().recalculateSize();
         (0, _square.getForm)().focus("cardNumber");
       }
-    }) : '', (0, _hyperapp.h)(Div, {
+    }) : '', (0, _hyperapp.h)(_router.Route, {
+      path: "/stage/success",
+      render: function render() {
+        return (0, _hyperapp.h)(Div, {
+          col: true
+        }, (0, _hyperapp.h)("h1", null, "Success!!!!"), (0, _hyperapp.h)("p", null, "Your ENS name ", (0, _hyperapp.h)("b", null, state.nameValue, ".eth"), " is being processed.. please wait a few minutes"), (0, _hyperapp.h)(A, {
+          mt: "40px",
+          href: "#",
+          route: "/names"
+        }, "Goto My Names"));
+      }
+    }), (0, _hyperapp.h)(Div, {
       col: true,
-      style: "display: ".concat((match.params || {}).stage === 'payment' ? 'flex' : 'none'),
+      style: "\n      ".concat((match.params || {}).stage === 'payment' ? 'opacity: 1; z-index: 1200;' : 'visibility: hidden; opacity: 0; z-index: 100;', "\n      "),
       oncreate: function oncreate() {
         return (0, _square.buildForm)(actions);
       }
@@ -10731,7 +10766,7 @@ var Lander = function Lander(_ref3) {
     }, (0, _hyperapp.h)("div", {
       style: "display: flex; flex-direction: column; margin-bottom: 20px;"
     }, (0, _hyperapp.h)("div", {
-      style: "width: 100%;",
+      style: "width: 100%; padding-left: 20px; padding-top: 20px;",
       id: "sq-card-number"
     }), (0, _hyperapp.h)("div", {
       style: "display: flex; flex-direction: row; min-height: 40px;"
@@ -10749,24 +10784,16 @@ var Lander = function Lander(_ref3) {
       type: "hidden",
       id: "card-nonce",
       name: "nonce"
-    })))), (0, _hyperapp.h)(NextButton, {
-      mt: "40px",
-      onclick: function onclick(e) {
+    })))), (0, _hyperapp.h)(CreationNav, {
+      available: state.emailValid && state.available,
+      next: function next(e) {
         (0, _square.onGetCardNonce)(e);
         route('/stage/success');
+      },
+      back: function back() {
+        return route('/stage/email');
       }
-    }, "Complete")), (0, _hyperapp.h)(_router.Route, {
-      path: "/stage/success",
-      render: function render() {
-        return (0, _hyperapp.h)(Div, {
-          col: true
-        }, (0, _hyperapp.h)("h1", null, "Success!!!!"), (0, _hyperapp.h)("p", null, "Your ENS name ", (0, _hyperapp.h)("b", null, state.nameValue, ".eth"), " is being processed.. please wait a few minutes"), (0, _hyperapp.h)(A, {
-          mt: "40px",
-          href: "#",
-          route: "/names"
-        }, "Goto My Names"));
-      }
-    }));
+    })));
   };
 }; // for Payment button
 //  onclickreal="onGetCardNonce(event)"
@@ -10881,7 +10908,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43951" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43809" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
