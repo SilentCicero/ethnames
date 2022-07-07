@@ -22,7 +22,7 @@
     "ethjs-extras": "0.0.7",
     "hyperapp": "^1.2.9",
     "hyperapp-styled-components": "^0.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "regenerator-runtime": "^0.13.2",
     "solc": "^0.5.7"
   },
